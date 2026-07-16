@@ -3,6 +3,7 @@ import type { Opportunity } from "@/src/types";
 export const opportunities = [
   {
     id: "opp-import-jute-packaging-001",
+    slug: "import-compostable-jute-packaging",
     type: "import",
     status: "open",
     title: "Import compostable jute packaging for retail distribution",
@@ -21,6 +22,7 @@ export const opportunities = [
   },
   {
     id: "opp-export-leather-goods-002",
+    slug: "export-bangladesh-leather-goods",
     type: "export",
     status: "open",
     title: "Bangladesh leather goods manufacturer seeking EU buyers",
@@ -38,6 +40,7 @@ export const opportunities = [
   },
   {
     id: "opp-supply-industrial-fasteners-003",
+    slug: "local-supply-industrial-fasteners",
     type: "supply",
     status: "under_review",
     title: "Local supply partner for industrial fasteners",
@@ -55,6 +58,7 @@ export const opportunities = [
   },
   {
     id: "opp-technology-erp-rollout-004",
+    slug: "technology-multi-location-erp-rollout",
     type: "technology",
     status: "open",
     title: "Technology partner for a multi-location ERP rollout",

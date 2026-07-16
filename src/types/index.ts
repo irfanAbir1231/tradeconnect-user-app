@@ -29,6 +29,7 @@ export interface SolutionConfig {
 
 export interface Opportunity {
   id: string;
+  slug: string;
   type: OpportunityType;
   status: OpportunityStatus;
   title: string;

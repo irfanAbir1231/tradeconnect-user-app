@@ -9,8 +9,8 @@ export const navItems: NavItem[] = [
   { label: "Marketplace", href: "/marketplace" },
   { label: "Directory", href: "/directory" },
   { label: "Technology Products", href: "/products" },
-  { label: "Resources", href: "#resources" },
-  { label: "About", href: "#about" },
+  { label: "Resources", href: "/#resources" },
+  { label: "About", href: "/#about" },
 ];
 
 export type NavGroup = {
@@ -23,7 +23,7 @@ export const footerNavGroups: NavGroup[] = [
     label: "Platform",
     items: [
       { label: "Overview", href: "/platform" },
-      { label: "How it works", href: "#how-it-works" },
+      { label: "How it works", href: "/#how-it-works" },
       { label: "Technology Products", href: "/products" },
     ],
   },
@@ -39,24 +39,24 @@ export const footerNavGroups: NavGroup[] = [
     label: "Marketplace",
     items: [
       { label: "Browse marketplace", href: "/marketplace" },
-      { label: "Submit a request", href: "#contact" },
+      { label: "Submit a request", href: "/submit" },
       { label: "Business directory", href: "/directory" },
     ],
   },
   {
     label: "Resources",
     items: [
-      { label: "Insights", href: "#resources" },
-      { label: "Trade guides", href: "#resources" },
-      { label: "Help center", href: "#resources" },
+      { label: "Insights", href: "/#resources" },
+      { label: "Trade guides", href: "/#resources" },
+      { label: "Help center", href: "/#resources" },
     ],
   },
   {
     label: "Company",
     items: [
-      { label: "About TradeConnect", href: "#about" },
-      { label: "Contact", href: "#contact" },
-      { label: "Careers", href: "#about" },
+      { label: "About TradeConnect", href: "/#about" },
+      { label: "Contact", href: "/submit" },
+      { label: "Careers", href: "/#about" },
     ],
   },
 ];

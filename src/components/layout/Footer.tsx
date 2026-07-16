@@ -15,7 +15,7 @@ export function Footer() {
               <span className="text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--navy)]">TradeConnect</span>
             </Link>
             <p className="mt-5 text-sm leading-6 text-[var(--muted)]">The connected platform for smarter trade, trusted partnerships, and confident business growth.</p>
-            <Link className="mt-6 inline-flex text-sm font-semibold text-[var(--accent-deep)] transition-colors hover:text-[var(--navy)]" href="#contact">Talk to our team <span aria-hidden="true" className="ml-2">↗</span></Link>
+            <Link className="mt-6 inline-flex text-sm font-semibold text-[var(--accent-deep)] transition-colors hover:text-[var(--navy)]" href="/submit">Talk to our team <span aria-hidden="true" className="ml-2">↗</span></Link>
           </div>
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
@@ -34,7 +34,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-[var(--line)] pt-6 text-xs text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} TradeConnect. All rights reserved.</p>
-          <div className="flex gap-5"><Link className="transition-colors hover:text-[var(--navy)]" href="#terms">Terms</Link><Link className="transition-colors hover:text-[var(--navy)]" href="#privacy">Privacy</Link></div>
+          <div className="flex gap-5"><Link className="transition-colors hover:text-[var(--navy)]" href="/#terms">Terms</Link><Link className="transition-colors hover:text-[var(--navy)]" href="/#privacy">Privacy</Link></div>
         </div>
       </div>
     </footer>

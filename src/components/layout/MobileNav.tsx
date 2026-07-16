@@ -30,7 +30,7 @@ export function MobileNav({ items }: MobileNavProps) {
               </Link>
             ))}
             <div className="mt-2 grid grid-cols-2 gap-2 border-t border-[var(--line)] pt-3">
-              <Link className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" href="#login" onClick={() => setIsOpen(false)}>Login</Link>
+              <Link className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" href="/dashboard" onClick={() => setIsOpen(false)}>Login</Link>
               <Link className="rounded-xl bg-[var(--accent-deep)] px-4 py-3 text-center text-sm font-semibold text-white" href="/submit" onClick={() => setIsOpen(false)}>Submit Request</Link>
             </div>
           </nav>

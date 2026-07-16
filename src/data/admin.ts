@@ -1,5 +1,6 @@
 import type { HomeIconName } from "@/src/components/home/HomeIcon";
-import type { OpportunityType } from "@/src/types";
+import { businessRequests } from "@/src/data/requests";
+import type { RequestType } from "@/src/types";
 
 export type AdminNavItem = {
   label: string;
@@ -46,20 +47,16 @@ export const requestVolume = [
   { label: "Sun", value: 25 },
 ] as const;
 
-export const requestTypeBreakdown: { type: OpportunityType; label: string; count: number; percentage: number; color: string }[] = [
-  { type: "import", label: "Import", count: 124, percentage: 42, color: "bg-[var(--accent-deep)]" },
-  { type: "export", label: "Export", count: 86, percentage: 29, color: "bg-[#31658e]" },
-  { type: "supply", label: "Supply", count: 52, percentage: 18, color: "bg-[#9b6b28]" },
-  { type: "technology", label: "Technology", count: 32, percentage: 11, color: "bg-[#7154a4]" },
-];
+const requestTypeColors: Record<RequestType, string> = { import: "bg-[var(--accent-deep)]", export: "bg-[#31658e]", supply: "bg-[#9b6b28]", technology: "bg-[#7154a4]" };
+const requestTypeLabels: Record<RequestType, string> = { import: "Import", export: "Export", supply: "Supply", technology: "Technology" };
 
-export const recentAdminRequests = [
-  { id: "REQ-1048", title: "Import compostable jute packaging", type: "Import", company: "Bengal Homeware Retail Group", submitted: "Today, 10:42 AM", status: "New", statusTone: "accent" },
-  { id: "REQ-1047", title: "ERP rollout for six locations", type: "Technology", company: "Eastern Distribution Co.", submitted: "Today, 09:18 AM", status: "Under review", statusTone: "amber" },
-  { id: "REQ-1046", title: "Local supply partner for fasteners", type: "Supply", company: "Gazipur Industrial Works", submitted: "Yesterday", status: "Needs info", statusTone: "amber" },
-  { id: "REQ-1045", title: "Leather goods buyers for EU market", type: "Export", company: "Riverstone Leather Exports Ltd.", submitted: "Yesterday", status: "Matching", statusTone: "blue" },
-  { id: "REQ-1044", title: "Retail POS implementation partner", type: "Technology", company: "Narayanganj Retail Network", submitted: "Jul 15, 2026", status: "Assigned", statusTone: "purple" },
-] as const;
+export const requestTypeBreakdown = (Object.keys(requestTypeLabels) as RequestType[]).map((type) => {
+  const count = businessRequests.filter((request) => request.type === type).length;
+  const percentage = Math.round((count / businessRequests.length) * 100);
+  return { type, label: requestTypeLabels[type], count, percentage, color: requestTypeColors[type] };
+});
+
+export const recentAdminRequests = businessRequests.slice(0, 5);
 
 export const verificationQueue = [
   { company: "Delta Packaging & Industrial Supplies Ltd.", type: "Supplier", submitted: "18 min ago", documents: "4 of 5 documents", tone: "amber" },

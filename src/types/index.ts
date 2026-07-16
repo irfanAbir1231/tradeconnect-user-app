@@ -1,4 +1,22 @@
-export type OpportunityType = "import" | "export" | "supply" | "technology";
+export type RequestType = "import" | "export" | "supply" | "technology";
+
+export type OpportunityType = RequestType;
+
+export type RequestStatus =
+  | "draft"
+  | "submitted"
+  | "under_review"
+  | "needs_information"
+  | "matching"
+  | "quotation_received"
+  | "approved"
+  | "completed"
+  | "rejected"
+  | "cancelled";
+
+export type RequestPriority = "low" | "medium" | "high" | "urgent";
+
+export type MarketplaceStatus = "draft" | "pending_review" | "published" | "paused" | "matched" | "closed";
 
 export type OpportunityStatus = "open" | "under_review" | "matched" | "closed";
 
@@ -45,6 +63,81 @@ export interface Opportunity {
   budget?: string;
   postedAt: string;
   closesAt?: string;
+}
+
+export interface UserSummary {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export interface CompanySummary {
+  id: string;
+  name: string;
+  slug: string;
+  businessType: string;
+  location: string;
+  isVerified: boolean;
+}
+
+export interface AssignedTeamMember {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+}
+
+export interface RequestDocument {
+  id: string;
+  name: string;
+  type: string;
+  status: "uploaded" | "pending" | "under_review" | "rejected";
+  uploadedAt?: string;
+}
+
+export interface AdminNote {
+  id: string;
+  message: string;
+  authorName: string;
+  createdAt: string;
+  isInternal?: boolean;
+}
+
+export interface RequestStatusHistory {
+  id: string;
+  status: RequestStatus;
+  note?: string;
+  updatedBy: string;
+  createdAt: string;
+}
+
+export interface BusinessRequest {
+  id: string;
+  referenceNumber: string;
+  slug: string;
+  title: string;
+  description: string;
+  type: RequestType;
+  status: RequestStatus;
+  priority: RequestPriority;
+  category: string;
+  user: UserSummary;
+  company: CompanySummary;
+  sourceCountry?: string;
+  destinationCountry?: string;
+  location?: string;
+  quantity: string;
+  budgetRange: string;
+  timeline: string;
+  assignedTeamMember: AssignedTeamMember | null;
+  documents: RequestDocument[];
+  adminNotes: AdminNote[];
+  statusHistory: RequestStatusHistory[];
+  createdAt: string;
+  updatedAt: string;
+  isPublic: boolean;
+  marketplaceStatus: MarketplaceStatus;
 }
 
 export interface Company {

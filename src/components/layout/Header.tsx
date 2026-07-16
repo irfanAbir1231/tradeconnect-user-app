@@ -24,18 +24,18 @@ export function Header() {
           <span className="text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--navy)]">TradeConnect</span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-5 lg:flex xl:gap-7">
           {navItems.map((item) => (
-            <Link className="text-sm font-medium text-[var(--muted)] transition-colors hover:text-[var(--navy)]" href={item.href} key={item.href}>
+            <Link className="whitespace-nowrap text-[.8rem] font-medium text-[var(--muted)] transition-colors hover:text-[var(--navy)]" href={item.href} key={item.href}>
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
-          <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="#contact">Sign in</Link>
-          <Link className="rounded-full bg-[var(--navy)] px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5" href="#contact">
-            Get started
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="#login">Login</Link>
+          <Link className="rounded-full bg-[var(--accent-deep)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_var(--accent-deep)] transition-transform hover:-translate-y-0.5 hover:bg-[var(--navy)]" href="#contact">
+            Submit Request
           </Link>
         </div>
 

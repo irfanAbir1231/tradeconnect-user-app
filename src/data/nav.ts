@@ -5,7 +5,7 @@ export type NavItem = {
 
 export const navItems: NavItem[] = [
   { label: "Platform", href: "/platform" },
-  { label: "Solutions", href: "#solutions" },
+  { label: "Solutions", href: "/solutions" },
   { label: "Marketplace", href: "#marketplace" },
   { label: "Directory", href: "#directory" },
   { label: "Technology Products", href: "#technology-products" },
@@ -30,9 +30,9 @@ export const footerNavGroups: NavGroup[] = [
   {
     label: "Solutions",
     items: [
-      { label: "For buyers", href: "#solutions" },
-      { label: "For suppliers", href: "#solutions" },
-      { label: "For service providers", href: "#solutions" },
+      { label: "For buyers", href: "/solutions/import" },
+      { label: "For suppliers", href: "/solutions/supply" },
+      { label: "For service providers", href: "/solutions/technology" },
     ],
   },
   {

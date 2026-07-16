@@ -8,6 +8,25 @@ export type ProductCategory = "pos_software" | "inventory_management" | "ecommer
 
 export type ProductDeployment = "cloud" | "on_premise" | "hybrid";
 
+export type SolutionSlug = "import" | "export" | "supply" | "technology";
+
+export type SolutionIcon = "building" | "globe" | "laptop" | "package";
+
+export interface SolutionConfig {
+  slug: SolutionSlug;
+  path: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  icon: SolutionIcon;
+  audience: string[];
+  benefits: { title: string; text: string }[];
+  steps: { title: string; text: string }[];
+  formFields: string[];
+  categories: string[];
+  faqs: { question: string; answer: string }[];
+}
+
 export interface Opportunity {
   id: string;
   type: OpportunityType;

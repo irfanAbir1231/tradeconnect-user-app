@@ -1,0 +1,108 @@
+import type { SolutionConfig, SolutionSlug } from "@/src/types";
+
+export const solutionConfigs: Record<SolutionSlug, SolutionConfig> = {
+  import: {
+    slug: "import",
+    path: "/solutions/import",
+    eyebrow: "Import with more confidence",
+    title: "Source the products your business needs, with the right partners behind them.",
+    description: "Turn an import need into a structured request, connect with reviewed suppliers, and keep the path from product brief to purchase clearer.",
+    icon: "package",
+    audience: ["Retailers and distributors", "Manufacturers sourcing raw materials", "Procurement and purchasing teams", "Businesses entering a new product category"],
+    benefits: [
+      { title: "A clearer sourcing brief", text: "Share specifications, volume, destination, and timing in one focused request." },
+      { title: "Relevant supplier discovery", text: "Reach suppliers aligned to the product, quantity, and market you are actually buying for." },
+      { title: "Better procurement conversations", text: "Keep questions, quotations, and important details easier to compare." },
+    ],
+    steps: [
+      { title: "Describe what you need", text: "Tell us the product, specification, expected quantity, and preferred delivery window." },
+      { title: "Review potential suppliers", text: "Our team checks the request and identifies relevant businesses in the network." },
+      { title: "Compare and connect", text: "Receive inquiries or introductions and move forward with the supplier that fits." },
+    ],
+    formFields: ["Product or material needed", "Quantity and delivery location", "Target budget and timeline"],
+    categories: ["Raw materials", "Packaging", "Industrial equipment", "Consumer products", "Textiles & apparel", "Food & agriculture"],
+    faqs: [
+      { question: "Can I submit an import request for a product I have not sourced before?", answer: "Yes. Include as much context as you have, and the TradeConnect team can help clarify the brief before matching." },
+      { question: "Will suppliers see my business information?", answer: "Only the information needed to support a relevant business conversation is shared, with verification and review built into the process." },
+      { question: "Can I request multiple supplier options?", answer: "Yes. A structured request can be reviewed for multiple suitable supplier matches." },
+    ],
+  },
+  export: {
+    slug: "export",
+    path: "/solutions/export",
+    eyebrow: "Export with a stronger signal",
+    title: "Put your products in front of buyers ready to build something long term.",
+    description: "Present your Bangladesh-made products with the context international buyers need, and turn export interest into a better-qualified conversation.",
+    icon: "globe",
+    audience: ["Bangladesh exporters", "Manufacturers with export capacity", "Private-label producers", "Local brands ready for new markets"],
+    benefits: [
+      { title: "Be easier to discover", text: "Showcase your capabilities, certifications, markets, and products in one credible profile." },
+      { title: "Reach serious buyers", text: "Get visibility with businesses looking for the categories and production strengths you offer." },
+      { title: "Build repeatable demand", text: "Create a clearer starting point for inquiries, quotations, and future orders." },
+    ],
+    steps: [
+      { title: "Create your export profile", text: "Add your products, capacity, certifications, markets, and ideal buyer profile." },
+      { title: "Get reviewed and verified", text: "Give buyers a stronger reason to trust the information they find." },
+      { title: "Receive buyer inquiries", text: "Respond to relevant opportunities and build relationships beyond a single order." },
+    ],
+    formFields: ["Product or service to export", "Production capacity and markets", "Certifications and buyer requirements"],
+    categories: ["Leather goods", "Jute & natural fiber", "Ready-made garments", "Light engineering", "Food & agro products", "Homeware"],
+    faqs: [
+      { question: "Do I need to be an established exporter?", answer: "No. Manufacturers and businesses preparing for their first export conversations can also create a profile and request support." },
+      { question: "Which markets can I target?", answer: "You can describe your preferred markets, while the network supports Bangladesh-connected conversations with buyers across regions." },
+      { question: "Can I list more than one product?", answer: "Yes. Your company profile can present multiple capabilities and product categories." },
+    ],
+  },
+  supply: {
+    slug: "supply",
+    path: "/solutions/supply",
+    eyebrow: "Supply in Bangladesh",
+    title: "Find the local suppliers and partners that help your operation deliver.",
+    description: "Connect with manufacturers, distributors, and service providers across Bangladesh for dependable local supply and practical support.",
+    icon: "building",
+    audience: ["Manufacturers and factories", "Retail and distribution businesses", "Construction and project teams", "International companies sourcing locally"],
+    benefits: [
+      { title: "Local capability, easier to find", text: "Explore relevant suppliers by location, category, capacity, and service scope." },
+      { title: "Less fragmented sourcing", text: "Keep local supply requests and partner conversations organized in one place." },
+      { title: "Partners who understand the market", text: "Work with businesses familiar with Bangladesh delivery, operations, and timelines." },
+    ],
+    steps: [
+      { title: "Share your local requirement", text: "Tell us what you need, where it should be delivered, and what matters most." },
+      { title: "Review local matches", text: "The team identifies suppliers and service partners with relevant capability." },
+      { title: "Start a practical conversation", text: "Compare availability, commercial terms, and delivery fit with confidence." },
+    ],
+    formFields: ["Product, material, or service", "Delivery location and schedule", "Estimated monthly requirement"],
+    categories: ["Industrial supplies", "Packaging & materials", "Logistics & warehousing", "Construction services", "Local distribution", "Business services"],
+    faqs: [
+      { question: "Can I search for suppliers in a specific city?", answer: "Yes. Location is part of the request and profile context, so local matches can be prioritized." },
+      { question: "What makes a company verified?", answer: "Verification is an admin-reviewed process that checks core business information before a profile is highlighted as verified." },
+      { question: "Can this support recurring supply contracts?", answer: "Yes. Include your expected frequency, volume, and timeline so potential partners understand the longer-term opportunity." },
+    ],
+  },
+  technology: {
+    slug: "technology",
+    path: "/solutions/technology",
+    eyebrow: "Technology support for growth",
+    title: "Choose the technology products and partners that fit the way you work.",
+    description: "Move beyond generic software lists. Describe the operational challenge and find practical technology support for your next stage of growth.",
+    icon: "laptop",
+    audience: ["Growing SMEs", "Retail and distribution teams", "Factories and operations leaders", "Businesses replacing manual workflows"],
+    benefits: [
+      { title: "Start with the business problem", text: "Frame the need around sales, inventory, operations, customers, or reporting—not just a product name." },
+      { title: "See relevant solutions", text: "Explore technology products and providers suited to your business size and workflow." },
+      { title: "Get implementation context", text: "Bring questions about setup, support, integrations, and adoption into one conversation." },
+    ],
+    steps: [
+      { title: "Describe the workflow", text: "Share where your business loses time, visibility, or control today." },
+      { title: "Review product and provider options", text: "Explore technology products and implementation partners that match the brief." },
+      { title: "Plan the next step", text: "Discuss scope, rollout, support, and the right path for your team." },
+    ],
+    formFields: ["Business challenge or workflow", "Team size and locations", "Technology budget and timeline"],
+    categories: ["POS software", "Inventory management", "E-commerce systems", "Custom ERP/CRM", "Automation & integration", "Digital operations"],
+    faqs: [
+      { question: "Do I need to know exactly which software I want?", answer: "No. You can begin with a business challenge, and the team can help frame the right technology conversation." },
+      { question: "Is technology support only for large businesses?", answer: "No. The platform is designed to help Bangladesh-connected SMEs and growing teams adopt practical solutions at the right pace." },
+      { question: "Can a provider help with implementation?", answer: "Yes. Your request can include rollout, training, integration, and ongoing support requirements." },
+    ],
+  },
+};

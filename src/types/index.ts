@@ -75,9 +75,14 @@ export interface Product {
   slug: string;
   category: ProductCategory;
   description: string;
+  problem: string;
   providerId: string;
   providerName: string;
   features: string[];
+  targetUsers: string[];
+  useCases: { title: string; text: string }[];
+  implementationSteps: { title: string; text: string }[];
+  faqs: { question: string; answer: string }[];
   deployment: ProductDeployment;
   pricingNote: string;
   availability: string;

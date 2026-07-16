@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { DemoRequestForm } from "@/src/components/forms/DemoRequestForm";
 import { ProductDetailPage } from "@/src/components/products/ProductDetailPage";
 import { products } from "@/src/data/products";
 
@@ -20,5 +21,5 @@ export default async function ProductDetailRoute({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
-  return <ProductDetailPage product={product} />;
+  return <><ProductDetailPage product={product} /><section className="container-shell py-20 sm:py-28" id="demo"><DemoRequestForm productName={product.name} /></section></>;
 }

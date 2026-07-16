@@ -52,9 +52,16 @@ export interface Company {
   name: string;
   slug: string;
   type: CompanyType;
+  businessType: string;
   description: string;
   location: string;
   foundedYear: number;
+  categories: string[];
+  countriesServed: string[];
+  products: string[];
+  services: string[];
+  certifications: string[];
+  isVerified: boolean;
   industries: string[];
   markets: string[];
   employeeRange: string;

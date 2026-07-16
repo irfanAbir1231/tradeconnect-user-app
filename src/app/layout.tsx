@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { Footer } from "@/src/components/layout/Footer";
-import { Header } from "@/src/components/layout/Header";
+import { SiteChrome } from "@/src/components/layout/SiteChrome";
 
 import "./globals.css";
 
@@ -17,9 +16,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

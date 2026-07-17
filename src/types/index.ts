@@ -32,6 +32,8 @@ export type InquirySource = "marketplace" | "company_profile" | "product_demo" |
 
 export type InquiryType = "request_quotation" | "submit_interest" | "more_information" | "demo_request" | "partnership_inquiry";
 
+export type CompanyAccountStatus = "active" | "pending" | "suspended";
+
 export type OpportunityStatus = "open" | "under_review" | "matched" | "closed";
 
 export type CompanyType = "supplier" | "exporter" | "buyer" | "technology_provider";
@@ -250,6 +252,39 @@ export interface Inquiry {
   updatedAt: string;
   timeline: InquiryTimelineEvent[];
   internalNotes: AdminNote[];
+}
+
+export interface CompanyContactUser {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  isPrimary: boolean;
+}
+
+export interface CompanyActivityEvent {
+  id: string;
+  title: string;
+  detail: string;
+  actor: string;
+  createdAt: string;
+}
+
+export interface CompanyAdminRecord {
+  company: Company;
+  primaryCategory: string;
+  accountStatus: CompanyAccountStatus;
+  verificationStatus: VerificationStatus;
+  joinedAt: string;
+  contacts: CompanyContactUser[];
+  activeRequests: BusinessRequest[];
+  marketplaceListings: MarketplaceModerationListing[];
+  inquiries: Inquiry[];
+  documents: VerificationDocument[];
+  internalNotes: AdminNote[];
+  activityHistory: CompanyActivityEvent[];
+  isFeatured: boolean;
 }
 
 export interface Company {

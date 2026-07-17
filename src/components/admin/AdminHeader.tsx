@@ -11,7 +11,7 @@ const pageTitles: Record<string, string> = {
   "/admin/requests/technology": "Technology Requests",
   "/admin/marketplace": "Marketplace Listings",
   "/admin/companies": "Companies",
-  "/admin/verification": "Verification Queue",
+  "/admin/verifications": "Verification Queue",
   "/admin/inquiries": "Inquiries",
   "/admin/documents": "Documents",
   "/admin/users": "Users",

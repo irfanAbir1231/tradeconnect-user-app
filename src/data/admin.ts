@@ -18,7 +18,7 @@ export const adminNavigation: AdminNavItem[] = [
   { label: "Technology Requests", href: "/admin/requests/technology", icon: "laptop" },
   { label: "Marketplace Listings", href: "/admin/marketplace", icon: "spark", section: "Network" },
   { label: "Companies", href: "/admin/companies", icon: "building" },
-  { label: "Verification Queue", href: "/admin/verification", icon: "shield" },
+  { label: "Verification Queue", href: "/admin/verifications", icon: "shield" },
   { label: "Inquiries", href: "/admin/inquiries", icon: "users" },
   { label: "Documents", href: "/admin/documents", icon: "package" },
   { label: "Users", href: "/admin/users", icon: "users", section: "Workspace" },
@@ -74,7 +74,7 @@ export const recentAdminActivity = [
 
 export const adminQuickActions = [
   { label: "Review requests", href: "/admin/requests", icon: "package" as const },
-  { label: "Verify companies", href: "/admin/verification", icon: "shield" as const },
+  { label: "Verify companies", href: "/admin/verifications", icon: "shield" as const },
   { label: "Manage listings", href: "/admin/marketplace", icon: "spark" as const },
   { label: "View inquiries", href: "/admin/inquiries", icon: "users" as const },
 ] as const;

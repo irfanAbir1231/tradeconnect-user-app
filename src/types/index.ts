@@ -18,6 +18,12 @@ export type RequestPriority = "low" | "medium" | "high" | "urgent";
 
 export type MarketplaceStatus = "draft" | "pending_review" | "published" | "paused" | "matched" | "closed";
 
+export type VerificationStatus = "pending_review" | "approved" | "rejected" | "needs_information";
+
+export type VerificationChecklistStatus = "complete" | "pending" | "failed" | "not_started";
+
+export type VerificationDocumentStatus = "pending" | "approved" | "rejected" | "needs_replacement";
+
 export type OpportunityStatus = "open" | "under_review" | "matched" | "closed";
 
 export type CompanyType = "supplier" | "exporter" | "buyer" | "technology_provider";
@@ -103,6 +109,56 @@ export interface AdminNote {
   authorName: string;
   createdAt: string;
   isInternal?: boolean;
+}
+
+export interface VerificationDocument {
+  id: string;
+  name: string;
+  type: string;
+  uploadedAt?: string;
+  status: VerificationDocumentStatus;
+  reviewerNote?: string;
+}
+
+export interface VerificationChecklistItem {
+  id: string;
+  label: string;
+  status: VerificationChecklistStatus;
+  detail?: string;
+}
+
+export interface VerificationContact {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface VerificationAddress {
+  line: string;
+  city: string;
+  country: string;
+  postalCode: string;
+}
+
+export interface VerificationSocialLink {
+  label: string;
+  url: string;
+}
+
+export interface VerificationCase {
+  id: string;
+  company: Company;
+  status: VerificationStatus;
+  submittedAt: string;
+  updatedAt: string;
+  assignedReviewer: AssignedTeamMember | null;
+  contact: VerificationContact;
+  address: VerificationAddress;
+  website?: string;
+  socialLinks: VerificationSocialLink[];
+  checklist: VerificationChecklistItem[];
+  documents: VerificationDocument[];
+  reviewerNotes: AdminNote[];
 }
 
 export interface RequestStatusHistory {

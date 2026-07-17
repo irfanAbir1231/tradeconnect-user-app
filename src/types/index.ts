@@ -24,6 +24,8 @@ export type VerificationChecklistStatus = "complete" | "pending" | "failed" | "n
 
 export type VerificationDocumentStatus = "pending" | "approved" | "rejected" | "needs_replacement";
 
+export type MarketplaceModerationStatus = "draft" | "pending_publication" | "published" | "paused" | "rejected" | "expired";
+
 export type OpportunityStatus = "open" | "under_review" | "matched" | "closed";
 
 export type CompanyType = "supplier" | "exporter" | "buyer" | "technology_provider";
@@ -195,6 +197,20 @@ export interface BusinessRequest {
   updatedAt: string;
   isPublic: boolean;
   marketplaceStatus: MarketplaceStatus;
+}
+
+export interface MarketplaceModerationListing {
+  id: string;
+  request: BusinessRequest;
+  publicTitle: string;
+  publicSummary: string;
+  publicationStatus: MarketplaceModerationStatus;
+  submittedAt: string;
+  views: number;
+  interests: number;
+  publicFields: string[];
+  privateFields: string[];
+  moderationNotes: AdminNote[];
 }
 
 export interface Company {

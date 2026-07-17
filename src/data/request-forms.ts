@@ -1,6 +1,7 @@
 import type { HomeIconName } from "@/src/components/home/HomeIcon";
+import type { RequestType } from "@/src/types";
 
-export type RequestFormType = "import" | "export" | "supply" | "technology";
+export type RequestFormType = RequestType;
 
 export type RequestFormConfig = {
   type: RequestFormType;

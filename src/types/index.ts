@@ -26,6 +26,12 @@ export type VerificationDocumentStatus = "pending" | "approved" | "rejected" | "
 
 export type MarketplaceModerationStatus = "draft" | "pending_publication" | "published" | "paused" | "rejected" | "expired";
 
+export type InquiryStatus = "new" | "contacted" | "qualified" | "introduced" | "negotiating" | "converted" | "closed" | "spam";
+
+export type InquirySource = "marketplace" | "company_profile" | "product_demo" | "partnership_request";
+
+export type InquiryType = "request_quotation" | "submit_interest" | "more_information" | "demo_request" | "partnership_inquiry";
+
 export type OpportunityStatus = "open" | "under_review" | "matched" | "closed";
 
 export type CompanyType = "supplier" | "exporter" | "buyer" | "technology_provider";
@@ -211,6 +217,39 @@ export interface MarketplaceModerationListing {
   publicFields: string[];
   privateFields: string[];
   moderationNotes: AdminNote[];
+}
+
+export interface InquiryRelated {
+  kind: "opportunity" | "company" | "product" | "partnership";
+  id: string;
+  title: string;
+  href: string;
+}
+
+export interface InquiryTimelineEvent {
+  id: string;
+  status: InquiryStatus;
+  note: string;
+  actor: string;
+  createdAt: string;
+}
+
+export interface Inquiry {
+  id: string;
+  referenceNumber: string;
+  sender: UserSummary;
+  company: CompanySummary;
+  source: InquirySource;
+  type: InquiryType;
+  subject: string;
+  message: string;
+  related: InquiryRelated;
+  status: InquiryStatus;
+  assignedTeamMember: AssignedTeamMember | null;
+  receivedAt: string;
+  updatedAt: string;
+  timeline: InquiryTimelineEvent[];
+  internalNotes: AdminNote[];
 }
 
 export interface Company {

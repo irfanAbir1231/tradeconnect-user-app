@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { RoleGate } from "@/src/components/auth/RoleGate";
 import { AdminRequestDetail } from "@/src/components/admin/AdminRequestDetail";
 import { businessRequests } from "@/src/data/requests";
 
@@ -20,5 +21,5 @@ export default async function AdminRequestPage({ params }: AdminRequestPageProps
   const request = businessRequests.find((item) => item.id === id);
   if (!request) notFound();
   const teamMembers = businessRequests.flatMap((item) => item.assignedTeamMember ? [item.assignedTeamMember] : []).filter((member, index, members) => members.findIndex((candidate) => candidate.id === member.id) === index);
-  return <AdminRequestDetail request={request} teamMembers={teamMembers} />;
+  return <RoleGate requiredPermission="manage_requests" fallback={<p className="rounded-2xl border border-[var(--line)] bg-white p-6 text-sm text-[var(--muted)]">You do not have permission to manage request records.</p>}><AdminRequestDetail request={request} teamMembers={teamMembers} /></RoleGate>;
 }

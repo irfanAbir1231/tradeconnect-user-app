@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { HomeIcon } from "@/src/components/home/HomeIcon";
+import { RoleGate } from "@/src/components/auth/RoleGate";
 import { adminNavigation, type AdminNavItem } from "@/src/data/admin";
 
 type AdminSidebarProps = {
@@ -18,7 +19,7 @@ function activeHref(pathname: string) {
 function NavigationLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   const currentHref = activeHref(pathname);
 
-  return <nav aria-label="Admin navigation" className="space-y-1">{adminNavigation.map((item: AdminNavItem) => { const isActive = item.href === currentHref; return <div key={item.href}>{item.section ? <p className="mb-2 mt-5 px-3 text-[.62rem] font-bold uppercase tracking-[.16em] text-white/35">{item.section}</p> : null}<Link aria-current={isActive ? "page" : undefined} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? "bg-[var(--accent)] text-[var(--navy)] shadow-[0_10px_20px_-15px_var(--accent)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`} href={item.href} onClick={onNavigate}><HomeIcon name={item.icon} className="size-[1.05rem]" />{item.label}</Link></div>; })}</nav>;
+  return <nav aria-label="Admin navigation" className="space-y-1">{adminNavigation.map((item: AdminNavItem) => { const isActive = item.href === currentHref; return <RoleGate key={item.href} requiredPermission={item.requiredPermission}><div>{item.section ? <p className="mb-2 mt-5 px-3 text-[.62rem] font-bold uppercase tracking-[.16em] text-white/35">{item.section}</p> : null}<Link aria-current={isActive ? "page" : undefined} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? "bg-[var(--accent)] text-[var(--navy)] shadow-[0_10px_20px_-15px_var(--accent)]" : "text-white/60 hover:bg-white/10 hover:text-white"}`} href={item.href} onClick={onNavigate}><HomeIcon name={item.icon} className="size-[1.05rem]" />{item.label}</Link></div></RoleGate>; })}</nav>;
 }
 
 export function AdminSidebar({ mobile = false, onNavigate }: AdminSidebarProps) {

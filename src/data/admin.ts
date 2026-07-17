@@ -1,31 +1,33 @@
 import type { HomeIconName } from "@/src/components/home/HomeIcon";
 import { businessRequests } from "@/src/data/requests";
 import type { RequestType } from "@/src/types";
+import type { Permission } from "@/src/types/auth";
 
 export type AdminNavItem = {
   label: string;
   href: string;
   icon: HomeIconName;
   section?: string;
+  requiredPermission?: Permission;
 };
 
 export const adminNavigation: AdminNavItem[] = [
-  { label: "Overview", href: "/admin", icon: "chart" },
-  { label: "All Requests", href: "/admin/requests", icon: "package", section: "Requests" },
-  { label: "Import Requests", href: "/admin/requests/import", icon: "package" },
-  { label: "Export Requests", href: "/admin/requests/export", icon: "globe" },
-  { label: "Supply Requests", href: "/admin/requests/supply", icon: "building" },
-  { label: "Technology Requests", href: "/admin/requests/technology", icon: "laptop" },
-  { label: "Marketplace Listings", href: "/admin/marketplace", icon: "spark", section: "Network" },
-  { label: "Companies", href: "/admin/companies", icon: "building" },
-  { label: "Verification Queue", href: "/admin/verifications", icon: "shield" },
-  { label: "Inquiries", href: "/admin/inquiries", icon: "users" },
-  { label: "Documents", href: "/admin/documents", icon: "package" },
-  { label: "Users", href: "/admin/users", icon: "users", section: "Workspace" },
-  { label: "Team Members", href: "/admin/team", icon: "users" },
-  { label: "Categories", href: "/admin/categories", icon: "spark" },
-  { label: "Analytics", href: "/admin/analytics", icon: "chart" },
-  { label: "Settings", href: "/admin/settings", icon: "shield" },
+  { label: "Overview", href: "/admin", icon: "chart", requiredPermission: "view_admin_dashboard" },
+  { label: "All Requests", href: "/admin/requests", icon: "package", section: "Requests", requiredPermission: "manage_requests" },
+  { label: "Import Requests", href: "/admin/requests/import", icon: "package", requiredPermission: "manage_requests" },
+  { label: "Export Requests", href: "/admin/requests/export", icon: "globe", requiredPermission: "manage_requests" },
+  { label: "Supply Requests", href: "/admin/requests/supply", icon: "building", requiredPermission: "manage_requests" },
+  { label: "Technology Requests", href: "/admin/requests/technology", icon: "laptop", requiredPermission: "manage_requests" },
+  { label: "Marketplace Listings", href: "/admin/marketplace", icon: "spark", section: "Network", requiredPermission: "moderate_marketplace" },
+  { label: "Companies", href: "/admin/companies", icon: "building", requiredPermission: "manage_companies" },
+  { label: "Verification Queue", href: "/admin/verifications", icon: "shield", requiredPermission: "review_verifications" },
+  { label: "Inquiries", href: "/admin/inquiries", icon: "users", requiredPermission: "view_admin_dashboard" },
+  { label: "Documents", href: "/admin/documents", icon: "package", requiredPermission: "review_verifications" },
+  { label: "Users", href: "/admin/users", icon: "users", section: "Workspace", requiredPermission: "manage_companies" },
+  { label: "Team Members", href: "/admin/team", icon: "users", requiredPermission: "manage_team" },
+  { label: "Categories", href: "/admin/categories", icon: "spark", requiredPermission: "manage_settings" },
+  { label: "Analytics", href: "/admin/analytics", icon: "chart", requiredPermission: "view_analytics" },
+  { label: "Settings", href: "/admin/settings", icon: "shield", requiredPermission: "manage_settings" },
 ];
 
 export const adminStats = [

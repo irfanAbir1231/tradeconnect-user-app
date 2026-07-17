@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { RoleGate } from "@/src/components/auth/RoleGate";
 import { VerificationDetail } from "@/src/components/admin/VerificationDetail";
 import { verificationCases, verificationReviewers } from "@/src/data/adminVerification";
 
@@ -19,5 +20,5 @@ export default async function AdminVerificationDetailPage({ params }: Verificati
   const { companyId } = await params;
   const verificationCase = verificationCases.find((item) => item.company.id === companyId);
   if (!verificationCase) notFound();
-  return <VerificationDetail reviewers={verificationReviewers} verificationCase={verificationCase} />;
+  return <RoleGate requiredPermission="review_verifications" fallback={<p className="rounded-2xl border border-[var(--line)] bg-white p-6 text-sm text-[var(--muted)]">You do not have permission to review verification cases.</p>}><VerificationDetail reviewers={verificationReviewers} verificationCase={verificationCase} /></RoleGate>;
 }

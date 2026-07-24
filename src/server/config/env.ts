@@ -1,5 +1,7 @@
 import "server-only";
 
+import { optionalVercelSystemHost } from "@/src/server/auth/origins";
+
 export type ServerEnvironment = "development" | "preview" | "production" | "test";
 export type DeploymentEnvironment = "development" | "preview" | "production";
 
@@ -64,28 +66,6 @@ function optionalBetterAuthUrl(value: string | undefined) {
   }
 }
 
-function optionalVercelHost(value: string | undefined) {
-  if (!value) {
-    return undefined;
-  }
-
-  if (value.length > 255 || /[\r\n\s]/.test(value)) {
-    throw new Error("VERCEL_URL contains an invalid value.");
-  }
-
-  try {
-    const parsed = new URL(`https://${value}`);
-
-    if (parsed.host !== value || parsed.hostname === "vercel.app" || !parsed.hostname.endsWith(".vercel.app")) {
-      throw new Error();
-    }
-
-    return parsed.host;
-  } catch {
-    throw new Error("VERCEL_URL must be a Vercel deployment hostname without a protocol or path.");
-  }
-}
-
 function parseEnvironment(name: string, value: string | undefined, allowed: readonly string[], fallback: ServerEnvironment) {
   const candidate = value ?? fallback;
 
@@ -116,9 +96,10 @@ function parseDeploymentEnvironment(value: string | undefined) {
 export const serverEnv = Object.freeze({
   nodeEnv: parseEnvironment("NODE_ENV", process.env.NODE_ENV, serverEnvironments, "development"),
   vercelEnv: parseDeploymentEnvironment(process.env.VERCEL_ENV),
-  // Vercel supplies this server-side deployment hostname. It is validated before
-  // Better Auth can use it as an exact trusted host.
-  vercelUrl: optionalVercelHost(process.env.VERCEL_URL),
+  // Vercel supplies these server-side deployment hostnames. They are validated
+  // before Better Auth can use them as exact trusted hosts.
+  vercelUrl: optionalVercelSystemHost("VERCEL_URL", process.env.VERCEL_URL),
+  vercelBranchUrl: optionalVercelSystemHost("VERCEL_BRANCH_URL", process.env.VERCEL_BRANCH_URL),
   version: requiredSafeValue("VERCEL_GIT_COMMIT_SHA", process.env.VERCEL_GIT_COMMIT_SHA, 80) ?? "development",
   databaseUrl: optionalDatabaseUrl(process.env.DATABASE_URL),
   betterAuthSecret: optionalBetterAuthSecret(process.env.BETTER_AUTH_SECRET),

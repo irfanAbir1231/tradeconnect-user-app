@@ -6,6 +6,7 @@ import { betterAuth } from "better-auth";
 import { getBetterAuthEnvironment, serverEnv } from "@/src/server/config/env";
 import { getPrismaClient } from "@/src/server/db/client";
 
+import { buildAuthAllowedHosts } from "./origins";
 import { ensureDefaultUserRole } from "./roles";
 
 const authEnvironment = getBetterAuthEnvironment();
@@ -13,23 +14,12 @@ const authEnvironment = getBetterAuthEnvironment();
 // closed only on the actual production deployment until email delivery exists.
 const isProductionDeployment = serverEnv.vercelEnv === "production";
 const isVercelDeployment = Boolean(serverEnv.vercelEnv);
-const canonicalProductionHost = "tradeconnect-user-app.vercel.app";
-
-function localHostFromOrigin(origin: string | undefined) {
-  if (!origin || isVercelDeployment) {
-    return undefined;
-  }
-
-  const url = new URL(origin);
-  return url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1") ? url.host : undefined;
-}
-
-const allowedHosts = [
-  "localhost:3000",
-  canonicalProductionHost,
-  serverEnv.vercelUrl,
-  localHostFromOrigin(authEnvironment.localUrl),
-].filter((host): host is string => Boolean(host));
+const allowedHosts = buildAuthAllowedHosts({
+  isVercelDeployment,
+  localOrigin: authEnvironment.localUrl,
+  vercelUrl: serverEnv.vercelUrl,
+  vercelBranchUrl: serverEnv.vercelBranchUrl,
+});
 
 /**
  * Better Auth owns sessions, password hashes, verification records, and rate

@@ -1,8 +1,10 @@
 # TradeConnect Database Operations
 
-## Environment safety
+## MVP environment decision
 
-Use separate Neon databases/branches for development, preview, staging, and production. Configure `DATABASE_URL` for pooled runtime access. Prisma CLI migration/schema operations resolve a direct connection in this order: local `DIRECT_URL`, then Vercel Neon `DATABASE_URL_UNPOOLED`. `.env.example` contains names only. Never print, commit, or expose any connection value through `NEXT_PUBLIC_*` or an API response.
+TradeConnect temporarily uses one persistent Neon main branch for Vercel Production and Preview. Disable automatic Neon Preview Branching (or automatic connection injection) in the Vercel/Neon integration. Preview test data can affect the same persistent database, so it is not suitable for destructive testing or real customer activity.
+
+`DATABASE_URL` is the pooled runtime connection. Prisma migration/schema operations use `DIRECT_URL` when present and otherwise `DATABASE_URL_UNPOOLED`, regardless of `VERCEL_ENV`. The runtime client never uses a direct URL. Connection values stay server-only and must never be printed, committed, or exposed through `NEXT_PUBLIC_*`.
 
 ## Commands
 
@@ -17,27 +19,22 @@ npm run db:smoke
 npm run db:studio
 ```
 
-`db:migrate` is for a development database and creates/reviews migrations. `db:migrate:deploy` applies reviewed migrations in staging/production. `db:seed` creates only idempotent, production-safe canonical reference records by default: roles, permissions, role-permission mappings, categories, countries, and locations. Never run `migrate dev` in production, never run migrations during app startup, and do not use `db push` as the production strategy.
+`db:migrate` creates and reviews migrations for development only. `db:migrate:deploy` applies reviewed migrations. Never run `migrate dev` in a deployment, never run migrations during request handling, and do not use `db push` or `migrate reset`.
 
-## Development
+## Deployment
 
-1. Configure a disposable local/Neon development branch.
-2. Set pooled `DATABASE_URL` and direct `DIRECT_URL` locally.
-3. Run format, validate, generate, `db:migrate`, `db:seed`, and `db:smoke`.
-4. Inspect generated SQL for foreign keys, delete behavior, enums, decimals, and indexes before committing a migration.
+The only deployment build command is:
 
-The initial development migration `20260721190410_init_domain` is applied and the direct branch is up to date. The pooled `DATABASE_URL` and direct `DIRECT_URL` have been verified against the same Neon development branch; the seed and smoke test passed. Keep this branch-alignment check in the release procedure, because a matching database name alone is insufficient when the endpoint branch differs.
+```text
+prisma migrate deploy
+prisma db seed
+next build
+```
 
-## Preview
+Migrations create the schema. The default seed is idempotent and production-safe: six canonical roles, canonical permissions, role-permission mappings, categories, countries, and Bangladesh locations. It creates no users, passwords, admin accounts, demo companies, requests, marketplace records, or personal test data. Demo technology records require `SEED_DEMO_DATA=true`.
 
-Migrations create the database schema; the idempotent seed creates canonical role/permission data required by signup. Preview branches require both steps. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`. Demo records require explicit `SEED_DEMO_DATA=true` and never include users, passwords, requests, credentials, or real PII.
-
-Use an isolated Neon branch/database per preview or controlled preview group. Vercel’s Neon integration supplies pooled `DATABASE_URL` for runtime and `DATABASE_URL_UNPOOLED` for migrations and seeding. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; never point preview at production or run demo seed data against a shared production database. Demo seed is opt-in and contains no credentials or real PII.
-
-## Production
-
-Apply migrations as an explicit deployment step with a reviewed migration artifact and backup/PITR coverage. Use `migrate deploy`, observe readiness, and verify application compatibility before traffic promotion. Keep rollback as a forward-fix migration unless a documented restore is required; do not casually reverse destructive migrations.
+Before deployment, confirm in the Vercel and Neon dashboards that Production and Preview `DATABASE_URL` values target the persistent Neon main branch and that their direct `DATABASE_URL_UNPOOLED` or `DIRECT_URL` values target that same branch. Do not delete `DATABASE_URL` until the direct migration variable is confirmed.
 
 ## Recovery and maintenance
 
-Use Neon branching, backups, and point-in-time recovery according to the project’s retention policy. For a failed migration, stop promotion, inspect the migration and database state, then use a reviewed forward fix or restore to an isolated branch. Expired idempotency keys and soft-deleted records require a reviewed maintenance job later; this phase does not add background jobs.
+Use Neon backups and point-in-time recovery according to the project retention policy. For a failed migration, stop promotion, inspect the migration/database state, then use a reviewed forward fix or approved restore procedure. Expired idempotency keys and soft-deleted records require a reviewed maintenance job later; this MVP does not add background cleanup jobs.

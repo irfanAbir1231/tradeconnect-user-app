@@ -8,6 +8,10 @@ Today, pages import static records from `src/data`, and interactive flows update
 
 All route paths in this document are relative to the canonical `/api/v1` Route Handler tree unless a full path is shown.
 
+## Temporary MVP deployment decision
+
+`main` is the only active deployment branch. Vercel Production and optional Preview deployments temporarily share one persistent Neon main branch, with automatic Neon Preview Branching disabled. Deployments always run migrations, the production-safe canonical seed, and the Next.js build. Preview test data can affect the shared database; restore isolated staging resources before real customer production or destructive testing.
+
 ## Recommended system shape
 
 | Concern | Backend responsibility | Frontend change |
@@ -317,7 +321,7 @@ The detailed acceptance gates are repeated in `INTEGRATION_EXECUTION_CHECKLIST.m
 4. **First frontend integration milestone:** session hydration plus read-only `/me`, company directory, and user request list behind a feature flag; no destructive admin mutations yet.
 5. **Highest-risk areas:** document privacy and signed URLs, admin authorization, status transition concurrency, public/private listing projection, refresh-token security, and cross-company data leakage.
 6. **Team approval required:** session transport, role/membership model, storage provider, file limits/retention, state transition rules, analytics definitions, public route decisions, and API versioning policy.
-7. **Branch strategy:** `main` stays deployable; use `fullstack/phase-<n>-<slug>` for Route Handler/server work, `frontend/integration-<n>-<slug>` for UI adapters, and short-lived `docs/contract-*` branches for approved contract changes. Merge through reviewed pull requests.
+7. **Branch strategy:** for this MVP, `main` is the only active deployment branch after the authentication milestone is merged. Do not depend on feature branches or deployment-specific database branches for deployment testing; restore a reviewed multi-environment branch strategy before broader team delivery.
 8. **Commit sequence:** `docs: approve api and schema contracts` → `fullstack: add server foundation` → `fullstack: add database foundation` → `fullstack: add auth and permissions` → `frontend: add typed api client` → one domain pair per phase (`fullstack: ...`, `frontend: integrate ...`) → `test: add integration and e2e coverage` → `ops: add staging and monitoring`.
 
 ## Final planning report

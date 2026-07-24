@@ -2,6 +2,10 @@
 
 Planning checklist only. Do not mark a phase complete until its backend, frontend, test, privacy, and deployment acceptance criteria are met. Keep `main` deployable and retain the current mock-data mode behind an explicit feature flag until the corresponding API slice is proven in staging.
 
+## Temporary MVP deployment decision
+
+`main` is the sole active deployment branch. Vercel Production and Preview temporarily share the persistent Neon main branch; automatic Neon Preview Branching must be disabled. The deployment command is `prisma migrate deploy && prisma db seed && next build`. Preview data can affect the shared database, so destructive tests and customer-like data are prohibited until isolated staging is restored.
+
 ## Phase 2 database foundation status
 
 ## Phase 3A authentication core status
@@ -15,8 +19,8 @@ Planning checklist only. Do not mark a phase complete until its backend, fronten
 - [x] Prisma 7 schema, generated client boundary, config, scripts, seed structure, and readiness route added.
 - [x] Runtime/migration environment split documented as pooled `DATABASE_URL` versus direct `DIRECT_URL`.
 - [x] Frontend remains mock-data based; no business API or authentication was added.
-- [x] Initial migration `20260721190410_init_domain` generated, reviewed, and applied to the direct development branch.
-- [x] Reference seed, rollback-only smoke test, and ready-state verification completed against the aligned development branch.
+- [x] Initial migration `20260721190410_init_domain` generated, reviewed, and applied through the direct migration connection.
+- [x] Reference seed, rollback-only smoke test, and ready-state verification completed against the aligned persistent database connection.
 
 ## Global release gates
 

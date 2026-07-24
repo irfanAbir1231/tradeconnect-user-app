@@ -30,7 +30,9 @@ Rate limits use Better Auth's database storage. Sign-up allows five attempts per
 
 ## Database deployment connection
 
-Better Auth uses the application's pooled `DATABASE_URL` at request time. Prisma migration/schema commands deliberately resolve a direct database URL in this order: `DIRECT_URL` for local development, then Vercel Neon `DATABASE_URL_UNPOOLED` for Preview/production deployment. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; migrations create the schema, while the idempotent production-safe seed creates required canonical roles, permissions, and mappings before Better Auth can assign `business_user` on signup. It never uses the pooled runtime URL for migrations.
+Better Auth uses the application's pooled `DATABASE_URL` at request time. Prisma migration/schema commands resolve a direct database URL in this order: `DIRECT_URL`, then Vercel Neon `DATABASE_URL_UNPOOLED`, without branching on Preview/Production. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; migrations create the schema, while the idempotent production-safe seed creates required canonical roles, permissions, and mappings before Better Auth can assign `business_user` on signup. It never uses the pooled runtime URL for migrations.
+
+For the temporary MVP, Vercel Preview and Production use the same persistent Neon main branch. Preview authentication may use a separate `BETTER_AUTH_SECRET`, but Preview database activity is shared and can create accounts, sessions, and rate-limit records. Automatic Neon Preview Branching must be disabled before relying on this deployment model.
 
 ## Known deferred work
 

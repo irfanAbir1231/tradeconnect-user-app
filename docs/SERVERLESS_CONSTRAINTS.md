@@ -4,7 +4,7 @@ Planning only. This document describes how the full-stack Next.js application sh
 
 ## Implemented database and Phase 3A auth boundary
 
-The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-neon`. Node.js Route Handlers use pooled `DATABASE_URL`; Prisma migration/schema operations use direct `DIRECT_URL` locally or Vercel Neon `DATABASE_URL_UNPOOLED` when the local variable is absent. Better Auth runs only in Node.js Route Handlers against this server-only boundary. Authentication uses a configured fixed origin and database-backed rate limits; proxy redirects are only optimistic and server layouts/handlers re-validate sessions and permissions. No migration runs during application startup; Vercel uses the explicit `prisma migrate deploy && prisma db seed && next build` flow so each Preview has both schema and idempotent canonical role/permission data.
+The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-neon`. Node.js Route Handlers use pooled `DATABASE_URL`; Prisma migration/schema operations use `DIRECT_URL` first and Vercel Neon `DATABASE_URL_UNPOOLED` otherwise. Better Auth runs only in Node.js Route Handlers against this server-only boundary. No migration runs during application startup; Vercel uses `prisma migrate deploy && prisma db seed && next build`. For the MVP, Production and Preview intentionally share one persistent Neon main branch; automatic Preview database branching is disabled and Preview data can affect the shared database.
 
 ## Constraint matrix
 
@@ -22,7 +22,7 @@ The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-n
 | Scheduled-job limits | Cron runs may be delayed, duplicated, or have short execution windows | Make jobs idempotent, use leases/locks, process bounded batches, persist cursors |
 | Background work | Serverless response should not depend on long post-response work | Queue/outbox provider for retries; cron only for bounded discovery/cleanup |
 | Logging | Function logs are distributed and may contain sensitive data | Structured correlation IDs, redaction, centralized retention, no secrets/private payloads |
-| Environment boundaries | Preview and production must never share secrets/data accidentally | Separate projects/databases/storage buckets, explicit environment mapping, no `NEXT_PUBLIC_` secrets |
+| Environment boundaries | Preview activity can affect the shared MVP database | Explicit pooled/direct variable mapping, no `NEXT_PUBLIC_` secrets, no destructive Preview testing, and restore isolation before customer production |
 
 ## Operation classification
 
@@ -51,7 +51,7 @@ The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-n
 - Prefer a managed serverless Postgres provider with pooling/proxy support; confirm driver compatibility with the Node.js runtime.
 - Do not create a new uncontrolled connection/pool inside each request handler.
 - Set statement and transaction timeouts, use indexes for every list filter, and monitor active/idle connections.
-- Keep preview, staging, and production databases completely separate. Preview seeds must never point at production.
+- For the MVP, Preview and Production deliberately share the persistent Neon main branch; Preview seeds must remain production-safe and idempotent. Restore separate staging resources before customer production.
 
 ## Upload constraints
 
@@ -75,7 +75,7 @@ Use exponential backoff with bounded retries. Permanent validation/permission er
 
 ## Deployment and operations checklist
 
-- [ ] Vercel project environments map to separate database/storage/email/queue resources.
+- [ ] Vercel Production and Preview database variables map to the same persistent Neon main branch for the temporary MVP, with automatic Neon Preview Branching disabled.
 - [ ] Route Handlers run in Node.js where database/storage/crypto SDKs require it.
 - [ ] Migrations run as a controlled deployment step, never opportunistically on every request.
 - [ ] Health checks cover application, database reachability, storage configuration, and queue/outbox health without leaking secrets.

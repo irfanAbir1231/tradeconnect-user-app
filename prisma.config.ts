@@ -9,11 +9,13 @@ loadDotEnv({ path: ".env" });
 const command = process.argv.slice(2).join(" ");
 const needsDirectUrl = /(^|\s)(migrate|introspect)(\s|$)/.test(command)
   || /(^|\s)db\s+(pull|push|execute)(\s|$)/.test(command);
-const directUrl = process.env.DIRECT_URL;
+// Local development keeps DIRECT_URL in .env.local. Vercel's Neon integration
+// exposes the equivalent direct connection as DATABASE_URL_UNPOOLED.
+const migrationUrl = process.env.DIRECT_URL || process.env.DATABASE_URL_UNPOOLED;
 
-if (needsDirectUrl && !directUrl) {
+if (needsDirectUrl && !migrationUrl) {
   throw new Error(
-    "DIRECT_URL is required for Prisma migration and schema operations. Configure it in .env.local or the process environment.",
+    "Prisma migration and schema operations require DIRECT_URL or DATABASE_URL_UNPOOLED. Configure DIRECT_URL locally or DATABASE_URL_UNPOOLED on Vercel.",
   );
 }
 
@@ -23,5 +25,5 @@ export default defineConfig({
     path: "prisma/migrations",
     seed: "tsx prisma/seed.ts",
   },
-  datasource: directUrl ? { url: directUrl } : undefined,
+  datasource: migrationUrl ? { url: migrationUrl } : undefined,
 });

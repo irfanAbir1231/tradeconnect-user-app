@@ -2,7 +2,7 @@
 
 ## Environment safety
 
-Use separate Neon databases/branches for development, preview, staging, and production. Configure `DATABASE_URL` (pooled runtime) and `DIRECT_URL` (CLI migrations/schema operations) in the platform or local ignored environment. `.env.example` contains names only. Never print, commit, or expose either value through `NEXT_PUBLIC_*` or an API response.
+Use separate Neon databases/branches for development, preview, staging, and production. Configure `DATABASE_URL` for pooled runtime access. Prisma CLI migration/schema operations resolve a direct connection in this order: local `DIRECT_URL`, then Vercel Neon `DATABASE_URL_UNPOOLED`. `.env.example` contains names only. Never print, commit, or expose any connection value through `NEXT_PUBLIC_*` or an API response.
 
 ## Commands
 
@@ -30,7 +30,7 @@ The initial development migration `20260721190410_init_domain` is applied and th
 
 ## Preview
 
-Use an isolated Neon branch/database per preview or controlled preview group. Apply reviewed migrations with `db:migrate:deploy`; never point preview at production or run demo seed data against a shared production database. Demo seed is opt-in and contains no credentials or real PII.
+Use an isolated Neon branch/database per preview or controlled preview group. Vercel’s Neon integration supplies pooled `DATABASE_URL` for runtime and `DATABASE_URL_UNPOOLED` for `prisma migrate deploy`. The `vercel-build` script runs `prisma migrate deploy && next build`; never point preview at production or run demo seed data against a shared production database. Demo seed is opt-in and contains no credentials or real PII.
 
 ## Production
 

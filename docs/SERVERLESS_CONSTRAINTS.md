@@ -4,7 +4,7 @@ Planning only. This document describes how the full-stack Next.js application sh
 
 ## Implemented database and Phase 3A auth boundary
 
-The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-neon`. Node.js Route Handlers use pooled `DATABASE_URL`; migrations and schema operations use direct `DIRECT_URL`. Better Auth runs only in Node.js Route Handlers against this server-only boundary. Authentication uses a configured fixed origin and database-backed rate limits; proxy redirects are only optimistic and server layouts/handlers re-validate sessions and permissions. No migration runs during application startup.
+The current foundation uses Neon PostgreSQL with Prisma 7 and `@prisma/adapter-neon`. Node.js Route Handlers use pooled `DATABASE_URL`; Prisma migration/schema operations use direct `DIRECT_URL` locally or Vercel Neon `DATABASE_URL_UNPOOLED` when the local variable is absent. Better Auth runs only in Node.js Route Handlers against this server-only boundary. Authentication uses a configured fixed origin and database-backed rate limits; proxy redirects are only optimistic and server layouts/handlers re-validate sessions and permissions. No migration runs during application startup; Vercel uses the explicit `prisma migrate deploy && next build` flow.
 
 ## Constraint matrix
 

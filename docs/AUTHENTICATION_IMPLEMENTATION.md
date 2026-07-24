@@ -18,6 +18,10 @@ BETTER_AUTH_URL=
 
 `BETTER_AUTH_SECRET` must be at least 32 characters. `BETTER_AUTH_URL` must be an absolute HTTP(S) origin without a path, such as `http://localhost:3000` locally. Never expose either through `NEXT_PUBLIC_*`, source control, logs, or browser code.
 
+## Database deployment connection
+
+Better Auth uses the application's pooled `DATABASE_URL` at request time. Prisma migration/schema commands deliberately resolve a direct database URL in this order: `DIRECT_URL` for local development, then Vercel Neon `DATABASE_URL_UNPOOLED` for Preview/production deployment. The `vercel-build` script runs `prisma migrate deploy && next build`; it never uses the pooled runtime URL for migrations.
+
 ## Known deferred work
 
 Email verification delivery, password reset, email change, OAuth, support/abuse workflows, auth e2e tests, and all business-resource API mutations remain later phases. `RoleGate` can hide UI controls but the server guard and Route Handler checks are the actual boundary.

@@ -9,7 +9,9 @@ import { getPrismaClient } from "@/src/server/db/client";
 import { ensureDefaultUserRole } from "./roles";
 
 const authEnvironment = getBetterAuthEnvironment();
-const isProduction = serverEnv.nodeEnv === "production";
+// Vercel runs Preview builds with NODE_ENV=production. Public sign-up should be
+// closed only on the actual production deployment until email delivery exists.
+const isProductionDeployment = serverEnv.vercelEnv === "production";
 
 /**
  * Better Auth owns sessions, password hashes, verification records, and rate
@@ -31,11 +33,11 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 12,
     maxPasswordLength: 128,
-    autoSignIn: !isProduction,
+    autoSignIn: !isProductionDeployment,
     // Public production sign-up stays closed until transactional email and
     // verification delivery are implemented in a later phase.
-    disableSignUp: isProduction,
-    requireEmailVerification: isProduction,
+    disableSignUp: isProductionDeployment,
+    requireEmailVerification: isProductionDeployment,
   },
   rateLimit: {
     enabled: true,
@@ -51,7 +53,7 @@ export const auth = betterAuth({
   },
   advanced: {
     database: { generateId: "uuid" },
-    useSecureCookies: isProduction,
+    useSecureCookies: isProductionDeployment,
   },
   databaseHooks: {
     user: {

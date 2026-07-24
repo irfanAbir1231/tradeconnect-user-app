@@ -6,7 +6,7 @@
 - Same-origin browser auth client, responsive `/login` and `/register` forms, and logout button.
 - `GET /api/v1/me`, using the standard API envelope and returning only a safe actor projection.
 - Server-side session/actor helpers and permission guards for dashboard, admin, requests, marketplace, companies, and verification routes.
-- Database-backed Better Auth rate limiting, UUID IDs, secure production cookies, fixed trusted origin, 12–128 character passwords, and database default-role assignment.
+- Database-backed Better Auth rate limiting, UUID IDs, HTTPS-only deployment cookies, dynamic allowlisted origins, 12–128 character passwords, and database default-role assignment.
 - Development-only `npm run auth:grant-role -- --email <email> --role <role>` tool. Admin or super-admin grants additionally require `--confirm-admin I_UNDERSTAND`; it cannot run with `NODE_ENV=production` and writes an audit record.
 
 ## Environment
@@ -16,7 +16,13 @@ BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=
 ```
 
-`BETTER_AUTH_SECRET` must be at least 32 characters. `BETTER_AUTH_URL` must be an absolute HTTP(S) origin without a path, such as `http://localhost:3000` locally. Never expose either through `NEXT_PUBLIC_*`, source control, logs, or browser code.
+`BETTER_AUTH_SECRET` must be at least 32 characters and is mandatory in every environment. `BETTER_AUTH_URL` remains useful locally as an explicit loopback origin, such as `http://localhost:3000`; it is not required to track generated Preview URLs. Never expose either through `NEXT_PUBLIC_*`, source control, logs, or browser code.
+
+## Deployment origins
+
+Better Auth uses its dynamic `baseURL` configuration so each accepted request resolves its own base URL only after host validation. The production origin is `https://tradeconnect-user-app.vercel.app`. The explicit allowlist contains `localhost:3000`, the production hostname, and the exact server-side `VERCEL_URL` hostname for the active Vercel deployment. `VERCEL_URL` is trusted deployment metadata, is validated as a protocol-free `*.vercel.app` hostname, and is never read from a browser request.
+
+Local requests use HTTP; Vercel Preview and production use HTTPS with secure cookies. Better Auth derives trusted origins from the allowed hosts, validates forwarded/request hosts before use, and rejects unknown origins rather than redirecting them to production. No wildcard is used: Vercel supplies `VERCEL_URL` at build and runtime, so each Preview allows only its exact generated hostname without manually updating `BETTER_AUTH_URL`.
 
 ## Database deployment connection
 

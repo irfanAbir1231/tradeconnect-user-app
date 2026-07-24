@@ -64,6 +64,28 @@ function optionalBetterAuthUrl(value: string | undefined) {
   }
 }
 
+function optionalVercelHost(value: string | undefined) {
+  if (!value) {
+    return undefined;
+  }
+
+  if (value.length > 255 || /[\r\n\s]/.test(value)) {
+    throw new Error("VERCEL_URL contains an invalid value.");
+  }
+
+  try {
+    const parsed = new URL(`https://${value}`);
+
+    if (parsed.host !== value || parsed.hostname === "vercel.app" || !parsed.hostname.endsWith(".vercel.app")) {
+      throw new Error();
+    }
+
+    return parsed.host;
+  } catch {
+    throw new Error("VERCEL_URL must be a Vercel deployment hostname without a protocol or path.");
+  }
+}
+
 function parseEnvironment(name: string, value: string | undefined, allowed: readonly string[], fallback: ServerEnvironment) {
   const candidate = value ?? fallback;
 
@@ -94,7 +116,9 @@ function parseDeploymentEnvironment(value: string | undefined) {
 export const serverEnv = Object.freeze({
   nodeEnv: parseEnvironment("NODE_ENV", process.env.NODE_ENV, serverEnvironments, "development"),
   vercelEnv: parseDeploymentEnvironment(process.env.VERCEL_ENV),
-  vercelUrl: requiredSafeValue("VERCEL_URL", process.env.VERCEL_URL, 255),
+  // Vercel supplies this server-side deployment hostname. It is validated before
+  // Better Auth can use it as an exact trusted host.
+  vercelUrl: optionalVercelHost(process.env.VERCEL_URL),
   version: requiredSafeValue("VERCEL_GIT_COMMIT_SHA", process.env.VERCEL_GIT_COMMIT_SHA, 80) ?? "development",
   databaseUrl: optionalDatabaseUrl(process.env.DATABASE_URL),
   betterAuthSecret: optionalBetterAuthSecret(process.env.BETTER_AUTH_SECRET),
@@ -110,9 +134,9 @@ export type ServerEnv = typeof serverEnv;
  * means static marketing pages can still build without loading auth configuration.
  */
 export function getBetterAuthEnvironment() {
-  if (!serverEnv.betterAuthSecret || !serverEnv.betterAuthUrl) {
-    throw new Error("Authentication is not configured. Set BETTER_AUTH_SECRET and BETTER_AUTH_URL on the server.");
+  if (!serverEnv.betterAuthSecret) {
+    throw new Error("Authentication is not configured. Set BETTER_AUTH_SECRET on the server.");
   }
 
-  return { secret: serverEnv.betterAuthSecret, url: serverEnv.betterAuthUrl };
+  return { secret: serverEnv.betterAuthSecret, localUrl: serverEnv.betterAuthUrl };
 }

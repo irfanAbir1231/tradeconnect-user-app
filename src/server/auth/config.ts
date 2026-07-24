@@ -12,6 +12,24 @@ const authEnvironment = getBetterAuthEnvironment();
 // Vercel runs Preview builds with NODE_ENV=production. Public sign-up should be
 // closed only on the actual production deployment until email delivery exists.
 const isProductionDeployment = serverEnv.vercelEnv === "production";
+const isVercelDeployment = Boolean(serverEnv.vercelEnv);
+const canonicalProductionHost = "tradeconnect-user-app.vercel.app";
+
+function localHostFromOrigin(origin: string | undefined) {
+  if (!origin || isVercelDeployment) {
+    return undefined;
+  }
+
+  const url = new URL(origin);
+  return url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1") ? url.host : undefined;
+}
+
+const allowedHosts = [
+  "localhost:3000",
+  canonicalProductionHost,
+  serverEnv.vercelUrl,
+  localHostFromOrigin(authEnvironment.localUrl),
+].filter((host): host is string => Boolean(host));
 
 /**
  * Better Auth owns sessions, password hashes, verification records, and rate
@@ -20,10 +38,15 @@ const isProductionDeployment = serverEnv.vercelEnv === "production";
  */
 export const auth = betterAuth({
   appName: "TradeConnect",
-  baseURL: authEnvironment.url,
+  // Dynamic base URLs validate the forwarded/request host against this explicit
+  // allowlist before constructing redirects, callbacks, cookie settings, or
+  // trusted origins. Unknown hosts fail closed; no request origin is appended.
+  baseURL: {
+    allowedHosts,
+    protocol: isVercelDeployment ? "https" : "http",
+  },
   basePath: "/api/auth",
   secret: authEnvironment.secret,
-  trustedOrigins: [authEnvironment.url],
   database: prismaAdapter(getPrismaClient(), { provider: "postgresql", transaction: true }),
   user: { modelName: "User", fields: { name: "fullName" } },
   session: { modelName: "AuthSession" },
@@ -53,7 +76,10 @@ export const auth = betterAuth({
   },
   advanced: {
     database: { generateId: "uuid" },
-    useSecureCookies: isProductionDeployment,
+    // Dynamic baseURL validates proxy-derived hosts against allowedHosts before
+    // use. Vercel supplies these headers for deployed HTTPS requests.
+    trustedProxyHeaders: true,
+    useSecureCookies: isVercelDeployment,
   },
   databaseHooks: {
     user: {

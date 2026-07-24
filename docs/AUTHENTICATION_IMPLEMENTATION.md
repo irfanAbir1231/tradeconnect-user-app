@@ -24,6 +24,10 @@ Better Auth uses its dynamic `baseURL` configuration so each accepted request re
 
 Local requests use HTTP; Vercel Preview and production use HTTPS with secure cookies. Better Auth derives trusted origins from the allowed hosts, validates forwarded/request hosts before use, and rejects unknown origins rather than redirecting them to production. No wildcard is used: Vercel supplies both hostnames at build and runtime, so each Preview explicitly accepts its generated deployment URL and branch URL without manually updating `BETTER_AUTH_URL`. Other Vercel projects remain rejected.
 
+## Signup rate limiting
+
+Rate limits use Better Auth's database storage. Sign-up allows five attempts per rolling window: five minutes in local development and Vercel Preview, and one hour in production. The deployment environment is determined only from `VERCEL_ENV`; `NODE_ENV=production` on Preview does not activate the production window. A rejected request reports Better Auth's `X-Retry-After` value, which the registration form turns into a visible minute countdown and uses to prevent duplicate submissions until the bucket expires.
+
 ## Database deployment connection
 
 Better Auth uses the application's pooled `DATABASE_URL` at request time. Prisma migration/schema commands deliberately resolve a direct database URL in this order: `DIRECT_URL` for local development, then Vercel Neon `DATABASE_URL_UNPOOLED` for Preview/production deployment. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; migrations create the schema, while the idempotent production-safe seed creates required canonical roles, permissions, and mappings before Better Auth can assign `business_user` on signup. It never uses the pooled runtime URL for migrations.

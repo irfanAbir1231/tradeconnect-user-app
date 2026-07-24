@@ -17,7 +17,8 @@
     "db:format": "prisma format",
     "db:smoke": "tsx scripts/db-smoke.ts",
     "auth:grant-role": "tsx scripts/grant-user-role.ts",
-    "test:auth-origins": "tsx scripts/test-auth-origins.ts"
+    "test:auth-origins": "tsx scripts/test-auth-origins.ts",
+    "test:auth-rate-limit": "tsx scripts/test-auth-rate-limit.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.6.25",

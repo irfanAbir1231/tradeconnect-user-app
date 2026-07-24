@@ -7,6 +7,7 @@ import { getBetterAuthEnvironment, serverEnv } from "@/src/server/config/env";
 import { getPrismaClient } from "@/src/server/db/client";
 
 import { buildAuthAllowedHosts } from "./origins";
+import { signupRateLimitFor } from "./rate-limit";
 import { ensureDefaultUserRole } from "./roles";
 
 const authEnvironment = getBetterAuthEnvironment();
@@ -14,6 +15,7 @@ const authEnvironment = getBetterAuthEnvironment();
 // closed only on the actual production deployment until email delivery exists.
 const isProductionDeployment = serverEnv.vercelEnv === "production";
 const isVercelDeployment = Boolean(serverEnv.vercelEnv);
+const signupRateLimit = signupRateLimitFor(serverEnv.vercelEnv);
 const allowedHosts = buildAuthAllowedHosts({
   isVercelDeployment,
   localOrigin: authEnvironment.localUrl,
@@ -60,7 +62,7 @@ export const auth = betterAuth({
     max: 20,
     customRules: {
       "/sign-in/email": { window: 60, max: 5 },
-      "/sign-up/email": { window: 3600, max: 5 },
+      "/sign-up/email": signupRateLimit,
       "/get-session": { window: 60, max: 60 },
     },
   },

@@ -33,7 +33,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="/dashboard">Login</Link>
+          <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="/login">Login</Link>
           <Link className="rounded-full bg-[var(--accent-deep)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_var(--accent-deep)] transition-transform hover:-translate-y-0.5 hover:bg-[var(--navy)]" href="/submit">
             Submit Request
           </Link>

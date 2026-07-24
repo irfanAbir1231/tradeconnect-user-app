@@ -196,24 +196,51 @@ async function seedReferenceData() {
     }
   }
 
+  return {
+    roles: roles.length,
+    permissions: permissions.length,
+    categories: categories.length,
+    countries: countries.length,
+    bangladeshLocations: 6,
+  };
+}
+
+async function seedOptionalDemoData() {
+  if (process.env.SEED_DEMO_DATA !== "true") {
+    return { enabled: false, records: 0 };
+  }
+
+  // Deliberately no users, passwords, contact details, requests, documents, or credentials.
   const provider = await prisma.company.upsert({
     where: { slug: "tradeconnect-demo-technology-provider" },
-    update: { displayName: "TradeConnect Demo Technology Provider", accountStatus: "active", verificationStatus: "approved", isDemo: true },
+    update: {
+      displayName: "TradeConnect Demo Technology Provider",
+      description: "Development-only demo company; not a real business or contact.",
+      accountStatus: "active",
+      verificationStatus: "approved",
+      isDemo: true,
+    },
     create: {
       slug: "tradeconnect-demo-technology-provider",
       legalName: "TradeConnect Demo Technology Provider",
       displayName: "TradeConnect Demo Technology Provider",
       businessType: "technology_provider",
-      description: "A clearly marked development fixture used to anchor the seeded technology catalogue.",
+      description: "Development-only demo company; not a real business or contact.",
       verificationStatus: "approved",
       isDemo: true,
     },
     select: { id: true },
   });
 
-  for (const [index, product] of products.entries()) {
-    const category = categoryRecords.get(product.category);
-    if (!category) throw new Error(`Missing product category: ${product.category}`);
+  for (const product of products) {
+    const category = await prisma.category.findFirst({
+      where: { scope: "technology", slug: product.category, deletedAt: null },
+      select: { id: true },
+    });
+
+    if (!category) {
+      throw new Error(`Missing demo product category: ${product.category}`);
+    }
 
     await prisma.technologyProduct.upsert({
       where: { slug: product.slug },
@@ -249,33 +276,9 @@ async function seedReferenceData() {
         status: "published",
       },
     });
-
-    if (index === products.length - 1) {
-      console.info("Technology catalogue reference seed complete.");
-    }
   }
 
-  return {
-    roles: roles.length,
-    permissions: permissions.length,
-    categories: categories.length,
-    countries: countries.length,
-    bangladeshLocations: 6,
-    technologyProducts: products.length,
-  };
-}
-
-async function seedOptionalDemoData() {
-  if (process.env.SEED_DEMO_DATA !== "true") {
-    return { enabled: false, records: 0 };
-  }
-
-  // Deliberately no users, passwords, contact details, documents, or credentials.
-  await prisma.company.update({
-    where: { slug: "tradeconnect-demo-technology-provider" },
-    data: { description: "Development-only demo company; not a real business or contact.", isDemo: true },
-  });
-  return { enabled: true, records: 1 };
+  return { enabled: true, records: products.length + 1 };
 }
 
 async function main() {

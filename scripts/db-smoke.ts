@@ -35,15 +35,14 @@ function safeErrorSummary(error: unknown) {
 async function main() {
   await prisma.$queryRaw(Prisma.sql`SELECT 1`);
 
-  const [role, permission, category, country, technologyProduct] = await Promise.all([
+  const [role, permission, category, country] = await Promise.all([
     prisma.role.findUnique({ where: { slug: "admin" }, select: { id: true } }),
     prisma.permission.findUnique({ where: { slug: "manage_requests" }, select: { id: true } }),
     prisma.category.findFirst({ where: { isActive: true }, select: { id: true } }),
     prisma.country.findUnique({ where: { iso2: "BD" }, select: { id: true } }),
-    prisma.technologyProduct.findUnique({ where: { slug: "pos-software" }, select: { id: true } }),
   ]);
 
-  if (!role || !permission || !category || !country || !technologyProduct) {
+  if (!role || !permission || !category || !country) {
     throw new Error("Expected reference seed data is missing.");
   }
 

@@ -17,7 +17,7 @@ npm run db:smoke
 npm run db:studio
 ```
 
-`db:migrate` is for a development database and creates/reviews migrations. `db:migrate:deploy` applies reviewed migrations in staging/production. Never run `migrate dev` in production, never run migrations during app startup, and do not use `db push` as the production strategy.
+`db:migrate` is for a development database and creates/reviews migrations. `db:migrate:deploy` applies reviewed migrations in staging/production. `db:seed` creates only idempotent, production-safe canonical reference records by default: roles, permissions, role-permission mappings, categories, countries, and locations. Never run `migrate dev` in production, never run migrations during app startup, and do not use `db push` as the production strategy.
 
 ## Development
 
@@ -30,7 +30,9 @@ The initial development migration `20260721190410_init_domain` is applied and th
 
 ## Preview
 
-Use an isolated Neon branch/database per preview or controlled preview group. Vercel’s Neon integration supplies pooled `DATABASE_URL` for runtime and `DATABASE_URL_UNPOOLED` for `prisma migrate deploy`. The `vercel-build` script runs `prisma migrate deploy && next build`; never point preview at production or run demo seed data against a shared production database. Demo seed is opt-in and contains no credentials or real PII.
+Migrations create the database schema; the idempotent seed creates canonical role/permission data required by signup. Preview branches require both steps. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`. Demo records require explicit `SEED_DEMO_DATA=true` and never include users, passwords, requests, credentials, or real PII.
+
+Use an isolated Neon branch/database per preview or controlled preview group. Vercel’s Neon integration supplies pooled `DATABASE_URL` for runtime and `DATABASE_URL_UNPOOLED` for migrations and seeding. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; never point preview at production or run demo seed data against a shared production database. Demo seed is opt-in and contains no credentials or real PII.
 
 ## Production
 

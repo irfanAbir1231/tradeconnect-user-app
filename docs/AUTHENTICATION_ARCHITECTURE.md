@@ -21,7 +21,7 @@ TradeConnect uses Better Auth for email/password identity, signed session cookie
 
 ## Production posture
 
-`BETTER_AUTH_SECRET` and `BETTER_AUTH_URL` are server-only. Production public registration is intentionally disabled until transactional email and verification delivery exist; development permits registration and assigns only `business_user`. No OAuth, magic link, password reset, email delivery, admin-management plugin, or business APIs are part of Phase 3A.
+`BETTER_AUTH_SECRET` and `BETTER_AUTH_URL` are server-only. Public email/password registration is enabled in development, Preview, and Production and assigns only `business_user`. Accounts remain unverified (`emailVerified=false`) until the later email-verification delivery phase; verification is not currently required for sign-in. No OAuth, magic link, password reset, email delivery, admin-management plugin, or business APIs are part of Phase 3A.
 
 ## Vercel and proxy assumptions
 

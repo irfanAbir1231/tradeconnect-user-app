@@ -26,6 +26,8 @@ Local requests use HTTP; Vercel Preview and production use HTTPS with secure coo
 
 ## Signup rate limiting
 
+Public email/password signup is enabled in local development, Vercel Preview, and Production. New accounts are assigned exactly one `business_user` role by the database hook and receive a database-backed session. Their `emailVerified` value remains `false`: email verification delivery is intentionally deferred and is not required to sign in yet.
+
 Rate limits use Better Auth's database storage. Sign-up allows five attempts per rolling window: five minutes in local development and Vercel Preview, and one hour in production. The deployment environment is determined only from `VERCEL_ENV`; `NODE_ENV=production` on Preview does not activate the production window. A rejected request reports Better Auth's `X-Retry-After` value, which the registration form turns into a visible minute countdown and uses to prevent duplicate submissions until the bucket expires.
 
 ## Database deployment connection

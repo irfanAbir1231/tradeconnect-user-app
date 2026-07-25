@@ -2,6 +2,8 @@ import "server-only";
 
 import type { Permission, UserRole } from "@/src/types/auth";
 
+export { actorHasPermission } from "./policy";
+
 /** Canonical server permission vocabulary currently shared with the UI contract. */
 export const serverPermissions = [
   "submit_request",
@@ -27,8 +29,4 @@ export interface AuthorizationActor {
   roles: readonly UserRole[];
   companyIds?: readonly string[];
   permissions: readonly Permission[];
-}
-
-export function actorHasPermission(actor: AuthorizationActor | null | undefined, permission: Permission) {
-  return actor?.permissions.includes(permission) ?? false;
 }

@@ -9,11 +9,9 @@ import { getPrismaClient } from "@/src/server/db/client";
 import { buildAuthAllowedHosts } from "./origins";
 import { signupRateLimitFor } from "./rate-limit";
 import { ensureDefaultUserRole } from "./roles";
+import { emailPasswordPolicyFor } from "./signup-policy";
 
 const authEnvironment = getBetterAuthEnvironment();
-// Vercel runs Preview builds with NODE_ENV=production. Public sign-up should be
-// closed only on the actual production deployment until email delivery exists.
-const isProductionDeployment = serverEnv.vercelEnv === "production";
 const isVercelDeployment = Boolean(serverEnv.vercelEnv);
 const signupRateLimit = signupRateLimitFor(serverEnv.vercelEnv);
 const allowedHosts = buildAuthAllowedHosts({
@@ -44,16 +42,7 @@ export const auth = betterAuth({
   session: { modelName: "AuthSession" },
   account: { modelName: "AuthAccount" },
   verification: { modelName: "AuthVerification" },
-  emailAndPassword: {
-    enabled: true,
-    minPasswordLength: 12,
-    maxPasswordLength: 128,
-    autoSignIn: !isProductionDeployment,
-    // Public production sign-up stays closed until transactional email and
-    // verification delivery are implemented in a later phase.
-    disableSignUp: isProductionDeployment,
-    requireEmailVerification: isProductionDeployment,
-  },
+  emailAndPassword: emailPasswordPolicyFor(serverEnv.vercelEnv),
   rateLimit: {
     enabled: true,
     storage: "database",

@@ -1,0 +1,916 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "../src/generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserStatus {
+  active
+  suspended
+  archived
+}
+
+enum CompanyMemberStatus {
+  pending
+  active
+  suspended
+  removed
+}
+
+enum CompanyMemberRole {
+  owner
+  admin
+  member
+}
+
+enum CompanyVerificationStatus {
+  not_started
+  submitted
+  under_review
+  needs_information
+  approved
+  rejected
+  suspended
+}
+
+enum CompanyAccountStatus {
+  active
+  suspended
+  archived
+}
+
+enum RequestType {
+  import
+  export
+  supply
+  technology
+}
+
+enum RequestStatus {
+  draft
+  submitted
+  under_review
+  needs_information
+  matching
+  quotation_received
+  approved
+  completed
+  rejected
+  cancelled
+}
+
+enum RequestPriority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum MarketplaceRequestStatus {
+  not_requested
+  draft
+  pending_review
+  published
+  paused
+  matched
+  closed
+}
+
+enum MarketplaceListingStatus {
+  draft
+  pending_publication
+  published
+  paused
+  rejected
+  expired
+  archived
+}
+
+enum DocumentResourceType {
+  company
+  request
+  verification
+  product
+}
+
+enum DocumentScanStatus {
+  pending
+  clean
+  infected
+  failed
+}
+
+enum DocumentReviewStatus {
+  pending
+  approved
+  rejected
+  replacement_requested
+}
+
+enum VerificationChecklistStatus {
+  pending
+  approved
+  rejected
+  needs_information
+}
+
+enum VerificationDocumentDecision {
+  approved
+  rejected
+  replacement_requested
+}
+
+enum InquirySource {
+  marketplace_opportunity
+  company_profile
+  technology_product
+  partnership
+}
+
+enum InquiryType {
+  request_quotation
+  submit_interest
+  ask_information
+  partnership_inquiry
+}
+
+enum InquiryStatus {
+  new
+  contacted
+  qualified
+  introduced
+  negotiating
+  converted
+  closed
+  spam
+}
+
+enum TechnologyProductStatus {
+  draft
+  published
+  archived
+}
+
+enum NotificationDeliveryStatus {
+  pending
+  sent
+  failed
+}
+
+enum IdempotencyStatus {
+  in_progress
+  completed
+  failed
+  expired
+}
+
+model User {
+  id                            String                       @id @default(uuid()) @db.Uuid
+  email                         String                       @unique @db.VarChar(254)
+  fullName                      String                       @db.VarChar(160)
+  emailVerified                 Boolean                      @default(false)
+  image                         String?
+  phone                         String?                      @db.VarChar(40)
+  emailVerifiedAt               DateTime?
+  phoneVerifiedAt               DateTime?
+  status                        UserStatus                   @default(active)
+  lastLoginAt                   DateTime?
+  createdAt                     DateTime                     @default(now())
+  updatedAt                     DateTime                     @updatedAt
+  deletedAt                     DateTime?
+  companyMemberships            CompanyMember[]
+  roleAssignments               UserRole[]                   @relation("UserRoleSubject")
+  assignedRequests              RequestAssignment[]          @relation("AssignedTeamMember")
+  createdAssignments            RequestAssignment[]          @relation("AssignmentCreator")
+  statusChanges                 RequestStatusHistory[]       @relation("StatusChangeActor")
+  authoredNotes                 RequestAdminNote[]
+  uploadedDocuments             Document[]                   @relation("DocumentUploader")
+  submittedVerifications        CompanyVerification[]        @relation("VerificationSubmitter")
+  assignedVerifications         CompanyVerification[]        @relation("VerificationReviewer")
+  decidedVerifications          CompanyVerification[]        @relation("VerificationDecisionMaker")
+  checklistReviews              VerificationChecklistItem[]  @relation("ChecklistReviewer")
+  documentReviews               VerificationDocumentReview[] @relation("DocumentReviewer")
+  marketplaceModerations        MarketplaceListing[]         @relation("ListingModerator")
+  createdRequests               BusinessRequest[]            @relation("RequestCreator")
+  assignedInquiries             Inquiry[]                    @relation("InquiryAssignee")
+  inquiryActivities             InquiryActivity[]            @relation("InquiryActivityActor")
+  notifications                 Notification[]
+  notificationPreference        NotificationPreference?
+  auditLogs                     AuditLog[]                   @relation("AuditActor")
+  idempotencyKeys               IdempotencyKey[]
+  assignedUserRoles             UserRole[]                   @relation("RoleAssignmentActor")
+  createdCompanies              Company[]                    @relation("CompanyCreator")
+  membershipInvites             CompanyMember[]              @relation("MembershipInviter")
+  sentInquiries                 Inquiry[]                    @relation("InquirySender")
+  submittedMarketplaceInterests MarketplaceInterest[]        @relation("InterestSubmitter")
+  authSessions                  AuthSession[]
+  authAccounts                  AuthAccount[]
+
+  @@index([status])
+  @@index([emailVerifiedAt])
+  @@map("users")
+}
+
+model AuthSession {
+  id        String   @id @default(uuid()) @db.Uuid
+  expiresAt DateTime
+  token     String   @unique @db.VarChar(255)
+  ipAddress String?  @db.VarChar(64)
+  userAgent String?
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("auth_sessions")
+}
+
+model AuthAccount {
+  id                    String    @id @default(uuid()) @db.Uuid
+  accountId             String    @db.VarChar(255)
+  providerId            String    @db.VarChar(100)
+  userId                String    @db.Uuid
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("auth_accounts")
+}
+
+model AuthVerification {
+  id         String   @id @default(uuid()) @db.Uuid
+  identifier String   @db.VarChar(255)
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@index([expiresAt])
+  @@map("auth_verifications")
+}
+
+model AuthRateLimit {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique @db.VarChar(255)
+  count       Int
+  lastRequest BigInt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([lastRequest])
+  @@map("auth_rate_limits")
+}
+
+model Company {
+  id                  String                    @id @default(uuid()) @db.Uuid
+  slug                String                    @unique @db.VarChar(180)
+  legalName           String                    @db.VarChar(240)
+  displayName         String                    @db.VarChar(240)
+  businessType        String                    @db.VarChar(64)
+  description         String?
+  website             String?
+  verificationStatus  CompanyVerificationStatus @default(not_started)
+  accountStatus       CompanyAccountStatus      @default(active)
+  isFeatured          Boolean                   @default(false)
+  isDemo              Boolean                   @default(false)
+  foundedYear         Int?
+  employeeRange       String?                   @db.VarChar(64)
+  primaryLocationId   String?                   @db.Uuid
+  createdById         String?                   @db.Uuid
+  createdAt           DateTime                  @default(now())
+  updatedAt           DateTime                  @updatedAt
+  deletedAt           DateTime?
+  primaryLocation     Location?                 @relation("CompanyPrimaryLocation", fields: [primaryLocationId], references: [id], onDelete: Restrict)
+  createdBy           User?                     @relation("CompanyCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  members             CompanyMember[]
+  categories          CompanyCategory[]
+  countriesServed     CompanyCountry[]
+  businessRequests    BusinessRequest[]
+  documents           Document[]
+  verification        CompanyVerification?
+  marketplaceListings MarketplaceListing[]
+  inquiries           Inquiry[]                 @relation("InquirySenderCompany")
+  relatedInquiries    Inquiry[]                 @relation("InquiryRelatedCompany")
+  technologyProducts  TechnologyProduct[]
+  auditLogs           AuditLog[]
+  roleAssignments     UserRole[]
+
+  @@index([verificationStatus])
+  @@index([accountStatus])
+  @@index([businessType])
+  @@index([primaryLocationId])
+  @@map("companies")
+}
+
+model CompanyMember {
+  id             String              @id @default(uuid()) @db.Uuid
+  companyId      String              @db.Uuid
+  userId         String              @db.Uuid
+  membershipRole CompanyMemberRole   @default(member)
+  status         CompanyMemberStatus @default(pending)
+  isPrimary      Boolean             @default(false)
+  invitedById    String?             @db.Uuid
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  deletedAt      DateTime?
+  company        Company             @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  user           User                @relation(fields: [userId], references: [id], onDelete: Restrict)
+  invitedBy      User?               @relation("MembershipInviter", fields: [invitedById], references: [id], onDelete: SetNull)
+
+  @@unique([companyId, userId])
+  @@index([companyId, status])
+  @@index([userId, status])
+  @@map("company_members")
+}
+
+model Role {
+  id          String           @id @default(uuid()) @db.Uuid
+  slug        String           @unique @db.VarChar(64)
+  name        String           @db.VarChar(120)
+  description String?
+  isSystem    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  permissions RolePermission[]
+  assignments UserRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(uuid()) @db.Uuid
+  slug        String           @unique @db.VarChar(100)
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId       String     @db.Uuid
+  permissionId String     @db.Uuid
+  createdAt    DateTime   @default(now())
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Restrict)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id           String    @id @default(uuid()) @db.Uuid
+  userId       String    @db.Uuid
+  roleId       String    @db.Uuid
+  companyId    String?   @db.Uuid
+  assignedById String?   @db.Uuid
+  assignedAt   DateTime  @default(now())
+  revokedAt    DateTime?
+  user         User      @relation("UserRoleSubject", fields: [userId], references: [id], onDelete: Restrict)
+  role         Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  company      Company?  @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  assignedBy   User?     @relation("RoleAssignmentActor", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@unique([userId, roleId, companyId])
+  @@index([userId, revokedAt])
+  @@index([roleId])
+  @@index([companyId])
+  @@map("user_roles")
+}
+
+model Category {
+  id                String              @id @default(uuid()) @db.Uuid
+  slug              String              @db.VarChar(120)
+  name              String              @db.VarChar(160)
+  scope             String              @db.VarChar(48)
+  parentId          String?             @db.Uuid
+  isActive          Boolean             @default(true)
+  sortOrder         Int                 @default(0)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+  parent            Category?           @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children          Category[]          @relation("CategoryTree")
+  companyCategories CompanyCategory[]
+  requestCategories BusinessRequest[]
+  products          TechnologyProduct[]
+
+  @@unique([scope, slug])
+  @@index([scope, isActive, sortOrder])
+  @@index([parentId])
+  @@map("categories")
+}
+
+model Country {
+  id                  String            @id @default(uuid()) @db.Uuid
+  iso2                String            @unique @db.Char(2)
+  iso3                String            @unique @db.Char(3)
+  name                String            @db.VarChar(120)
+  isActive            Boolean           @default(true)
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  locations           Location[]
+  sourceRequests      BusinessRequest[] @relation("RequestSourceCountry")
+  destinationRequests BusinessRequest[] @relation("RequestDestinationCountry")
+  servedByCompanies   CompanyCountry[]
+
+  @@index([name])
+  @@map("countries")
+}
+
+model Location {
+  id                  String            @id @default(uuid()) @db.Uuid
+  countryId           String            @db.Uuid
+  parentId            String?           @db.Uuid
+  name                String            @db.VarChar(160)
+  type                String            @db.VarChar(48)
+  postalCode          String?           @db.VarChar(32)
+  isActive            Boolean           @default(true)
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  deletedAt           DateTime?
+  country             Country           @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  parent              Location?         @relation("LocationTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children            Location[]        @relation("LocationTree")
+  primaryForCompanies Company[]         @relation("CompanyPrimaryLocation")
+  requests            BusinessRequest[]
+
+  @@unique([countryId, parentId, name, type])
+  @@index([countryId, name])
+  @@index([parentId])
+  @@map("locations")
+}
+
+model CompanyCategory {
+  companyId  String   @db.Uuid
+  categoryId String   @db.Uuid
+  isPrimary  Boolean  @default(false)
+  company    Company  @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@id([companyId, categoryId])
+  @@index([categoryId])
+  @@map("company_categories")
+}
+
+model CompanyCountry {
+  companyId    String  @db.Uuid
+  countryId    String  @db.Uuid
+  relationship String  @db.VarChar(48)
+  company      Company @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  country      Country @relation(fields: [countryId], references: [id], onDelete: Restrict)
+
+  @@id([companyId, countryId, relationship])
+  @@index([countryId])
+  @@map("company_countries")
+}
+
+model BusinessRequest {
+  id                   String                   @id @default(uuid()) @db.Uuid
+  referenceNumber      String                   @unique @db.VarChar(40)
+  slug                 String                   @unique @db.VarChar(180)
+  title                String                   @db.VarChar(240)
+  description          String
+  requestType          RequestType
+  status               RequestStatus            @default(draft)
+  priority             RequestPriority          @default(medium)
+  companyId            String                   @db.Uuid
+  creatorId            String                   @db.Uuid
+  categoryId           String?                  @db.Uuid
+  sourceCountryId      String?                  @db.Uuid
+  destinationCountryId String?                  @db.Uuid
+  locationId           String?                  @db.Uuid
+  quantityValue        Decimal?                 @db.Decimal(18, 4)
+  quantityUnit         String?                  @db.VarChar(48)
+  quantityFrequency    String?                  @db.VarChar(48)
+  budgetMin            Decimal?                 @db.Decimal(18, 4)
+  budgetMax            Decimal?                 @db.Decimal(18, 4)
+  budgetCurrencyCode   String?                  @db.Char(3)
+  budgetUnit           String?                  @db.VarChar(48)
+  timeline             String?                  @db.VarChar(120)
+  isPublic             Boolean                  @default(false)
+  marketplaceStatus    MarketplaceRequestStatus @default(not_requested)
+  version              Int                      @default(1)
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+  deletedAt            DateTime?
+  company              Company                  @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  creator              User                     @relation("RequestCreator", fields: [creatorId], references: [id], onDelete: Restrict)
+  category             Category?                @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  sourceCountry        Country?                 @relation("RequestSourceCountry", fields: [sourceCountryId], references: [id], onDelete: SetNull)
+  destinationCountry   Country?                 @relation("RequestDestinationCountry", fields: [destinationCountryId], references: [id], onDelete: SetNull)
+  location             Location?                @relation(fields: [locationId], references: [id], onDelete: SetNull)
+  statusHistory        RequestStatusHistory[]
+  assignment           RequestAssignment?
+  adminNotes           RequestAdminNote[]
+  documents            RequestDocument[]
+  marketplaceListing   MarketplaceListing?
+
+  @@index([requestType, status])
+  @@index([status, priority])
+  @@index([companyId, status])
+  @@index([creatorId, createdAt])
+  @@index([createdAt])
+  @@index([marketplaceStatus])
+  @@map("business_requests")
+}
+
+model RequestStatusHistory {
+  id          String          @id @default(uuid()) @db.Uuid
+  requestId   String          @db.Uuid
+  fromStatus  RequestStatus?
+  toStatus    RequestStatus
+  reason      String?
+  changedById String          @db.Uuid
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  request     BusinessRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  changedBy   User            @relation("StatusChangeActor", fields: [changedById], references: [id], onDelete: Restrict)
+
+  @@index([requestId, createdAt])
+  @@index([toStatus])
+  @@map("request_status_history")
+}
+
+model RequestAssignment {
+  id           String          @id @default(uuid()) @db.Uuid
+  requestId    String          @unique @db.Uuid
+  teamMemberId String?         @db.Uuid
+  assignedById String?         @db.Uuid
+  assignedAt   DateTime        @default(now())
+  unassignedAt DateTime?
+  reason       String?
+  request      BusinessRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  teamMember   User?           @relation("AssignedTeamMember", fields: [teamMemberId], references: [id], onDelete: SetNull)
+  assignedBy   User?           @relation("AssignmentCreator", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@index([teamMemberId, unassignedAt])
+  @@index([requestId, unassignedAt])
+  @@map("request_assignments")
+}
+
+model RequestAdminNote {
+  id        String          @id @default(uuid()) @db.Uuid
+  requestId String          @db.Uuid
+  authorId  String          @db.Uuid
+  body      String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
+  request   BusinessRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  author    User            @relation(fields: [authorId], references: [id], onDelete: Restrict)
+
+  @@index([requestId, createdAt])
+  @@index([authorId])
+  @@map("request_admin_notes")
+}
+
+model Document {
+  id                  String                       @id @default(uuid()) @db.Uuid
+  uploaderId          String                       @db.Uuid
+  companyId           String?                      @db.Uuid
+  resourceType        DocumentResourceType
+  resourceId          String                       @db.Uuid
+  documentType        String                       @db.VarChar(64)
+  originalFileName    String                       @db.VarChar(255)
+  safeFileName        String                       @db.VarChar(255)
+  contentType         String                       @db.VarChar(120)
+  sizeBytes           BigInt
+  checksumSha256      String?                      @db.Char(64)
+  storageKey          String                       @unique
+  storageProvider     String                       @db.VarChar(48)
+  scanStatus          DocumentScanStatus           @default(pending)
+  reviewStatus        DocumentReviewStatus         @default(pending)
+  uploadedAt          DateTime                     @default(now())
+  retentionUntil      DateTime?
+  createdAt           DateTime                     @default(now())
+  updatedAt           DateTime                     @updatedAt
+  deletedAt           DateTime?
+  uploader            User                         @relation("DocumentUploader", fields: [uploaderId], references: [id], onDelete: Restrict)
+  company             Company?                     @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  requests            RequestDocument[]
+  verificationReviews VerificationDocumentReview[]
+
+  @@index([resourceType, resourceId])
+  @@index([companyId, reviewStatus])
+  @@index([scanStatus, reviewStatus])
+  @@map("documents")
+}
+
+model RequestDocument {
+  requestId  String          @db.Uuid
+  documentId String          @db.Uuid
+  request    BusinessRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  document   Document        @relation(fields: [documentId], references: [id], onDelete: Restrict)
+
+  @@id([requestId, documentId])
+  @@index([documentId])
+  @@map("request_documents")
+}
+
+model CompanyVerification {
+  id                 String                       @id @default(uuid()) @db.Uuid
+  companyId          String                       @unique @db.Uuid
+  status             CompanyVerificationStatus    @default(not_started)
+  submittedById      String?                      @db.Uuid
+  assignedReviewerId String?                      @db.Uuid
+  decisionById       String?                      @db.Uuid
+  submittedAt        DateTime?
+  decidedAt          DateTime?
+  decisionReason     String?
+  version            Int                          @default(1)
+  createdAt          DateTime                     @default(now())
+  updatedAt          DateTime                     @updatedAt
+  deletedAt          DateTime?
+  company            Company                      @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  submittedBy        User?                        @relation("VerificationSubmitter", fields: [submittedById], references: [id], onDelete: SetNull)
+  assignedReviewer   User?                        @relation("VerificationReviewer", fields: [assignedReviewerId], references: [id], onDelete: SetNull)
+  decisionBy         User?                        @relation("VerificationDecisionMaker", fields: [decisionById], references: [id], onDelete: SetNull)
+  checklist          VerificationChecklistItem[]
+  documentReviews    VerificationDocumentReview[]
+
+  @@index([status, submittedAt])
+  @@index([assignedReviewerId, status])
+  @@map("company_verifications")
+}
+
+model VerificationChecklistItem {
+  id             String                      @id @default(uuid()) @db.Uuid
+  verificationId String                      @db.Uuid
+  itemKey        String                      @db.VarChar(64)
+  status         VerificationChecklistStatus @default(pending)
+  reviewerId     String?                     @db.Uuid
+  note           String?
+  createdAt      DateTime                    @default(now())
+  updatedAt      DateTime                    @updatedAt
+  verification   CompanyVerification         @relation(fields: [verificationId], references: [id], onDelete: Restrict)
+  reviewer       User?                       @relation("ChecklistReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+
+  @@unique([verificationId, itemKey])
+  @@index([verificationId, status])
+  @@map("verification_checklist_items")
+}
+
+model VerificationDocumentReview {
+  id             String                       @id @default(uuid()) @db.Uuid
+  verificationId String                       @db.Uuid
+  documentId     String                       @db.Uuid
+  decision       VerificationDocumentDecision @default(replacement_requested)
+  reviewerId     String                       @db.Uuid
+  note           String?
+  reviewedAt     DateTime                     @default(now())
+  verification   CompanyVerification          @relation(fields: [verificationId], references: [id], onDelete: Restrict)
+  document       Document                     @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  reviewer       User                         @relation("DocumentReviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+
+  @@unique([verificationId, documentId])
+  @@index([documentId])
+  @@index([reviewerId, reviewedAt])
+  @@map("verification_document_reviews")
+}
+
+model MarketplaceListing {
+  id                String                   @id @default(uuid()) @db.Uuid
+  requestId         String                   @unique @db.Uuid
+  companyId         String                   @db.Uuid
+  slug              String                   @unique @db.VarChar(180)
+  publicTitle       String                   @db.VarChar(240)
+  publicSummary     String
+  publicationStatus MarketplaceListingStatus @default(draft)
+  publicFields      Json
+  viewsCount        BigInt                   @default(0)
+  interestsCount    Int                      @default(0)
+  publishedAt       DateTime?
+  expiresAt         DateTime?
+  moderatedById     String?                  @db.Uuid
+  moderationReason  String?
+  version           Int                      @default(1)
+  createdAt         DateTime                 @default(now())
+  updatedAt         DateTime                 @updatedAt
+  deletedAt         DateTime?
+  request           BusinessRequest          @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  company           Company                  @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  moderatedBy       User?                    @relation("ListingModerator", fields: [moderatedById], references: [id], onDelete: SetNull)
+  interests         MarketplaceInterest[]
+  relatedInquiries  Inquiry[]
+
+  @@index([publicationStatus, publishedAt])
+  @@index([companyId, publicationStatus])
+  @@index([expiresAt])
+  @@map("marketplace_listings")
+}
+
+model MarketplaceInterest {
+  id                String             @id @default(uuid()) @db.Uuid
+  listingId         String             @db.Uuid
+  inquiryId         String             @unique @db.Uuid
+  submittedByUserId String?            @db.Uuid
+  message           String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  listing           MarketplaceListing @relation(fields: [listingId], references: [id], onDelete: Restrict)
+  inquiry           Inquiry            @relation(fields: [inquiryId], references: [id], onDelete: Restrict)
+  submittedBy       User?              @relation("InterestSubmitter", fields: [submittedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([listingId, createdAt])
+  @@index([submittedByUserId])
+  @@map("marketplace_interests")
+}
+
+model Inquiry {
+  id                  String               @id @default(uuid()) @db.Uuid
+  inquiryNumber       String               @unique @db.VarChar(40)
+  source              InquirySource
+  inquiryType         InquiryType
+  status              InquiryStatus        @default(new)
+  senderUserId        String?              @db.Uuid
+  senderName          String               @db.VarChar(160)
+  senderEmail         String               @db.VarChar(254)
+  senderPhone         String?              @db.VarChar(40)
+  companyId           String?              @db.Uuid
+  relatedListingId    String?              @db.Uuid
+  relatedCompanyId    String?              @db.Uuid
+  relatedProductId    String?              @db.Uuid
+  message             String
+  assignedToId        String?              @db.Uuid
+  version             Int                  @default(1)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  deletedAt           DateTime?
+  sender              User?                @relation("InquirySender", fields: [senderUserId], references: [id], onDelete: SetNull)
+  company             Company?             @relation("InquirySenderCompany", fields: [companyId], references: [id], onDelete: SetNull)
+  relatedListing      MarketplaceListing?  @relation(fields: [relatedListingId], references: [id], onDelete: SetNull)
+  relatedCompany      Company?             @relation("InquiryRelatedCompany", fields: [relatedCompanyId], references: [id], onDelete: SetNull)
+  relatedProduct      TechnologyProduct?   @relation(fields: [relatedProductId], references: [id], onDelete: SetNull)
+  assignedTo          User?                @relation("InquiryAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  activities          InquiryActivity[]
+  marketplaceInterest MarketplaceInterest?
+  demoRequest         DemoRequest?
+
+  @@index([status, source])
+  @@index([assignedToId, status])
+  @@index([companyId])
+  @@index([createdAt])
+  @@map("inquiries")
+}
+
+model InquiryActivity {
+  id           String         @id @default(uuid()) @db.Uuid
+  inquiryId    String         @db.Uuid
+  activityType String         @db.VarChar(48)
+  body         String?
+  fromStatus   InquiryStatus?
+  toStatus     InquiryStatus?
+  actorId      String?        @db.Uuid
+  createdAt    DateTime       @default(now())
+  inquiry      Inquiry        @relation(fields: [inquiryId], references: [id], onDelete: Restrict)
+  actor        User?          @relation("InquiryActivityActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([inquiryId, createdAt])
+  @@index([activityType])
+  @@map("inquiry_activities")
+}
+
+model TechnologyProduct {
+  id                  String                  @id @default(uuid()) @db.Uuid
+  slug                String                  @unique @db.VarChar(180)
+  providerCompanyId   String                  @db.Uuid
+  name                String                  @db.VarChar(200)
+  categoryId          String                  @db.Uuid
+  shortDescription    String
+  description         String
+  problem             String
+  features            Json
+  targetUsers         Json
+  useCases            Json
+  implementationSteps Json
+  faq                 Json
+  pricingNote         String
+  status              TechnologyProductStatus @default(published)
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
+  deletedAt           DateTime?
+  providerCompany     Company                 @relation(fields: [providerCompanyId], references: [id], onDelete: Restrict)
+  category            Category                @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  inquiries           Inquiry[]
+  demoRequests        DemoRequest[]
+
+  @@index([providerCompanyId, status])
+  @@index([categoryId, status])
+  @@map("technology_products")
+}
+
+model DemoRequest {
+  id                String            @id @default(uuid()) @db.Uuid
+  inquiryId         String            @unique @db.Uuid
+  productId         String            @db.Uuid
+  businessType      String            @db.VarChar(80)
+  preferredDemoTime DateTime?
+  existingSystem    String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  deletedAt         DateTime?
+  inquiry           Inquiry           @relation(fields: [inquiryId], references: [id], onDelete: Restrict)
+  product           TechnologyProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([productId, createdAt])
+  @@map("demo_requests")
+}
+
+model Notification {
+  id             String                     @id @default(uuid()) @db.Uuid
+  userId         String                     @db.Uuid
+  type           String                     @db.VarChar(64)
+  title          String                     @db.VarChar(240)
+  body           String
+  resourceType   String?                    @db.VarChar(48)
+  resourceId     String?                    @db.Uuid
+  readAt         DateTime?
+  deliveryStatus NotificationDeliveryStatus @default(pending)
+  dedupeKey      String?                    @unique @db.VarChar(180)
+  createdAt      DateTime                   @default(now())
+  updatedAt      DateTime                   @updatedAt
+  deletedAt      DateTime?
+  user           User                       @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([userId, readAt])
+  @@index([deliveryStatus, createdAt])
+  @@map("notifications")
+}
+
+model NotificationPreference {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @db.Uuid
+  preferences Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@map("notification_preferences")
+}
+
+model AuditLog {
+  id           String   @id @default(uuid()) @db.Uuid
+  actorUserId  String?  @db.Uuid
+  actorRole    String?  @db.VarChar(64)
+  action       String   @db.VarChar(100)
+  resourceType String   @db.VarChar(64)
+  resourceId   String?  @db.Uuid
+  companyId    String?  @db.Uuid
+  beforeJson   Json?
+  afterJson    Json?
+  reason       String?
+  requestId    String?  @db.VarChar(80)
+  ipAddress    String?  @db.VarChar(64)
+  userAgent    String?
+  createdAt    DateTime @default(now())
+  actor        User?    @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+  company      Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+
+  @@index([resourceType, resourceId, createdAt])
+  @@index([actorUserId, createdAt])
+  @@index([companyId, createdAt])
+  @@index([action])
+  @@index([requestId])
+  @@map("audit_logs")
+}
+
+model IdempotencyKey {
+  id                 String            @id @default(uuid()) @db.Uuid
+  key                String            @db.VarChar(180)
+  scope              String            @db.VarChar(120)
+  actorUserId        String?           @db.Uuid
+  requestFingerprint String            @db.Char(64)
+  status             IdempotencyStatus @default(in_progress)
+  responseStatus     Int?
+  responseJson       Json?
+  expiresAt          DateTime
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  actor              User?             @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@unique([scope, key])
+  @@index([actorUserId])
+  @@index([expiresAt])
+  @@index([status])
+  @@map("idempotency_keys")
+}

@@ -5,10 +5,26 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "prisma migrate deploy && prisma db seed && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "db:validate": "prisma validate",
+    "db:format": "prisma format",
+    "db:smoke": "tsx scripts/db-smoke.ts",
+    "auth:grant-role": "tsx scripts/grant-user-role.ts",
+    "test:auth-origins": "tsx scripts/test-auth-origins.ts",
+    "test:auth-rate-limit": "tsx scripts/test-auth-rate-limit.ts"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.6.25",
+    "@prisma/adapter-neon": "^7.9.0",
+    "@prisma/client": "^7.9.0",
+    "better-auth": "^1.6.25",
     "clsx": "^2.1.1",
     "next": "16.2.10",
     "react": "19.2.4",
@@ -20,9 +36,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "prisma": "^7.9.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }

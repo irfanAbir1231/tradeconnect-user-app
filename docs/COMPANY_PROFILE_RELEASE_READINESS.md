@@ -13,3 +13,5 @@ Rollback is a standard feature-branch revert. No destructive migration, data rew
 ## Phase 4A.6 status
 
 Preview QA began on the protected feature deployment and produced one scoped UX fix in `5882a70`: a stale versioned update now presents a visible, keyboard-reachable reload action after the controlled 409 response. The updated Vercel Preview was Ready and the focused owner flow passed. Merge readiness remains pending the documented database, API-privacy, isolation/member, responsive/accessibility, and full runtime-log checks in `COMPANY_PROFILE_FINAL_QA.md`. Do not merge based on the partial Preview record alone.
+
+The partial mobile check passed at 390px without horizontal overflow. Because direct API navigation was blocked by the browser client and no read-only Neon session was available, these are evidence gaps rather than failed product behavior; they remain merge gates.

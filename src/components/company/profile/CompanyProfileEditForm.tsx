@@ -82,6 +82,7 @@ export function CompanyProfileEditForm({ company, categories, countries }: Compa
   const [upazilas, setUpazilas] = useState<ReferenceOption[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState("");
+  const [reloadRequired, setReloadRequired] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const errorSummary = useRef<HTMLDivElement>(null);
   const divisionRequest = useRef(0);
@@ -192,6 +193,7 @@ export function CompanyProfileEditForm({ company, categories, countries }: Compa
 
     setIsSubmitting(true);
     setFormError("");
+    setReloadRequired(false);
     try {
       const response = await fetch(`/api/v1/companies/${company.id}`, {
         method: "PATCH",
@@ -208,7 +210,10 @@ export function CompanyProfileEditForm({ company, categories, countries }: Compa
         setErrors(body.error?.fields ?? {});
         if (code === "FORBIDDEN" || code === "COMPANY_UPDATE_FORBIDDEN") setFormError("You no longer have permission to edit this company profile.");
         else if (code === "NOT_FOUND" || code === "COMPANY_NOT_FOUND") setFormError("This company profile is no longer available. Return to your company workspace.");
-        else if (code === "CONFLICT" || code === "COMPANY_VERSION_CONFLICT" || code === "COMPANY_REGISTRATION_CONFLICT") setFormError("This profile changed or conflicts with an existing record. Refresh and review the saved details.");
+        else if (code === "COMPANY_VERSION_CONFLICT") {
+          setFormError("This profile was updated somewhere else. Your changes were not saved.");
+          setReloadRequired(true);
+        } else if (code === "CONFLICT" || code === "COMPANY_REGISTRATION_CONFLICT") setFormError("This profile changed or conflicts with an existing record. Refresh and review the saved details.");
         else if (code === "CATEGORY_NOT_FOUND") setFormError("The selected category is no longer available. Please choose another category.");
         else if (code === "LOCATION_NOT_FOUND" || code === "INVALID_LOCATION_HIERARCHY") {
           setLocation((current) => resetLocationForCountry(current.countryId));
@@ -232,7 +237,7 @@ export function CompanyProfileEditForm({ company, categories, countries }: Compa
   const field = (label: string, key: keyof Values, options?: { type?: string; hint?: string; textarea?: boolean; required?: boolean }) => <label className="block text-sm font-semibold text-[var(--navy)]" htmlFor={key}>{label}{options?.required ? <span aria-hidden="true"> *</span> : null}{options?.textarea ? <textarea aria-describedby={describedBy(key, Boolean(options.hint))} className={`${inputClass} min-h-28`} id={key} maxLength={key === "description" ? 4000 : 2000} onChange={(event) => setValue(key, event.target.value)} value={values[key]} /> : <input aria-describedby={describedBy(key, Boolean(options?.hint))} className={inputClass} id={key} maxLength={key === "description" ? 4000 : 240} onChange={(event) => setValue(key, event.target.value)} type={options?.type ?? "text"} value={values[key]} />}{options?.hint ? <span className="mt-1 block text-xs font-normal text-[var(--muted)]" id={`${key}-hint`}>{options.hint}</span> : null}{fieldError(key)}</label>;
 
   return <form className="mx-auto max-w-4xl space-y-6" onSubmit={(event) => { event.preventDefault(); void submit(); }}>
-    {(formError || Object.values(errors).some(Boolean)) ? <div aria-live="assertive" className="rounded-xl border border-[#edc7c2] bg-[#fff3f1] p-4 text-sm text-[#9e3c32]" ref={errorSummary} tabIndex={-1}>{formError || "Please correct the highlighted fields before saving."}</div> : null}
+    {(formError || Object.values(errors).some(Boolean)) ? <div aria-live="assertive" className="rounded-xl border border-[#edc7c2] bg-[#fff3f1] p-4 text-sm text-[#9e3c32]" ref={errorSummary} tabIndex={-1}><p>{formError || "Please correct the highlighted fields before saving."}</p>{reloadRequired ? <button className="mt-3 rounded-lg border border-[#9e3c32] px-3 py-2 text-sm font-semibold hover:bg-[#fbe3df] focus:outline-none focus:ring-2 focus:ring-[#9e3c32] focus:ring-offset-2" onClick={() => window.location.reload()} type="button">Reload latest profile</button> : null}</div> : null}
     <section className="rounded-2xl border border-[var(--line)] bg-white p-5 sm:p-7"><p className="eyebrow">Basic information</p><h2 className="mt-2 text-xl font-semibold text-[var(--navy)]">Company identity</h2><div className="mt-6 grid gap-5 sm:grid-cols-2">{field("Legal company name", "legalName", { required: true })}{field("Trading or display name", "displayName", { required: true })}<label className="block text-sm font-semibold text-[var(--navy)]" htmlFor="businessType">Company type *<select aria-describedby={describedBy("businessType")} className={inputClass} id="businessType" onChange={(event) => setValue("businessType", event.target.value)} value={values.businessType}><option value="">Select company type</option>{businessTypes.map((type) => <option key={type} value={type}>{labelFor(type)}</option>)}</select>{fieldError("businessType")}</label>{field("Year established", "foundedYear", { type: "number", hint: "Optional. Use a four-digit year." })}<label className="block text-sm font-semibold text-[var(--navy)]" htmlFor="employeeRange">Employee range<select className={inputClass} id="employeeRange" onChange={(event) => setValue("employeeRange", event.target.value)} value={values.employeeRange}><option value="">Not provided</option>{employeeRanges.map((range) => <option key={range} value={range}>{range} employees</option>)}</select></label></div>{field("Business description", "description", { textarea: true, hint: "Describe what your company does. This remains private until a later public-profile phase." })}</section>
 
     <section className="rounded-2xl border border-[var(--line)] bg-white p-5 sm:p-7"><p className="eyebrow">Business classification</p><h2 className="mt-2 text-xl font-semibold text-[var(--navy)]">Category and products</h2><div className="mt-6 grid gap-5 sm:grid-cols-2"><label className="block text-sm font-semibold text-[var(--navy)]" htmlFor="categoryId">Primary business category<select aria-describedby={describedBy("categoryId")} className={inputClass} id="categoryId" onChange={(event) => setValue("categoryId", event.target.value)} value={values.categoryId}><option value="">Select a category</option>{categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select>{fieldError("categoryId")}</label>{field("Products or services", "primaryProducts", { hint: "Optional. Add a concise summary of your main offerings." })}</div></section>

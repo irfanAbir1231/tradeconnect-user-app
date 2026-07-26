@@ -9,3 +9,7 @@ Completion is server-derived and separate from verification readiness. No docume
 The single existing migration is additive and documented. Local `db:format`, `db:validate`, and `db:generate` pass. Local migration status, seed, smoke, and `vercel-build` may remain blocked by the known Prisma schema-engine environment failure; this does not change the deployment architecture. Vercel Preview should run its normal migration/seed/build sequence after the feature branch is pushed. Before merging to production, complete `COMPANY_PROFILE_FINAL_QA.md`, resolve/verify database tooling against the deployment environment, and review Preview logs.
 
 Rollback is a standard feature-branch revert. No destructive migration, data rewrite, or externally irreversible action was performed.
+
+## Phase 4A.6 status
+
+Preview QA began on the protected feature deployment and produced one scoped UX fix in `5882a70`: a stale versioned update now presents a visible, keyboard-reachable reload action after the controlled 409 response. The updated Vercel Preview was Ready and the focused owner flow passed. Merge readiness remains pending the documented database, API-privacy, isolation/member, responsive/accessibility, and full runtime-log checks in `COMPANY_PROFILE_FINAL_QA.md`. Do not merge based on the partial Preview record alone.

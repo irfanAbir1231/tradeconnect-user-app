@@ -2,7 +2,7 @@
 
 ## Phase 4A release status
 
-Company profile implementation is complete; manual QA and deployment-environment database verification remain pending. See `COMPANY_PROFILE_RELEASE_READINESS.md` and `COMPANY_PROFILE_FINAL_QA.md`.
+Company profile implementation is complete. Phase 4A.6 Preview QA has verified the core owner flow and stale-update recovery, but database verification, direct API privacy checks, isolation/member browser coverage, responsive/accessibility sweeps, and full runtime-log review remain pending. See `COMPANY_PROFILE_RELEASE_READINESS.md` and `COMPANY_PROFILE_FINAL_QA.md`; do not merge until these gates are complete.
 
 Planning checklist only. Do not mark a phase complete until its backend, frontend, test, privacy, and deployment acceptance criteria are met. Keep `main` deployable and retain the current mock-data mode behind an explicit feature flag until the corresponding API slice is proven in staging.
 

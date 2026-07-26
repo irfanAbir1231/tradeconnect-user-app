@@ -28,10 +28,12 @@ export type AggregateCompany = {
 
 export type CompanyAvgAggregateOutputType = {
   foundedYear: number | null
+  version: number | null
 }
 
 export type CompanySumAggregateOutputType = {
   foundedYear: number | null
+  version: number | null
 }
 
 export type CompanyMinAggregateOutputType = {
@@ -40,8 +42,17 @@ export type CompanyMinAggregateOutputType = {
   legalName: string | null
   displayName: string | null
   businessType: string | null
+  businessEmail: string | null
+  businessPhone: string | null
   description: string | null
   website: string | null
+  primaryProducts: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  registrationNumber: string | null
+  tradeLicenseNumber: string | null
+  taxVatNumber: string | null
+  registrationCountryId: string | null
   verificationStatus: $Enums.CompanyVerificationStatus | null
   accountStatus: $Enums.CompanyAccountStatus | null
   isFeatured: boolean | null
@@ -50,6 +61,7 @@ export type CompanyMinAggregateOutputType = {
   employeeRange: string | null
   primaryLocationId: string | null
   createdById: string | null
+  version: number | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -61,8 +73,17 @@ export type CompanyMaxAggregateOutputType = {
   legalName: string | null
   displayName: string | null
   businessType: string | null
+  businessEmail: string | null
+  businessPhone: string | null
   description: string | null
   website: string | null
+  primaryProducts: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  registrationNumber: string | null
+  tradeLicenseNumber: string | null
+  taxVatNumber: string | null
+  registrationCountryId: string | null
   verificationStatus: $Enums.CompanyVerificationStatus | null
   accountStatus: $Enums.CompanyAccountStatus | null
   isFeatured: boolean | null
@@ -71,6 +92,7 @@ export type CompanyMaxAggregateOutputType = {
   employeeRange: string | null
   primaryLocationId: string | null
   createdById: string | null
+  version: number | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -82,8 +104,17 @@ export type CompanyCountAggregateOutputType = {
   legalName: number
   displayName: number
   businessType: number
+  businessEmail: number
+  businessPhone: number
   description: number
   website: number
+  primaryProducts: number
+  addressLine1: number
+  addressLine2: number
+  registrationNumber: number
+  tradeLicenseNumber: number
+  taxVatNumber: number
+  registrationCountryId: number
   verificationStatus: number
   accountStatus: number
   isFeatured: number
@@ -92,6 +123,7 @@ export type CompanyCountAggregateOutputType = {
   employeeRange: number
   primaryLocationId: number
   createdById: number
+  version: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -101,10 +133,12 @@ export type CompanyCountAggregateOutputType = {
 
 export type CompanyAvgAggregateInputType = {
   foundedYear?: true
+  version?: true
 }
 
 export type CompanySumAggregateInputType = {
   foundedYear?: true
+  version?: true
 }
 
 export type CompanyMinAggregateInputType = {
@@ -113,8 +147,17 @@ export type CompanyMinAggregateInputType = {
   legalName?: true
   displayName?: true
   businessType?: true
+  businessEmail?: true
+  businessPhone?: true
   description?: true
   website?: true
+  primaryProducts?: true
+  addressLine1?: true
+  addressLine2?: true
+  registrationNumber?: true
+  tradeLicenseNumber?: true
+  taxVatNumber?: true
+  registrationCountryId?: true
   verificationStatus?: true
   accountStatus?: true
   isFeatured?: true
@@ -123,6 +166,7 @@ export type CompanyMinAggregateInputType = {
   employeeRange?: true
   primaryLocationId?: true
   createdById?: true
+  version?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -134,8 +178,17 @@ export type CompanyMaxAggregateInputType = {
   legalName?: true
   displayName?: true
   businessType?: true
+  businessEmail?: true
+  businessPhone?: true
   description?: true
   website?: true
+  primaryProducts?: true
+  addressLine1?: true
+  addressLine2?: true
+  registrationNumber?: true
+  tradeLicenseNumber?: true
+  taxVatNumber?: true
+  registrationCountryId?: true
   verificationStatus?: true
   accountStatus?: true
   isFeatured?: true
@@ -144,6 +197,7 @@ export type CompanyMaxAggregateInputType = {
   employeeRange?: true
   primaryLocationId?: true
   createdById?: true
+  version?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -155,8 +209,17 @@ export type CompanyCountAggregateInputType = {
   legalName?: true
   displayName?: true
   businessType?: true
+  businessEmail?: true
+  businessPhone?: true
   description?: true
   website?: true
+  primaryProducts?: true
+  addressLine1?: true
+  addressLine2?: true
+  registrationNumber?: true
+  tradeLicenseNumber?: true
+  taxVatNumber?: true
+  registrationCountryId?: true
   verificationStatus?: true
   accountStatus?: true
   isFeatured?: true
@@ -165,6 +228,7 @@ export type CompanyCountAggregateInputType = {
   employeeRange?: true
   primaryLocationId?: true
   createdById?: true
+  version?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -263,8 +327,17 @@ export type CompanyGroupByOutputType = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail: string | null
+  businessPhone: string | null
   description: string | null
   website: string | null
+  primaryProducts: string | null
+  addressLine1: string | null
+  addressLine2: string | null
+  registrationNumber: string | null
+  tradeLicenseNumber: string | null
+  taxVatNumber: string | null
+  registrationCountryId: string | null
   verificationStatus: $Enums.CompanyVerificationStatus
   accountStatus: $Enums.CompanyAccountStatus
   isFeatured: boolean
@@ -273,6 +346,7 @@ export type CompanyGroupByOutputType = {
   employeeRange: string | null
   primaryLocationId: string | null
   createdById: string | null
+  version: number
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -307,8 +381,17 @@ export type CompanyWhereInput = {
   legalName?: Prisma.StringFilter<"Company"> | string
   displayName?: Prisma.StringFilter<"Company"> | string
   businessType?: Prisma.StringFilter<"Company"> | string
+  businessEmail?: Prisma.StringNullableFilter<"Company"> | string | null
+  businessPhone?: Prisma.StringNullableFilter<"Company"> | string | null
   description?: Prisma.StringNullableFilter<"Company"> | string | null
   website?: Prisma.StringNullableFilter<"Company"> | string | null
+  primaryProducts?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine1?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  tradeLicenseNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  taxVatNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationCountryId?: Prisma.UuidNullableFilter<"Company"> | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFilter<"Company"> | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFilter<"Company"> | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFilter<"Company"> | boolean
@@ -317,10 +400,12 @@ export type CompanyWhereInput = {
   employeeRange?: Prisma.StringNullableFilter<"Company"> | string | null
   primaryLocationId?: Prisma.UuidNullableFilter<"Company"> | string | null
   createdById?: Prisma.UuidNullableFilter<"Company"> | string | null
+  version?: Prisma.IntFilter<"Company"> | number
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Company"> | Date | string | null
   primaryLocation?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
+  registrationCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   members?: Prisma.CompanyMemberListRelationFilter
   categories?: Prisma.CompanyCategoryListRelationFilter
@@ -342,8 +427,17 @@ export type CompanyOrderByWithRelationInput = {
   legalName?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
+  businessEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryProducts?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  tradeLicenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxVatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationCountryId?: Prisma.SortOrderInput | Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -352,10 +446,12 @@ export type CompanyOrderByWithRelationInput = {
   employeeRange?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryLocationId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryLocation?: Prisma.LocationOrderByWithRelationInput
+  registrationCountry?: Prisma.CountryOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   members?: Prisma.CompanyMemberOrderByRelationAggregateInput
   categories?: Prisma.CompanyCategoryOrderByRelationAggregateInput
@@ -380,8 +476,17 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   legalName?: Prisma.StringFilter<"Company"> | string
   displayName?: Prisma.StringFilter<"Company"> | string
   businessType?: Prisma.StringFilter<"Company"> | string
+  businessEmail?: Prisma.StringNullableFilter<"Company"> | string | null
+  businessPhone?: Prisma.StringNullableFilter<"Company"> | string | null
   description?: Prisma.StringNullableFilter<"Company"> | string | null
   website?: Prisma.StringNullableFilter<"Company"> | string | null
+  primaryProducts?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine1?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  tradeLicenseNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  taxVatNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationCountryId?: Prisma.UuidNullableFilter<"Company"> | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFilter<"Company"> | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFilter<"Company"> | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFilter<"Company"> | boolean
@@ -390,10 +495,12 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   employeeRange?: Prisma.StringNullableFilter<"Company"> | string | null
   primaryLocationId?: Prisma.UuidNullableFilter<"Company"> | string | null
   createdById?: Prisma.UuidNullableFilter<"Company"> | string | null
+  version?: Prisma.IntFilter<"Company"> | number
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Company"> | Date | string | null
   primaryLocation?: Prisma.XOR<Prisma.LocationNullableScalarRelationFilter, Prisma.LocationWhereInput> | null
+  registrationCountry?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   members?: Prisma.CompanyMemberListRelationFilter
   categories?: Prisma.CompanyCategoryListRelationFilter
@@ -415,8 +522,17 @@ export type CompanyOrderByWithAggregationInput = {
   legalName?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
+  businessEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryProducts?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  tradeLicenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxVatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  registrationCountryId?: Prisma.SortOrderInput | Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -425,6 +541,7 @@ export type CompanyOrderByWithAggregationInput = {
   employeeRange?: Prisma.SortOrderInput | Prisma.SortOrder
   primaryLocationId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -444,8 +561,17 @@ export type CompanyScalarWhereWithAggregatesInput = {
   legalName?: Prisma.StringWithAggregatesFilter<"Company"> | string
   displayName?: Prisma.StringWithAggregatesFilter<"Company"> | string
   businessType?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  businessEmail?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  businessPhone?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   website?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  primaryProducts?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  addressLine1?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  addressLine2?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  registrationNumber?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  tradeLicenseNumber?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  taxVatNumber?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  registrationCountryId?: Prisma.UuidNullableWithAggregatesFilter<"Company"> | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusWithAggregatesFilter<"Company"> | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusWithAggregatesFilter<"Company"> | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
@@ -454,6 +580,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   employeeRange?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   primaryLocationId?: Prisma.UuidNullableWithAggregatesFilter<"Company"> | string | null
   createdById?: Prisma.UuidNullableWithAggregatesFilter<"Company"> | string | null
+  version?: Prisma.IntWithAggregatesFilter<"Company"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
@@ -465,18 +592,28 @@ export type CompanyCreateInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -498,8 +635,17 @@ export type CompanyUncheckedCreateInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -508,6 +654,7 @@ export type CompanyUncheckedCreateInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -531,18 +678,28 @@ export type CompanyUpdateInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -564,8 +721,17 @@ export type CompanyUncheckedUpdateInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -574,6 +740,7 @@ export type CompanyUncheckedUpdateInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -597,8 +764,17 @@ export type CompanyCreateManyInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -607,6 +783,7 @@ export type CompanyCreateManyInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -618,14 +795,23 @@ export type CompanyUpdateManyMutationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -637,8 +823,17 @@ export type CompanyUncheckedUpdateManyInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -647,6 +842,7 @@ export type CompanyUncheckedUpdateManyInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -668,8 +864,17 @@ export type CompanyCountOrderByAggregateInput = {
   legalName?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
+  businessEmail?: Prisma.SortOrder
+  businessPhone?: Prisma.SortOrder
   description?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  primaryProducts?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  registrationNumber?: Prisma.SortOrder
+  tradeLicenseNumber?: Prisma.SortOrder
+  taxVatNumber?: Prisma.SortOrder
+  registrationCountryId?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -678,6 +883,7 @@ export type CompanyCountOrderByAggregateInput = {
   employeeRange?: Prisma.SortOrder
   primaryLocationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -685,6 +891,7 @@ export type CompanyCountOrderByAggregateInput = {
 
 export type CompanyAvgOrderByAggregateInput = {
   foundedYear?: Prisma.SortOrder
+  version?: Prisma.SortOrder
 }
 
 export type CompanyMaxOrderByAggregateInput = {
@@ -693,8 +900,17 @@ export type CompanyMaxOrderByAggregateInput = {
   legalName?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
+  businessEmail?: Prisma.SortOrder
+  businessPhone?: Prisma.SortOrder
   description?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  primaryProducts?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  registrationNumber?: Prisma.SortOrder
+  tradeLicenseNumber?: Prisma.SortOrder
+  taxVatNumber?: Prisma.SortOrder
+  registrationCountryId?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -703,6 +919,7 @@ export type CompanyMaxOrderByAggregateInput = {
   employeeRange?: Prisma.SortOrder
   primaryLocationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -714,8 +931,17 @@ export type CompanyMinOrderByAggregateInput = {
   legalName?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   businessType?: Prisma.SortOrder
+  businessEmail?: Prisma.SortOrder
+  businessPhone?: Prisma.SortOrder
   description?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  primaryProducts?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  registrationNumber?: Prisma.SortOrder
+  tradeLicenseNumber?: Prisma.SortOrder
+  taxVatNumber?: Prisma.SortOrder
+  registrationCountryId?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   accountStatus?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
@@ -724,6 +950,7 @@ export type CompanyMinOrderByAggregateInput = {
   employeeRange?: Prisma.SortOrder
   primaryLocationId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  version?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -731,6 +958,7 @@ export type CompanyMinOrderByAggregateInput = {
 
 export type CompanySumOrderByAggregateInput = {
   foundedYear?: Prisma.SortOrder
+  version?: Prisma.SortOrder
 }
 
 export type CompanyScalarRelationFilter = {
@@ -829,6 +1057,48 @@ export type CompanyUpdateOneWithoutRoleAssignmentsNestedInput = {
   delete?: Prisma.CompanyWhereInput | boolean
   connect?: Prisma.CompanyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutRoleAssignmentsInput, Prisma.CompanyUpdateWithoutRoleAssignmentsInput>, Prisma.CompanyUncheckedUpdateWithoutRoleAssignmentsInput>
+}
+
+export type CompanyCreateNestedManyWithoutRegistrationCountryInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput> | Prisma.CompanyCreateWithoutRegistrationCountryInput[] | Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput[]
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput | Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput[]
+  createMany?: Prisma.CompanyCreateManyRegistrationCountryInputEnvelope
+  connect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+}
+
+export type CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput> | Prisma.CompanyCreateWithoutRegistrationCountryInput[] | Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput[]
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput | Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput[]
+  createMany?: Prisma.CompanyCreateManyRegistrationCountryInputEnvelope
+  connect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+}
+
+export type CompanyUpdateManyWithoutRegistrationCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput> | Prisma.CompanyCreateWithoutRegistrationCountryInput[] | Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput[]
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput | Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput[]
+  upsert?: Prisma.CompanyUpsertWithWhereUniqueWithoutRegistrationCountryInput | Prisma.CompanyUpsertWithWhereUniqueWithoutRegistrationCountryInput[]
+  createMany?: Prisma.CompanyCreateManyRegistrationCountryInputEnvelope
+  set?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  disconnect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  delete?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  connect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  update?: Prisma.CompanyUpdateWithWhereUniqueWithoutRegistrationCountryInput | Prisma.CompanyUpdateWithWhereUniqueWithoutRegistrationCountryInput[]
+  updateMany?: Prisma.CompanyUpdateManyWithWhereWithoutRegistrationCountryInput | Prisma.CompanyUpdateManyWithWhereWithoutRegistrationCountryInput[]
+  deleteMany?: Prisma.CompanyScalarWhereInput | Prisma.CompanyScalarWhereInput[]
+}
+
+export type CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput> | Prisma.CompanyCreateWithoutRegistrationCountryInput[] | Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput[]
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput | Prisma.CompanyCreateOrConnectWithoutRegistrationCountryInput[]
+  upsert?: Prisma.CompanyUpsertWithWhereUniqueWithoutRegistrationCountryInput | Prisma.CompanyUpsertWithWhereUniqueWithoutRegistrationCountryInput[]
+  createMany?: Prisma.CompanyCreateManyRegistrationCountryInputEnvelope
+  set?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  disconnect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  delete?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  connect?: Prisma.CompanyWhereUniqueInput | Prisma.CompanyWhereUniqueInput[]
+  update?: Prisma.CompanyUpdateWithWhereUniqueWithoutRegistrationCountryInput | Prisma.CompanyUpdateWithWhereUniqueWithoutRegistrationCountryInput[]
+  updateMany?: Prisma.CompanyUpdateManyWithWhereWithoutRegistrationCountryInput | Prisma.CompanyUpdateManyWithWhereWithoutRegistrationCountryInput[]
+  deleteMany?: Prisma.CompanyScalarWhereInput | Prisma.CompanyScalarWhereInput[]
 }
 
 export type CompanyCreateNestedManyWithoutPrimaryLocationInput = {
@@ -1027,18 +1297,28 @@ export type CompanyCreateWithoutCreatedByInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
   countriesServed?: Prisma.CompanyCountryCreateNestedManyWithoutCompanyInput
@@ -1059,8 +1339,17 @@ export type CompanyUncheckedCreateWithoutCreatedByInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1068,6 +1357,7 @@ export type CompanyUncheckedCreateWithoutCreatedByInput = {
   foundedYear?: number | null
   employeeRange?: string | null
   primaryLocationId?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1120,8 +1410,17 @@ export type CompanyScalarWhereInput = {
   legalName?: Prisma.StringFilter<"Company"> | string
   displayName?: Prisma.StringFilter<"Company"> | string
   businessType?: Prisma.StringFilter<"Company"> | string
+  businessEmail?: Prisma.StringNullableFilter<"Company"> | string | null
+  businessPhone?: Prisma.StringNullableFilter<"Company"> | string | null
   description?: Prisma.StringNullableFilter<"Company"> | string | null
   website?: Prisma.StringNullableFilter<"Company"> | string | null
+  primaryProducts?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine1?: Prisma.StringNullableFilter<"Company"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  tradeLicenseNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  taxVatNumber?: Prisma.StringNullableFilter<"Company"> | string | null
+  registrationCountryId?: Prisma.UuidNullableFilter<"Company"> | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFilter<"Company"> | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFilter<"Company"> | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFilter<"Company"> | boolean
@@ -1130,6 +1429,7 @@ export type CompanyScalarWhereInput = {
   employeeRange?: Prisma.StringNullableFilter<"Company"> | string | null
   primaryLocationId?: Prisma.UuidNullableFilter<"Company"> | string | null
   createdById?: Prisma.UuidNullableFilter<"Company"> | string | null
+  version?: Prisma.IntFilter<"Company"> | number
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Company"> | Date | string | null
@@ -1141,18 +1441,28 @@ export type CompanyCreateWithoutMembersInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
   countriesServed?: Prisma.CompanyCountryCreateNestedManyWithoutCompanyInput
@@ -1173,8 +1483,17 @@ export type CompanyUncheckedCreateWithoutMembersInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1183,6 +1502,7 @@ export type CompanyUncheckedCreateWithoutMembersInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1221,18 +1541,28 @@ export type CompanyUpdateWithoutMembersInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
   countriesServed?: Prisma.CompanyCountryUpdateManyWithoutCompanyNestedInput
@@ -1253,8 +1583,17 @@ export type CompanyUncheckedUpdateWithoutMembersInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1263,6 +1602,7 @@ export type CompanyUncheckedUpdateWithoutMembersInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1285,18 +1625,28 @@ export type CompanyCreateWithoutRoleAssignmentsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -1317,8 +1667,17 @@ export type CompanyUncheckedCreateWithoutRoleAssignmentsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1327,6 +1686,7 @@ export type CompanyUncheckedCreateWithoutRoleAssignmentsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1365,18 +1725,28 @@ export type CompanyUpdateWithoutRoleAssignmentsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -1397,8 +1767,17 @@ export type CompanyUncheckedUpdateWithoutRoleAssignmentsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1407,6 +1786,7 @@ export type CompanyUncheckedUpdateWithoutRoleAssignmentsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1423,23 +1803,143 @@ export type CompanyUncheckedUpdateWithoutRoleAssignmentsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
-export type CompanyCreateWithoutPrimaryLocationInput = {
+export type CompanyCreateWithoutRegistrationCountryInput = {
   id?: string
   slug: string
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
+  members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
+  countriesServed?: Prisma.CompanyCountryCreateNestedManyWithoutCompanyInput
+  businessRequests?: Prisma.BusinessRequestCreateNestedManyWithoutCompanyInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutCompanyInput
+  verification?: Prisma.CompanyVerificationCreateNestedOneWithoutCompanyInput
+  marketplaceListings?: Prisma.MarketplaceListingCreateNestedManyWithoutCompanyInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutCompanyInput
+  relatedInquiries?: Prisma.InquiryCreateNestedManyWithoutRelatedCompanyInput
+  technologyProducts?: Prisma.TechnologyProductCreateNestedManyWithoutProviderCompanyInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutCompanyInput
+  roleAssignments?: Prisma.UserRoleCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutRegistrationCountryInput = {
+  id?: string
+  slug: string
+  legalName: string
+  displayName: string
+  businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
+  description?: string | null
+  website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  verificationStatus?: $Enums.CompanyVerificationStatus
+  accountStatus?: $Enums.CompanyAccountStatus
+  isFeatured?: boolean
+  isDemo?: boolean
+  foundedYear?: number | null
+  employeeRange?: string | null
+  primaryLocationId?: string | null
+  createdById?: string | null
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  members?: Prisma.CompanyMemberUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CompanyCategoryUncheckedCreateNestedManyWithoutCompanyInput
+  countriesServed?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCompanyInput
+  businessRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutCompanyInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCompanyInput
+  verification?: Prisma.CompanyVerificationUncheckedCreateNestedOneWithoutCompanyInput
+  marketplaceListings?: Prisma.MarketplaceListingUncheckedCreateNestedManyWithoutCompanyInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutCompanyInput
+  relatedInquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutRelatedCompanyInput
+  technologyProducts?: Prisma.TechnologyProductUncheckedCreateNestedManyWithoutProviderCompanyInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutCompanyInput
+  roleAssignments?: Prisma.UserRoleUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutRegistrationCountryInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput>
+}
+
+export type CompanyCreateManyRegistrationCountryInputEnvelope = {
+  data: Prisma.CompanyCreateManyRegistrationCountryInput | Prisma.CompanyCreateManyRegistrationCountryInput[]
+  skipDuplicates?: boolean
+}
+
+export type CompanyUpsertWithWhereUniqueWithoutRegistrationCountryInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedUpdateWithoutRegistrationCountryInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedCreateWithoutRegistrationCountryInput>
+}
+
+export type CompanyUpdateWithWhereUniqueWithoutRegistrationCountryInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutRegistrationCountryInput, Prisma.CompanyUncheckedUpdateWithoutRegistrationCountryInput>
+}
+
+export type CompanyUpdateManyWithWhereWithoutRegistrationCountryInput = {
+  where: Prisma.CompanyScalarWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateManyMutationInput, Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryInput>
+}
+
+export type CompanyCreateWithoutPrimaryLocationInput = {
+  id?: string
+  slug: string
+  legalName: string
+  displayName: string
+  businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
+  description?: string | null
+  website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  verificationStatus?: $Enums.CompanyVerificationStatus
+  accountStatus?: $Enums.CompanyAccountStatus
+  isFeatured?: boolean
+  isDemo?: boolean
+  foundedYear?: number | null
+  employeeRange?: string | null
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -1461,8 +1961,17 @@ export type CompanyUncheckedCreateWithoutPrimaryLocationInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1470,6 +1979,7 @@ export type CompanyUncheckedCreateWithoutPrimaryLocationInput = {
   foundedYear?: number | null
   employeeRange?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1519,18 +2029,28 @@ export type CompanyCreateWithoutCategoriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   countriesServed?: Prisma.CompanyCountryCreateNestedManyWithoutCompanyInput
@@ -1551,8 +2071,17 @@ export type CompanyUncheckedCreateWithoutCategoriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1561,6 +2090,7 @@ export type CompanyUncheckedCreateWithoutCategoriesInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1599,18 +2129,28 @@ export type CompanyUpdateWithoutCategoriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   countriesServed?: Prisma.CompanyCountryUpdateManyWithoutCompanyNestedInput
@@ -1631,8 +2171,17 @@ export type CompanyUncheckedUpdateWithoutCategoriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1641,6 +2190,7 @@ export type CompanyUncheckedUpdateWithoutCategoriesInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1663,18 +2213,28 @@ export type CompanyCreateWithoutCountriesServedInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -1695,8 +2255,17 @@ export type CompanyUncheckedCreateWithoutCountriesServedInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1705,6 +2274,7 @@ export type CompanyUncheckedCreateWithoutCountriesServedInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1743,18 +2313,28 @@ export type CompanyUpdateWithoutCountriesServedInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -1775,8 +2355,17 @@ export type CompanyUncheckedUpdateWithoutCountriesServedInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1785,6 +2374,7 @@ export type CompanyUncheckedUpdateWithoutCountriesServedInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1807,18 +2397,28 @@ export type CompanyCreateWithoutBusinessRequestsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -1839,8 +2439,17 @@ export type CompanyUncheckedCreateWithoutBusinessRequestsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1849,6 +2458,7 @@ export type CompanyUncheckedCreateWithoutBusinessRequestsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1887,18 +2497,28 @@ export type CompanyUpdateWithoutBusinessRequestsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -1919,8 +2539,17 @@ export type CompanyUncheckedUpdateWithoutBusinessRequestsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1929,6 +2558,7 @@ export type CompanyUncheckedUpdateWithoutBusinessRequestsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1951,18 +2581,28 @@ export type CompanyCreateWithoutDocumentsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -1983,8 +2623,17 @@ export type CompanyUncheckedCreateWithoutDocumentsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -1993,6 +2642,7 @@ export type CompanyUncheckedCreateWithoutDocumentsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2031,18 +2681,28 @@ export type CompanyUpdateWithoutDocumentsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2063,8 +2723,17 @@ export type CompanyUncheckedUpdateWithoutDocumentsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2073,6 +2742,7 @@ export type CompanyUncheckedUpdateWithoutDocumentsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2095,18 +2765,28 @@ export type CompanyCreateWithoutVerificationInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2127,8 +2807,17 @@ export type CompanyUncheckedCreateWithoutVerificationInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2137,6 +2826,7 @@ export type CompanyUncheckedCreateWithoutVerificationInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2175,18 +2865,28 @@ export type CompanyUpdateWithoutVerificationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2207,8 +2907,17 @@ export type CompanyUncheckedUpdateWithoutVerificationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2217,6 +2926,7 @@ export type CompanyUncheckedUpdateWithoutVerificationInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2239,18 +2949,28 @@ export type CompanyCreateWithoutMarketplaceListingsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2271,8 +2991,17 @@ export type CompanyUncheckedCreateWithoutMarketplaceListingsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2281,6 +3010,7 @@ export type CompanyUncheckedCreateWithoutMarketplaceListingsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2319,18 +3049,28 @@ export type CompanyUpdateWithoutMarketplaceListingsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2351,8 +3091,17 @@ export type CompanyUncheckedUpdateWithoutMarketplaceListingsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2361,6 +3110,7 @@ export type CompanyUncheckedUpdateWithoutMarketplaceListingsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2383,18 +3133,28 @@ export type CompanyCreateWithoutInquiriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2415,8 +3175,17 @@ export type CompanyUncheckedCreateWithoutInquiriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2425,6 +3194,7 @@ export type CompanyUncheckedCreateWithoutInquiriesInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2452,18 +3222,28 @@ export type CompanyCreateWithoutRelatedInquiriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2484,8 +3264,17 @@ export type CompanyUncheckedCreateWithoutRelatedInquiriesInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2494,6 +3283,7 @@ export type CompanyUncheckedCreateWithoutRelatedInquiriesInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2532,18 +3322,28 @@ export type CompanyUpdateWithoutInquiriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2564,8 +3364,17 @@ export type CompanyUncheckedUpdateWithoutInquiriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2574,6 +3383,7 @@ export type CompanyUncheckedUpdateWithoutInquiriesInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2607,18 +3417,28 @@ export type CompanyUpdateWithoutRelatedInquiriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2639,8 +3459,17 @@ export type CompanyUncheckedUpdateWithoutRelatedInquiriesInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2649,6 +3478,7 @@ export type CompanyUncheckedUpdateWithoutRelatedInquiriesInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2671,18 +3501,28 @@ export type CompanyCreateWithoutTechnologyProductsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2703,8 +3543,17 @@ export type CompanyUncheckedCreateWithoutTechnologyProductsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2713,6 +3562,7 @@ export type CompanyUncheckedCreateWithoutTechnologyProductsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2751,18 +3601,28 @@ export type CompanyUpdateWithoutTechnologyProductsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2783,8 +3643,17 @@ export type CompanyUncheckedUpdateWithoutTechnologyProductsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2793,6 +3662,7 @@ export type CompanyUncheckedUpdateWithoutTechnologyProductsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2815,18 +3685,28 @@ export type CompanyCreateWithoutAuditLogsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
   isDemo?: boolean
   foundedYear?: number | null
   employeeRange?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   primaryLocation?: Prisma.LocationCreateNestedOneWithoutPrimaryForCompaniesInput
+  registrationCountry?: Prisma.CountryCreateNestedOneWithoutRegisteredCompaniesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedCompaniesInput
   members?: Prisma.CompanyMemberCreateNestedManyWithoutCompanyInput
   categories?: Prisma.CompanyCategoryCreateNestedManyWithoutCompanyInput
@@ -2847,8 +3727,17 @@ export type CompanyUncheckedCreateWithoutAuditLogsInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2857,6 +3746,7 @@ export type CompanyUncheckedCreateWithoutAuditLogsInput = {
   employeeRange?: string | null
   primaryLocationId?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2895,18 +3785,28 @@ export type CompanyUpdateWithoutAuditLogsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -2927,8 +3827,17 @@ export type CompanyUncheckedUpdateWithoutAuditLogsInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2937,6 +3846,7 @@ export type CompanyUncheckedUpdateWithoutAuditLogsInput = {
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2959,8 +3869,17 @@ export type CompanyCreateManyCreatedByInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -2968,6 +3887,7 @@ export type CompanyCreateManyCreatedByInput = {
   foundedYear?: number | null
   employeeRange?: string | null
   primaryLocationId?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -2979,18 +3899,28 @@ export type CompanyUpdateWithoutCreatedByInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
   countriesServed?: Prisma.CompanyCountryUpdateManyWithoutCompanyNestedInput
@@ -3011,8 +3941,17 @@ export type CompanyUncheckedUpdateWithoutCreatedByInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3020,6 +3959,7 @@ export type CompanyUncheckedUpdateWithoutCreatedByInput = {
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3043,8 +3983,17 @@ export type CompanyUncheckedUpdateManyWithoutCreatedByInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3052,6 +4001,151 @@ export type CompanyUncheckedUpdateManyWithoutCreatedByInput = {
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type CompanyCreateManyRegistrationCountryInput = {
+  id?: string
+  slug: string
+  legalName: string
+  displayName: string
+  businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
+  description?: string | null
+  website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  verificationStatus?: $Enums.CompanyVerificationStatus
+  accountStatus?: $Enums.CompanyAccountStatus
+  isFeatured?: boolean
+  isDemo?: boolean
+  foundedYear?: number | null
+  employeeRange?: string | null
+  primaryLocationId?: string | null
+  createdById?: string | null
+  version?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type CompanyUpdateWithoutRegistrationCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
+  accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  primaryLocation?: Prisma.LocationUpdateOneWithoutPrimaryForCompaniesNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
+  members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
+  countriesServed?: Prisma.CompanyCountryUpdateManyWithoutCompanyNestedInput
+  businessRequests?: Prisma.BusinessRequestUpdateManyWithoutCompanyNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutCompanyNestedInput
+  verification?: Prisma.CompanyVerificationUpdateOneWithoutCompanyNestedInput
+  marketplaceListings?: Prisma.MarketplaceListingUpdateManyWithoutCompanyNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutCompanyNestedInput
+  relatedInquiries?: Prisma.InquiryUpdateManyWithoutRelatedCompanyNestedInput
+  technologyProducts?: Prisma.TechnologyProductUpdateManyWithoutProviderCompanyNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutCompanyNestedInput
+  roleAssignments?: Prisma.UserRoleUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutRegistrationCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
+  accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  members?: Prisma.CompanyMemberUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CompanyCategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  countriesServed?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCompanyNestedInput
+  businessRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutCompanyNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutCompanyNestedInput
+  verification?: Prisma.CompanyVerificationUncheckedUpdateOneWithoutCompanyNestedInput
+  marketplaceListings?: Prisma.MarketplaceListingUncheckedUpdateManyWithoutCompanyNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutCompanyNestedInput
+  relatedInquiries?: Prisma.InquiryUncheckedUpdateManyWithoutRelatedCompanyNestedInput
+  technologyProducts?: Prisma.TechnologyProductUncheckedUpdateManyWithoutProviderCompanyNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutCompanyNestedInput
+  roleAssignments?: Prisma.UserRoleUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateManyWithoutRegistrationCountryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
+  accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3063,8 +4157,17 @@ export type CompanyCreateManyPrimaryLocationInput = {
   legalName: string
   displayName: string
   businessType: string
+  businessEmail?: string | null
+  businessPhone?: string | null
   description?: string | null
   website?: string | null
+  primaryProducts?: string | null
+  addressLine1?: string | null
+  addressLine2?: string | null
+  registrationNumber?: string | null
+  tradeLicenseNumber?: string | null
+  taxVatNumber?: string | null
+  registrationCountryId?: string | null
   verificationStatus?: $Enums.CompanyVerificationStatus
   accountStatus?: $Enums.CompanyAccountStatus
   isFeatured?: boolean
@@ -3072,6 +4175,7 @@ export type CompanyCreateManyPrimaryLocationInput = {
   foundedYear?: number | null
   employeeRange?: string | null
   createdById?: string | null
+  version?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -3083,17 +4187,27 @@ export type CompanyUpdateWithoutPrimaryLocationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDemo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  registrationCountry?: Prisma.CountryUpdateOneWithoutRegisteredCompaniesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedCompaniesNestedInput
   members?: Prisma.CompanyMemberUpdateManyWithoutCompanyNestedInput
   categories?: Prisma.CompanyCategoryUpdateManyWithoutCompanyNestedInput
@@ -3115,8 +4229,17 @@ export type CompanyUncheckedUpdateWithoutPrimaryLocationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3124,6 +4247,7 @@ export type CompanyUncheckedUpdateWithoutPrimaryLocationInput = {
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3147,8 +4271,17 @@ export type CompanyUncheckedUpdateManyWithoutPrimaryLocationInput = {
   legalName?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  businessEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryProducts?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tradeLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxVatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationCountryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumCompanyVerificationStatusFieldUpdateOperationsInput | $Enums.CompanyVerificationStatus
   accountStatus?: Prisma.EnumCompanyAccountStatusFieldUpdateOperationsInput | $Enums.CompanyAccountStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3156,6 +4289,7 @@ export type CompanyUncheckedUpdateManyWithoutPrimaryLocationInput = {
   foundedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   employeeRange?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3288,8 +4422,17 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   legalName?: boolean
   displayName?: boolean
   businessType?: boolean
+  businessEmail?: boolean
+  businessPhone?: boolean
   description?: boolean
   website?: boolean
+  primaryProducts?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  registrationNumber?: boolean
+  tradeLicenseNumber?: boolean
+  taxVatNumber?: boolean
+  registrationCountryId?: boolean
   verificationStatus?: boolean
   accountStatus?: boolean
   isFeatured?: boolean
@@ -3298,10 +4441,12 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   employeeRange?: boolean
   primaryLocationId?: boolean
   createdById?: boolean
+  version?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
   members?: boolean | Prisma.Company$membersArgs<ExtArgs>
   categories?: boolean | Prisma.Company$categoriesArgs<ExtArgs>
@@ -3324,8 +4469,17 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   legalName?: boolean
   displayName?: boolean
   businessType?: boolean
+  businessEmail?: boolean
+  businessPhone?: boolean
   description?: boolean
   website?: boolean
+  primaryProducts?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  registrationNumber?: boolean
+  tradeLicenseNumber?: boolean
+  taxVatNumber?: boolean
+  registrationCountryId?: boolean
   verificationStatus?: boolean
   accountStatus?: boolean
   isFeatured?: boolean
@@ -3334,10 +4488,12 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   employeeRange?: boolean
   primaryLocationId?: boolean
   createdById?: boolean
+  version?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -3347,8 +4503,17 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   legalName?: boolean
   displayName?: boolean
   businessType?: boolean
+  businessEmail?: boolean
+  businessPhone?: boolean
   description?: boolean
   website?: boolean
+  primaryProducts?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  registrationNumber?: boolean
+  tradeLicenseNumber?: boolean
+  taxVatNumber?: boolean
+  registrationCountryId?: boolean
   verificationStatus?: boolean
   accountStatus?: boolean
   isFeatured?: boolean
@@ -3357,10 +4522,12 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   employeeRange?: boolean
   primaryLocationId?: boolean
   createdById?: boolean
+  version?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -3370,8 +4537,17 @@ export type CompanySelectScalar = {
   legalName?: boolean
   displayName?: boolean
   businessType?: boolean
+  businessEmail?: boolean
+  businessPhone?: boolean
   description?: boolean
   website?: boolean
+  primaryProducts?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  registrationNumber?: boolean
+  tradeLicenseNumber?: boolean
+  taxVatNumber?: boolean
+  registrationCountryId?: boolean
   verificationStatus?: boolean
   accountStatus?: boolean
   isFeatured?: boolean
@@ -3380,14 +4556,16 @@ export type CompanySelectScalar = {
   employeeRange?: boolean
   primaryLocationId?: boolean
   createdById?: boolean
+  version?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "legalName" | "displayName" | "businessType" | "description" | "website" | "verificationStatus" | "accountStatus" | "isFeatured" | "isDemo" | "foundedYear" | "employeeRange" | "primaryLocationId" | "createdById" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "legalName" | "displayName" | "businessType" | "businessEmail" | "businessPhone" | "description" | "website" | "primaryProducts" | "addressLine1" | "addressLine2" | "registrationNumber" | "tradeLicenseNumber" | "taxVatNumber" | "registrationCountryId" | "verificationStatus" | "accountStatus" | "isFeatured" | "isDemo" | "foundedYear" | "employeeRange" | "primaryLocationId" | "createdById" | "version" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
   members?: boolean | Prisma.Company$membersArgs<ExtArgs>
   categories?: boolean | Prisma.Company$categoriesArgs<ExtArgs>
@@ -3405,10 +4583,12 @@ export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
 }
 export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   primaryLocation?: boolean | Prisma.Company$primaryLocationArgs<ExtArgs>
+  registrationCountry?: boolean | Prisma.Company$registrationCountryArgs<ExtArgs>
   createdBy?: boolean | Prisma.Company$createdByArgs<ExtArgs>
 }
 
@@ -3416,6 +4596,7 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Company"
   objects: {
     primaryLocation: Prisma.$LocationPayload<ExtArgs> | null
+    registrationCountry: Prisma.$CountryPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     members: Prisma.$CompanyMemberPayload<ExtArgs>[]
     categories: Prisma.$CompanyCategoryPayload<ExtArgs>[]
@@ -3436,8 +4617,17 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     legalName: string
     displayName: string
     businessType: string
+    businessEmail: string | null
+    businessPhone: string | null
     description: string | null
     website: string | null
+    primaryProducts: string | null
+    addressLine1: string | null
+    addressLine2: string | null
+    registrationNumber: string | null
+    tradeLicenseNumber: string | null
+    taxVatNumber: string | null
+    registrationCountryId: string | null
     verificationStatus: $Enums.CompanyVerificationStatus
     accountStatus: $Enums.CompanyAccountStatus
     isFeatured: boolean
@@ -3446,6 +4636,7 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     employeeRange: string | null
     primaryLocationId: string | null
     createdById: string | null
+    version: number
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -3844,6 +5035,7 @@ readonly fields: CompanyFieldRefs;
 export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   primaryLocation<T extends Prisma.Company$primaryLocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$primaryLocationArgs<ExtArgs>>): Prisma.Prisma__LocationClient<runtime.Types.Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  registrationCountry<T extends Prisma.Company$registrationCountryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$registrationCountryArgs<ExtArgs>>): Prisma.Prisma__CountryClient<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.Company$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.Company$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   categories<T extends Prisma.Company$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3891,8 +5083,17 @@ export interface CompanyFieldRefs {
   readonly legalName: Prisma.FieldRef<"Company", 'String'>
   readonly displayName: Prisma.FieldRef<"Company", 'String'>
   readonly businessType: Prisma.FieldRef<"Company", 'String'>
+  readonly businessEmail: Prisma.FieldRef<"Company", 'String'>
+  readonly businessPhone: Prisma.FieldRef<"Company", 'String'>
   readonly description: Prisma.FieldRef<"Company", 'String'>
   readonly website: Prisma.FieldRef<"Company", 'String'>
+  readonly primaryProducts: Prisma.FieldRef<"Company", 'String'>
+  readonly addressLine1: Prisma.FieldRef<"Company", 'String'>
+  readonly addressLine2: Prisma.FieldRef<"Company", 'String'>
+  readonly registrationNumber: Prisma.FieldRef<"Company", 'String'>
+  readonly tradeLicenseNumber: Prisma.FieldRef<"Company", 'String'>
+  readonly taxVatNumber: Prisma.FieldRef<"Company", 'String'>
+  readonly registrationCountryId: Prisma.FieldRef<"Company", 'String'>
   readonly verificationStatus: Prisma.FieldRef<"Company", 'CompanyVerificationStatus'>
   readonly accountStatus: Prisma.FieldRef<"Company", 'CompanyAccountStatus'>
   readonly isFeatured: Prisma.FieldRef<"Company", 'Boolean'>
@@ -3901,6 +5102,7 @@ export interface CompanyFieldRefs {
   readonly employeeRange: Prisma.FieldRef<"Company", 'String'>
   readonly primaryLocationId: Prisma.FieldRef<"Company", 'String'>
   readonly createdById: Prisma.FieldRef<"Company", 'String'>
+  readonly version: Prisma.FieldRef<"Company", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Company", 'DateTime'>
@@ -4321,6 +5523,25 @@ export type Company$primaryLocationArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.LocationInclude<ExtArgs> | null
   where?: Prisma.LocationWhereInput
+}
+
+/**
+ * Company.registrationCountry
+ */
+export type Company$registrationCountryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Country
+   */
+  select?: Prisma.CountrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Country
+   */
+  omit?: Prisma.CountryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CountryInclude<ExtArgs> | null
+  where?: Prisma.CountryWhereInput
 }
 
 /**

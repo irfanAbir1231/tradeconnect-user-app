@@ -42,6 +42,14 @@ export class AppError extends Error {
     return new AppError({ code: "CONFLICT", message, status: apiErrorStatuses.CONFLICT });
   }
 
+  static companyVersionConflict() {
+    return new AppError({ code: "COMPANY_VERSION_CONFLICT", message: "This company profile changed. Refresh and review the saved details before trying again.", status: apiErrorStatuses.COMPANY_VERSION_CONFLICT });
+  }
+
+  static companyRegistrationConflict() {
+    return new AppError({ code: "COMPANY_REGISTRATION_CONFLICT", message: "One of the registration identifiers cannot be used for this company profile.", status: apiErrorStatuses.COMPANY_REGISTRATION_CONFLICT });
+  }
+
   static invalidState(message = "The requested state change is not allowed.") {
     return new AppError({ code: "INVALID_STATE_TRANSITION", message, status: apiErrorStatuses.INVALID_STATE_TRANSITION });
   }

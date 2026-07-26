@@ -1,5 +1,9 @@
 # Authenticated frontend QA
 
+## Phase 4A.3 company profile note
+
+Company identity, membership role, canonical completion, truthful verification state, and authorized profile edits are real. Documents, verification submission/review, and dashboard request activity remain deferred or explicitly demo-labelled.
+
 ## Browser checklist
 
 1. Open the homepage while logged out.

@@ -7,14 +7,26 @@ import { createRequestContext, requestDurationMs, withRequestHeaders, type Reque
 
 export interface RouteHandlerContext {
   requestContext: RequestContext;
+  params: Promise<Record<string, string | string[] | undefined>>;
 }
+
+type NextRouteContext = {
+  params: Promise<Record<string, string | string[] | undefined>>;
+};
 
 type RouteHandler = (request: Request, context: RouteHandlerContext) => Response | Promise<Response>;
 
-export function withApiHandler(handler: RouteHandler): (request: Request) => Promise<Response> {
-  return async (request) => {
+/**
+ * Wraps App Router handlers with the canonical API envelope and logging. Dynamic
+ * route parameters are passed through rather than inferred from request URLs.
+ */
+export function withApiHandler(handler: RouteHandler): (request: Request, routeContext?: NextRouteContext) => Promise<Response> {
+  return async (request, routeContext) => {
     const requestContext = createRequestContext(request);
-    const context = { requestContext };
+    const context: RouteHandlerContext = {
+      requestContext,
+      params: routeContext?.params ?? Promise.resolve({}),
+    };
 
     try {
       const response = await handler(request, context);

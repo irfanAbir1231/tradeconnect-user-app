@@ -2,6 +2,10 @@
 
 This plan turns the current mock-only frontend into a production-ready full-stack Next.js B2B trade and business support platform without changing the existing information architecture unnecessarily.
 
+## Phase 4A.3 private company profile consumer
+
+The authenticated company profile consumer now uses the existing company service and PATCH contract. Owner/admin edits are server-authorized and version-checked; member-safe views omit contact and registration identifiers. Public company profiles, documents, verification review, and invitations remain later domains.
+
 ## Current boundary
 
 Today, pages import static records from `src/data`, and interactive flows update local React state. `RoleGate` hides UI based on a mock user, but it is explicitly not a security boundary. The backend must become the source of truth for identity, ownership, verification, workflow state, documents, marketplace publication, inquiries, analytics, and audit history.
@@ -101,6 +105,10 @@ Rejection/cancellation can occur only under documented rules. Every transition m
 2. Implement request create/read/update, draft autosave, and server validation.
 3. Add request status history, assignment, notes, and document metadata.
 4. Replace `src/data/requests.ts` imports on dashboard/admin pages with query hooks.
+
+#### Phase 4A.1 implemented foundation
+
+Authenticated company create/read/update/primary-company Route Handlers now exist with active reference-data validation, owner/admin membership scope, profile completion, audit writes, and an additive schema migration. The dashboard profile remains intentionally unwired until the next frontend phase. See `COMPANY_PROFILE_BACKEND_IMPLEMENTATION.md` and `COMPANY_PROFILE_API_CONTRACT.md`.
 
 ### Phase 3 — Verification and documents
 

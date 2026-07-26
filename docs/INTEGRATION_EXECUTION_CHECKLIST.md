@@ -1,6 +1,26 @@
 # TradeConnect Backend Integration Execution Checklist
 
+## Phase 4A release status
+
+Company profile implementation is complete; manual QA and deployment-environment database verification remain pending. See `COMPANY_PROFILE_RELEASE_READINESS.md` and `COMPANY_PROFILE_FINAL_QA.md`.
+
 Planning checklist only. Do not mark a phase complete until its backend, frontend, test, privacy, and deployment acceptance criteria are met. Keep `main` deployable and retain the current mock-data mode behind an explicit feature flag until the corresponding API slice is proven in staging.
+
+## Phase 4A.3 company profile view and edit
+
+- [x] Primary company view/edit routes authenticate server-side and use canonical services.
+- [x] PATCH retains service-layer owner/admin authorization and version conflict protection.
+- [x] Dashboard, settings, and navigation use compact real company projections.
+- [ ] Complete the later browser/mobile/accessibility checklist in `COMPANY_PROFILE_EDIT_QA.md`.
+
+## Phase 4A.2 company onboarding
+
+- [x] Server-authenticated onboarding route and no-company entry points
+- [x] Canonical category/country/Bangladesh hierarchy references
+- [x] Final-step company creation through the existing API contract
+- [x] Real private initial company view and canonical completion response
+- [ ] Profile editing (Phase 4A.3)
+- [ ] Documents and verification submission (later phase)
 
 ## Temporary MVP deployment decision
 

@@ -186,14 +186,34 @@ async function seedReferenceData() {
 
   const bangladesh = countryRecords.get("BD");
   if (!bangladesh) throw new Error("Bangladesh reference country could not be seeded.");
+  const bangladeshId = bangladesh.id;
 
-  for (const name of ["Dhaka", "Chattogram", "Gazipur", "Narayanganj", "Sylhet", "Khulna"]) {
-    const existing = await prisma.location.findFirst({ where: { countryId: bangladesh.id, name, type: "city", parentId: null, deletedAt: null } });
+  async function ensureBangladeshLocation(name: string, type: string, parentId: string | null = null) {
+    const existing = await prisma.location.findFirst({ where: { countryId: bangladeshId, name, type, parentId, deletedAt: null }, select: { id: true } });
     if (existing) {
       await prisma.location.update({ where: { id: existing.id }, data: { isActive: true } });
-    } else {
-      await prisma.location.create({ data: { countryId: bangladesh.id, name, type: "city" } });
+      return existing;
     }
+    return prisma.location.create({ data: { countryId: bangladeshId, name, type, parentId }, select: { id: true } });
+  }
+
+  // Canonical administrative paths used by the company onboarding selectors.
+  // The schema supports expanding this idempotent hierarchy without migrations.
+  const administrativeAreas = [
+    ["Dhaka", "Dhaka", ["Dhanmondi", "Savar"]],
+    ["Chattogram", "Chattogram", ["Pahartali", "Sitakunda"]],
+    ["Rajshahi", "Rajshahi", ["Paba", "Bagmara"]],
+    ["Khulna", "Khulna", ["Batiaghata", "Dumuria"]],
+    ["Barishal", "Barishal", ["Babuganj", "Bakerganj"]],
+    ["Sylhet", "Sylhet", ["Beanibazar", "Golapganj"]],
+    ["Rangpur", "Rangpur", ["Badarganj", "Mithapukur"]],
+    ["Mymensingh", "Mymensingh", ["Bhaluka", "Muktagacha"]],
+  ] as const;
+
+  for (const [divisionName, districtName, upazilas] of administrativeAreas) {
+    const division = await ensureBangladeshLocation(divisionName, "division");
+    const district = await ensureBangladeshLocation(districtName, "district", division.id);
+    for (const upazilaName of upazilas) await ensureBangladeshLocation(upazilaName, "upazila", district.id);
   }
 
   return {
@@ -201,7 +221,7 @@ async function seedReferenceData() {
     permissions: permissions.length,
     categories: categories.length,
     countries: countries.length,
-    bangladeshLocations: 6,
+    bangladeshLocations: administrativeAreas.length * 4,
   };
 }
 

@@ -30,6 +30,12 @@ Public email/password signup is enabled in local development, Vercel Preview, an
 
 Rate limits use Better Auth's database storage. Sign-up allows five attempts per rolling window: five minutes in local development and Vercel Preview, and one hour in production. The deployment environment is determined only from `VERCEL_ENV`; `NODE_ENV=production` on Preview does not activate the production window. A rejected request reports Better Auth's `X-Retry-After` value, which the registration form turns into a visible minute countdown and uses to prevent duplicate submissions until the bucket expires.
 
+## Authenticated frontend identity
+
+Server Components read `getCurrentActor()` and map it through `toAuthenticatedUserView()` before passing identity into Header, mobile navigation, dashboard navigation, and account pages. The client receives only `id`, name, email, email-verification state, roles, permissions, and company-membership summaries; it never receives sessions, cookies, account tokens, password data, or raw Prisma records. Login and signup refresh server-rendered navigation after redirecting to `/dashboard`; logout calls Better Auth, refreshes the router, and redirects to `/login`.
+
+Business dashboard fixtures remain temporary demo data. They are visibly labeled and are not presented as the signed-in user's requests, verification state, documents, or company ownership.
+
 ## Database deployment connection
 
 Better Auth uses the application's pooled `DATABASE_URL` at request time. Prisma migration/schema commands resolve a direct database URL in this order: `DIRECT_URL`, then Vercel Neon `DATABASE_URL_UNPOOLED`, without branching on Preview/Production. The `vercel-build` script runs `prisma migrate deploy && prisma db seed && next build`; migrations create the schema, while the idempotent production-safe seed creates required canonical roles, permissions, and mappings before Better Auth can assign `business_user` on signup. It never uses the pooled runtime URL for migrations.

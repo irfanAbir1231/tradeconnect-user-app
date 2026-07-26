@@ -19,7 +19,8 @@
     "auth:grant-role": "tsx scripts/grant-user-role.ts",
     "test:auth-origins": "tsx scripts/test-auth-origins.ts",
     "test:auth-rate-limit": "tsx scripts/test-auth-rate-limit.ts",
-    "test:auth-signup-policy": "tsx scripts/test-auth-signup-policy.ts"
+    "test:auth-signup-policy": "tsx scripts/test-auth-signup-policy.ts",
+    "test:authenticated-frontend": "tsx scripts/test-authenticated-frontend.ts"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.6.25",

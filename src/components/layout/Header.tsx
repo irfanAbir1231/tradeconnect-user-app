@@ -1,6 +1,10 @@
 import Link from "next/link";
 
+import { LogoutButton } from "@/src/components/auth/LogoutButton";
 import { navItems } from "@/src/data/nav";
+import { truncateUserLabel, userDisplayName } from "@/src/lib/user-identity";
+import { getCurrentActor } from "@/src/server/auth/actor";
+import { toAuthenticatedUserView } from "@/src/server/auth/user-view";
 
 import { MobileNav } from "./MobileNav";
 
@@ -15,7 +19,10 @@ function TradeConnectMark() {
   );
 }
 
-export function Header() {
+export async function Header() {
+  const actor = await getCurrentActor();
+  const user = actor ? toAuthenticatedUserView(actor) : null;
+
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[color:var(--background)/.9] backdrop-blur-xl">
       <div className="container-shell flex h-[4.5rem] items-center justify-between">
@@ -33,13 +40,13 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="/login">Login</Link>
+          {user ? <><Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="/dashboard">Dashboard</Link><span aria-label={`Signed in as ${userDisplayName(user)}`} className="max-w-32 truncate text-sm font-medium text-[var(--muted)] xl:max-w-44">{truncateUserLabel(userDisplayName(user))}</span><LogoutButton className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" /></> : <Link className="text-sm font-semibold text-[var(--navy)] transition-colors hover:text-[var(--accent-deep)]" href="/login">Login</Link>}
           <Link className="rounded-full bg-[var(--accent-deep)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_var(--accent-deep)] transition-transform hover:-translate-y-0.5 hover:bg-[var(--navy)]" href="/submit">
             Submit Request
           </Link>
         </div>
 
-        <MobileNav items={navItems} />
+        <MobileNav items={navItems} user={user} />
       </div>
     </header>
   );

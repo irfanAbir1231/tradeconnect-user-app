@@ -18,11 +18,20 @@ export type Permission =
   | "manage_team"
   | "manage_settings";
 
-export interface MockCurrentUser {
+export interface CompanyMembershipView {
+  companyId: string;
+  companyName: string;
+  membershipRole: "owner" | "admin" | "member";
+  isPrimary: boolean;
+}
+
+/** Safe, serializable identity data permitted in server-to-client UI props. */
+export interface AuthenticatedUserView {
   id: string;
   name: string;
   email: string;
-  role: UserRole;
-  companyId?: string;
-  companyName?: string;
+  emailVerified: boolean;
+  roles: UserRole[];
+  permissions: Permission[];
+  companyMemberships: CompanyMembershipView[];
 }

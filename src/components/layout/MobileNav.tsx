@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { LogoutButton } from "@/src/components/auth/LogoutButton";
 import type { NavItem } from "@/src/data/nav";
+import { truncateUserLabel, userDisplayName } from "@/src/lib/user-identity";
+import type { AuthenticatedUserView } from "@/src/types/auth";
 
 type MobileNavProps = {
   items: NavItem[];
+  user: AuthenticatedUserView | null;
 };
 
-export function MobileNav({ items }: MobileNavProps) {
+export function MobileNav({ items, user }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -30,9 +34,10 @@ export function MobileNav({ items }: MobileNavProps) {
               </Link>
             ))}
             <div className="mt-2 grid grid-cols-2 gap-2 border-t border-[var(--line)] pt-3">
-              <Link className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" href="/login" onClick={() => setIsOpen(false)}>Login</Link>
+              {user ? <><Link className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" href="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link><LogoutButton className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" onSignedOut={() => setIsOpen(false)} /></> : <Link className="rounded-xl px-4 py-3 text-center text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" href="/login" onClick={() => setIsOpen(false)}>Login</Link>}
               <Link className="rounded-xl bg-[var(--accent-deep)] px-4 py-3 text-center text-sm font-semibold text-white" href="/submit" onClick={() => setIsOpen(false)}>Submit Request</Link>
             </div>
+            {user ? <p className="mt-3 truncate px-2 text-center text-xs text-[var(--muted)]">Signed in as {truncateUserLabel(userDisplayName(user))}</p> : null}
           </nav>
         </div>
       ) : null}

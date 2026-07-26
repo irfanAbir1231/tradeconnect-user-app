@@ -9,7 +9,12 @@ import { authClient } from "@/src/lib/auth-client";
 type AuthMode = "login" | "register";
 
 function safeNextPath(value: string | null) {
-  return value && value.startsWith("/") && !value.startsWith("//") ? value : "/dashboard";
+  if (!value || !value.startsWith("/") || value.startsWith("//") || value.includes("\\")) {
+    return "/dashboard";
+  }
+
+  const nextUrl = new URL(value, window.location.origin);
+  return nextUrl.origin === window.location.origin ? `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}` : "/dashboard";
 }
 
 function retryAfterSeconds(value: string | null) {

@@ -2,7 +2,6 @@
 
 import type { ReactNode } from "react";
 
-import { currentUser } from "@/src/data/current-user";
 import { hasRole, rolePermissions } from "@/src/lib/permissions";
 import type { Permission, UserRole } from "@/src/types/auth";
 
@@ -20,7 +19,7 @@ type RoleGateProps = {
  * client code or call APIs directly. Real authorization must later be enforced by the backend/API.
  */
 export function RoleGate({ allowedRoles, requiredPermission, roles, permissions, fallback = null, children }: RoleGateProps) {
-  const availableRoles = roles ?? [currentUser.role];
+  const availableRoles = roles ?? [];
   const availablePermissions = permissions ?? availableRoles.flatMap((role) => rolePermissions[role]);
   const roleAllowed = !allowedRoles?.length || availableRoles.some((role) => hasRole(role, allowedRoles));
   const permissionAllowed = !requiredPermission || availablePermissions.includes(requiredPermission);

@@ -1,5 +1,3 @@
-import "server-only";
-
 import { AppError } from "@/src/server/errors/app-error";
 
 const DEFAULT_PAGE = 1;

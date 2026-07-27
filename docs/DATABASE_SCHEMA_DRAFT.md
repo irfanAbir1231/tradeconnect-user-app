@@ -1,5 +1,9 @@
 # TradeConnect PostgreSQL Database Schema Draft
 
+## Phase 4A.4 company-domain note
+
+No migration was created: current company slug, membership, primary-membership, category, location-parent, and version structures cover the observed correctness paths. The local Prisma schema-engine failure blocks database-backed migration review, so speculative indexes and registration-identifier constraints remain deferred for a reviewed future migration.
+
 Planning document and Phase 2 implementation contract. The implemented foundation uses PostgreSQL on Neon, Prisma ORM v7, UUID identifiers, and UTC timestamps. The first migration remains pending until a safe `DIRECT_URL` is configured.
 
 ## Phase 2 implementation decisions

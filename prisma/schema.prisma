@@ -278,43 +278,55 @@ model AuthRateLimit {
 }
 
 model Company {
-  id                  String                    @id @default(uuid()) @db.Uuid
-  slug                String                    @unique @db.VarChar(180)
-  legalName           String                    @db.VarChar(240)
-  displayName         String                    @db.VarChar(240)
-  businessType        String                    @db.VarChar(64)
-  description         String?
-  website             String?
-  verificationStatus  CompanyVerificationStatus @default(not_started)
-  accountStatus       CompanyAccountStatus      @default(active)
-  isFeatured          Boolean                   @default(false)
-  isDemo              Boolean                   @default(false)
-  foundedYear         Int?
-  employeeRange       String?                   @db.VarChar(64)
-  primaryLocationId   String?                   @db.Uuid
-  createdById         String?                   @db.Uuid
-  createdAt           DateTime                  @default(now())
-  updatedAt           DateTime                  @updatedAt
-  deletedAt           DateTime?
-  primaryLocation     Location?                 @relation("CompanyPrimaryLocation", fields: [primaryLocationId], references: [id], onDelete: Restrict)
-  createdBy           User?                     @relation("CompanyCreator", fields: [createdById], references: [id], onDelete: SetNull)
-  members             CompanyMember[]
-  categories          CompanyCategory[]
-  countriesServed     CompanyCountry[]
-  businessRequests    BusinessRequest[]
-  documents           Document[]
-  verification        CompanyVerification?
-  marketplaceListings MarketplaceListing[]
-  inquiries           Inquiry[]                 @relation("InquirySenderCompany")
-  relatedInquiries    Inquiry[]                 @relation("InquiryRelatedCompany")
-  technologyProducts  TechnologyProduct[]
-  auditLogs           AuditLog[]
-  roleAssignments     UserRole[]
+  id                    String                    @id @default(uuid()) @db.Uuid
+  slug                  String                    @unique @db.VarChar(180)
+  legalName             String                    @db.VarChar(240)
+  displayName           String                    @db.VarChar(240)
+  businessType          String                    @db.VarChar(64)
+  businessEmail         String?                   @db.VarChar(254)
+  businessPhone         String?                   @db.VarChar(40)
+  description           String?
+  website               String?
+  primaryProducts       String?
+  addressLine1          String?                   @db.VarChar(240)
+  addressLine2          String?                   @db.VarChar(240)
+  registrationNumber    String?                   @db.VarChar(120)
+  tradeLicenseNumber    String?                   @db.VarChar(120)
+  taxVatNumber          String?                   @db.VarChar(120)
+  registrationCountryId String?                   @db.Uuid
+  verificationStatus    CompanyVerificationStatus @default(not_started)
+  accountStatus         CompanyAccountStatus      @default(active)
+  isFeatured            Boolean                   @default(false)
+  isDemo                Boolean                   @default(false)
+  foundedYear           Int?
+  employeeRange         String?                   @db.VarChar(64)
+  primaryLocationId     String?                   @db.Uuid
+  createdById           String?                   @db.Uuid
+  version               Int                       @default(1)
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+  deletedAt             DateTime?
+  primaryLocation       Location?                 @relation("CompanyPrimaryLocation", fields: [primaryLocationId], references: [id], onDelete: Restrict)
+  registrationCountry   Country?                  @relation("CompanyRegistrationCountry", fields: [registrationCountryId], references: [id], onDelete: Restrict)
+  createdBy             User?                     @relation("CompanyCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  members               CompanyMember[]
+  categories            CompanyCategory[]
+  countriesServed       CompanyCountry[]
+  businessRequests      BusinessRequest[]
+  documents             Document[]
+  verification          CompanyVerification?
+  marketplaceListings   MarketplaceListing[]
+  inquiries             Inquiry[]                 @relation("InquirySenderCompany")
+  relatedInquiries      Inquiry[]                 @relation("InquiryRelatedCompany")
+  technologyProducts    TechnologyProduct[]
+  auditLogs             AuditLog[]
+  roleAssignments       UserRole[]
 
   @@index([verificationStatus])
   @@index([accountStatus])
   @@index([businessType])
   @@index([primaryLocationId])
+  @@index([registrationCountryId])
   @@map("companies")
 }
 
@@ -431,6 +443,7 @@ model Country {
   sourceRequests      BusinessRequest[] @relation("RequestSourceCountry")
   destinationRequests BusinessRequest[] @relation("RequestDestinationCountry")
   servedByCompanies   CompanyCountry[]
+  registeredCompanies Company[]         @relation("CompanyRegistrationCountry")
 
   @@index([name])
   @@map("countries")

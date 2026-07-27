@@ -6,8 +6,9 @@ import { useState } from "react";
 
 import { LogoutButton } from "@/src/components/auth/LogoutButton";
 import { HomeIcon, type HomeIconName } from "@/src/components/home/HomeIcon";
-import { primaryCompanyMembership, truncateUserLabel, userDisplayName, userInitials } from "@/src/lib/user-identity";
+import { truncateUserLabel, userDisplayName, userInitials } from "@/src/lib/user-identity";
 import type { AuthenticatedUserView } from "@/src/types/auth";
+import type { CompanyNavigationView } from "@/src/types/company-profile";
 
 const dashboardItems: { label: string; href: string; icon: HomeIconName }[] = [
   { label: "Overview", href: "/dashboard", icon: "chart" },
@@ -19,6 +20,10 @@ const dashboardItems: { label: string; href: string; icon: HomeIconName }[] = [
   { label: "Settings", href: "/dashboard/settings", icon: "spark" },
 ];
 
+function membershipLabel(role: CompanyNavigationView["membershipRole"]) {
+  return role === "owner" ? "Owner" : role === "admin" ? "Company admin" : "Member";
+}
+
 function DashboardLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
@@ -28,23 +33,19 @@ function DashboardLinks({ onNavigate }: { onNavigate?: () => void }) {
   })}</nav>;
 }
 
-function IdentitySummary({ user }: { user: AuthenticatedUserView }) {
-  const company = primaryCompanyMembership(user);
-
-  return <div className="mb-8 flex items-center gap-3 border-b border-[var(--line)] pb-5"><span aria-label={`${userDisplayName(user)} initials`} className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-sm font-bold text-[var(--navy)]">{userInitials(user)}</span><div className="min-w-0"><p className="truncate text-sm font-semibold text-[var(--navy)]">{truncateUserLabel(userDisplayName(user))}</p>{company ? <p className="truncate text-xs text-[var(--muted)]">{truncateUserLabel(company.companyName)}</p> : <Link className="text-xs font-medium text-[var(--accent-deep)] hover:text-[var(--navy)]" href="/dashboard/company">Complete your company profile</Link>}</div></div>;
+function IdentitySummary({ user, company }: { user: AuthenticatedUserView; company?: CompanyNavigationView }) {
+  return <div className="mb-8 flex items-center gap-3 border-b border-[var(--line)] pb-5"><span aria-label={`${userDisplayName(user)} initials`} className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-sm font-bold text-[var(--navy)]">{userInitials(user)}</span><div className="min-w-0"><p className="truncate text-sm font-semibold text-[var(--navy)]">{truncateUserLabel(userDisplayName(user))}</p>{company ? <p className="truncate text-xs text-[var(--muted)]" title={company.displayName}>{truncateUserLabel(company.displayName)}</p> : <Link className="text-xs font-medium text-[var(--accent-deep)] hover:text-[var(--navy)]" href="/dashboard/company/onboarding">Create your company profile</Link>}</div></div>;
 }
 
-function CompanyProfilePrompt({ user }: { user: AuthenticatedUserView }) {
-  const company = primaryCompanyMembership(user);
-
-  return <div className="mt-auto rounded-xl bg-[var(--surface)] p-3.5"><p className="text-xs font-semibold text-[var(--navy)]">Company profile</p>{company ? <p className="mt-2 text-xs leading-5 text-[var(--muted)]">{company.membershipRole === "owner" ? "Owner" : company.membershipRole} membership at {truncateUserLabel(company.companyName)}.</p> : <><p className="mt-2 text-xs leading-5 text-[var(--muted)]">No company profile yet. Add your business details when you are ready.</p><Link className="mt-3 inline-flex text-xs font-semibold text-[var(--accent-deep)] hover:text-[var(--navy)]" href="/dashboard/company">Complete profile →</Link></>}</div>;
+function CompanyProfilePrompt({ company }: { company?: CompanyNavigationView }) {
+  return <div className="mt-auto rounded-xl bg-[var(--surface)] p-3.5"><p className="text-xs font-semibold text-[var(--navy)]">Company profile</p>{company ? <><p className="mt-2 truncate text-xs font-semibold text-[var(--navy)]" title={company.displayName}>{truncateUserLabel(company.displayName)}</p><p className="mt-1 text-xs leading-5 text-[var(--muted)]">{membershipLabel(company.membershipRole)} · {company.profileCompletion}% complete</p><Link className="mt-3 inline-flex text-xs font-semibold text-[var(--accent-deep)] hover:text-[var(--navy)]" href={company.canEdit ? "/dashboard/company/edit" : "/dashboard/company"}>{company.canEdit ? "Edit profile →" : "View profile →"}</Link></> : <><p className="mt-2 text-xs leading-5 text-[var(--muted)]">No company profile yet. Add your business details when you are ready.</p><Link className="mt-3 inline-flex text-xs font-semibold text-[var(--accent-deep)] hover:text-[var(--navy)]" href="/dashboard/company/onboarding">Create profile →</Link></>}</div>;
 }
 
-export function DashboardNav({ user }: { user: AuthenticatedUserView }) {
+export function DashboardNav({ user, company }: { user: AuthenticatedUserView; company?: CompanyNavigationView }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return <>
-    <aside className="sticky top-[5.5rem] hidden h-[calc(100vh-7rem)] w-60 shrink-0 flex-col rounded-2xl border border-[var(--line)] bg-white p-4 lg:flex"><IdentitySummary user={user} /><DashboardLinks /><CompanyProfilePrompt user={user} /><LogoutButton className="mt-3 w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" /></aside>
-    <div className="mb-5 lg:hidden"><div className="flex items-center justify-between rounded-2xl border border-[var(--line)] bg-white p-3"><div className="flex min-w-0 items-center gap-3"><span aria-label={`${userDisplayName(user)} initials`} className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-xs font-bold text-[var(--navy)]">{userInitials(user)}</span><div className="min-w-0"><p className="truncate text-sm font-semibold text-[var(--navy)]">{truncateUserLabel(userDisplayName(user))}</p><p className="text-xs text-[var(--muted)]">Dashboard</p></div></div><button aria-expanded={isOpen} aria-label={isOpen ? "Close dashboard navigation" : "Open dashboard navigation"} className="rounded-lg p-2 text-[var(--navy)] hover:bg-[var(--surface)]" onClick={() => setIsOpen((open) => !open)} type="button"><HomeIcon name={isOpen ? "check" : "package"} className="size-5" /></button></div>{isOpen ? <div className="mt-2 rounded-2xl border border-[var(--line)] bg-white p-3"><DashboardLinks onNavigate={() => setIsOpen(false)} /><LogoutButton className="mt-3 w-full rounded-xl border border-[var(--line-strong)] px-3 py-2.5 text-left text-sm font-semibold text-[var(--navy)]" onSignedOut={() => setIsOpen(false)} /></div> : null}</div>
+    <aside className="sticky top-[5.5rem] hidden h-[calc(100vh-7rem)] w-60 shrink-0 flex-col rounded-2xl border border-[var(--line)] bg-white p-4 lg:flex"><IdentitySummary company={company} user={user} /><DashboardLinks /><CompanyProfilePrompt company={company} /><LogoutButton className="mt-3 w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--navy)] hover:bg-[var(--surface)]" /></aside>
+    <div className="mb-5 lg:hidden"><div className="flex items-center justify-between rounded-2xl border border-[var(--line)] bg-white p-3"><div className="flex min-w-0 items-center gap-3"><span aria-label={`${userDisplayName(user)} initials`} className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent)] text-xs font-bold text-[var(--navy)]">{userInitials(user)}</span><div className="min-w-0"><p className="truncate text-sm font-semibold text-[var(--navy)]">{truncateUserLabel(userDisplayName(user))}</p><p className="truncate text-xs text-[var(--muted)]" title={company?.displayName}>{company ? `${company.displayName} · ${membershipLabel(company.membershipRole)}` : "Dashboard"}</p></div></div><button aria-expanded={isOpen} aria-label={isOpen ? "Close dashboard navigation" : "Open dashboard navigation"} className="rounded-lg p-2 text-[var(--navy)] hover:bg-[var(--surface)]" onClick={() => setIsOpen((open) => !open)} type="button"><HomeIcon name={isOpen ? "check" : "package"} className="size-5" /></button></div>{isOpen ? <div className="mt-2 rounded-2xl border border-[var(--line)] bg-white p-3"><DashboardLinks onNavigate={() => setIsOpen(false)} /><CompanyProfilePrompt company={company} /><LogoutButton className="mt-3 w-full rounded-xl border border-[var(--line-strong)] px-3 py-2.5 text-left text-sm font-semibold text-[var(--navy)]" onSignedOut={() => setIsOpen(false)} /></div> : null}</div>
   </>;
 }

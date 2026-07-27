@@ -1,5 +1,9 @@
 # TradeConnect Serverless Constraints
 
+## Phase 4A.4 company-domain note
+
+Company creation, update, and primary selection stay short transactional database operations with no external calls inside the transaction. Private company routes use dynamic/no-store rendering; only stable public reference data uses conservative shared caching.
+
 Planning only. This document describes how the full-stack Next.js application should behave on Vercel with managed PostgreSQL, private object storage, transactional email, and optional queue/workflow/cron services.
 
 ## Implemented database and Phase 3A auth boundary

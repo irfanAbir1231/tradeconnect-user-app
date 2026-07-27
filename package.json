@@ -20,7 +20,12 @@
     "test:auth-origins": "tsx scripts/test-auth-origins.ts",
     "test:auth-rate-limit": "tsx scripts/test-auth-rate-limit.ts",
     "test:auth-signup-policy": "tsx scripts/test-auth-signup-policy.ts",
-    "test:authenticated-frontend": "tsx scripts/test-authenticated-frontend.ts"
+    "test:authenticated-frontend": "tsx scripts/test-authenticated-frontend.ts",
+    "test:company-foundation": "tsx scripts/test-company-foundation.ts",
+    "test:company-onboarding": "tsx scripts/test-company-onboarding.ts",
+    "test:company-profile-ui": "tsx scripts/test-company-profile-ui.ts",
+    "test:company-domain-hardening": "tsx scripts/test-company-domain-hardening.ts",
+    "test:company-profile": "npm run test:company-foundation && npm run test:company-onboarding && npm run test:company-profile-ui && npm run test:company-domain-hardening"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "^1.6.25",

@@ -1,5 +1,9 @@
 # TradeConnect Database Privacy Matrix
 
+## Phase 4A.4 company profile note
+
+Owner/admin company projections may include private contact and registration data; member-safe and navigation projections omit them. Company audit data stores only changed field names and version metadata, never contact, address, registration, session, token, cookie, document, or raw-error values.
+
 This matrix is a serialization policy, not an authorization implementation. Server repositories must select only fields appropriate to the caller. A database foreign key never grants access.
 
 | Model | Public projection | Authenticated owner/company member | Assigned staff | Admin only | System-only / never returned normally |

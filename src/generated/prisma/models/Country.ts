@@ -202,6 +202,7 @@ export type CountryWhereInput = {
   sourceRequests?: Prisma.BusinessRequestListRelationFilter
   destinationRequests?: Prisma.BusinessRequestListRelationFilter
   servedByCompanies?: Prisma.CompanyCountryListRelationFilter
+  registeredCompanies?: Prisma.CompanyListRelationFilter
 }
 
 export type CountryOrderByWithRelationInput = {
@@ -216,6 +217,7 @@ export type CountryOrderByWithRelationInput = {
   sourceRequests?: Prisma.BusinessRequestOrderByRelationAggregateInput
   destinationRequests?: Prisma.BusinessRequestOrderByRelationAggregateInput
   servedByCompanies?: Prisma.CompanyCountryOrderByRelationAggregateInput
+  registeredCompanies?: Prisma.CompanyOrderByRelationAggregateInput
 }
 
 export type CountryWhereUniqueInput = Prisma.AtLeast<{
@@ -233,6 +235,7 @@ export type CountryWhereUniqueInput = Prisma.AtLeast<{
   sourceRequests?: Prisma.BusinessRequestListRelationFilter
   destinationRequests?: Prisma.BusinessRequestListRelationFilter
   servedByCompanies?: Prisma.CompanyCountryListRelationFilter
+  registeredCompanies?: Prisma.CompanyListRelationFilter
 }, "id" | "iso2" | "iso3">
 
 export type CountryOrderByWithAggregationInput = {
@@ -273,6 +276,7 @@ export type CountryCreateInput = {
   sourceRequests?: Prisma.BusinessRequestCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUncheckedCreateInput = {
@@ -287,6 +291,7 @@ export type CountryUncheckedCreateInput = {
   sourceRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUpdateInput = {
@@ -301,6 +306,7 @@ export type CountryUpdateInput = {
   sourceRequests?: Prisma.BusinessRequestUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUncheckedUpdateInput = {
@@ -315,6 +321,7 @@ export type CountryUncheckedUpdateInput = {
   sourceRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryCreateManyInput = {
@@ -345,6 +352,11 @@ export type CountryUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CountryNullableScalarRelationFilter = {
+  is?: Prisma.CountryWhereInput | null
+  isNot?: Prisma.CountryWhereInput | null
 }
 
 export type CountryCountOrderByAggregateInput = {
@@ -382,9 +394,20 @@ export type CountryScalarRelationFilter = {
   isNot?: Prisma.CountryWhereInput
 }
 
-export type CountryNullableScalarRelationFilter = {
-  is?: Prisma.CountryWhereInput | null
-  isNot?: Prisma.CountryWhereInput | null
+export type CountryCreateNestedOneWithoutRegisteredCompaniesInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedCreateWithoutRegisteredCompaniesInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRegisteredCompaniesInput
+  connect?: Prisma.CountryWhereUniqueInput
+}
+
+export type CountryUpdateOneWithoutRegisteredCompaniesNestedInput = {
+  create?: Prisma.XOR<Prisma.CountryCreateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedCreateWithoutRegisteredCompaniesInput>
+  connectOrCreate?: Prisma.CountryCreateOrConnectWithoutRegisteredCompaniesInput
+  upsert?: Prisma.CountryUpsertWithoutRegisteredCompaniesInput
+  disconnect?: Prisma.CountryWhereInput | boolean
+  delete?: Prisma.CountryWhereInput | boolean
+  connect?: Prisma.CountryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutRegisteredCompaniesInput, Prisma.CountryUpdateWithoutRegisteredCompaniesInput>, Prisma.CountryUncheckedUpdateWithoutRegisteredCompaniesInput>
 }
 
 export type CountryCreateNestedOneWithoutLocationsInput = {
@@ -447,6 +470,78 @@ export type CountryUpdateOneWithoutDestinationRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CountryUpdateToOneWithWhereWithoutDestinationRequestsInput, Prisma.CountryUpdateWithoutDestinationRequestsInput>, Prisma.CountryUncheckedUpdateWithoutDestinationRequestsInput>
 }
 
+export type CountryCreateWithoutRegisteredCompaniesInput = {
+  id?: string
+  iso2: string
+  iso3: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutCountryInput
+  sourceRequests?: Prisma.BusinessRequestCreateNestedManyWithoutSourceCountryInput
+  destinationRequests?: Prisma.BusinessRequestCreateNestedManyWithoutDestinationCountryInput
+  servedByCompanies?: Prisma.CompanyCountryCreateNestedManyWithoutCountryInput
+}
+
+export type CountryUncheckedCreateWithoutRegisteredCompaniesInput = {
+  id?: string
+  iso2: string
+  iso3: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutCountryInput
+  sourceRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutSourceCountryInput
+  destinationRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutDestinationCountryInput
+  servedByCompanies?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCountryInput
+}
+
+export type CountryCreateOrConnectWithoutRegisteredCompaniesInput = {
+  where: Prisma.CountryWhereUniqueInput
+  create: Prisma.XOR<Prisma.CountryCreateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedCreateWithoutRegisteredCompaniesInput>
+}
+
+export type CountryUpsertWithoutRegisteredCompaniesInput = {
+  update: Prisma.XOR<Prisma.CountryUpdateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedUpdateWithoutRegisteredCompaniesInput>
+  create: Prisma.XOR<Prisma.CountryCreateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedCreateWithoutRegisteredCompaniesInput>
+  where?: Prisma.CountryWhereInput
+}
+
+export type CountryUpdateToOneWithWhereWithoutRegisteredCompaniesInput = {
+  where?: Prisma.CountryWhereInput
+  data: Prisma.XOR<Prisma.CountryUpdateWithoutRegisteredCompaniesInput, Prisma.CountryUncheckedUpdateWithoutRegisteredCompaniesInput>
+}
+
+export type CountryUpdateWithoutRegisteredCompaniesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  iso2?: Prisma.StringFieldUpdateOperationsInput | string
+  iso3?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutCountryNestedInput
+  sourceRequests?: Prisma.BusinessRequestUpdateManyWithoutSourceCountryNestedInput
+  destinationRequests?: Prisma.BusinessRequestUpdateManyWithoutDestinationCountryNestedInput
+  servedByCompanies?: Prisma.CompanyCountryUpdateManyWithoutCountryNestedInput
+}
+
+export type CountryUncheckedUpdateWithoutRegisteredCompaniesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  iso2?: Prisma.StringFieldUpdateOperationsInput | string
+  iso3?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutCountryNestedInput
+  sourceRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutSourceCountryNestedInput
+  destinationRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutDestinationCountryNestedInput
+  servedByCompanies?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCountryNestedInput
+}
+
 export type CountryCreateWithoutLocationsInput = {
   id?: string
   iso2: string
@@ -458,6 +553,7 @@ export type CountryCreateWithoutLocationsInput = {
   sourceRequests?: Prisma.BusinessRequestCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUncheckedCreateWithoutLocationsInput = {
@@ -471,6 +567,7 @@ export type CountryUncheckedCreateWithoutLocationsInput = {
   sourceRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryCreateOrConnectWithoutLocationsInput = {
@@ -500,6 +597,7 @@ export type CountryUpdateWithoutLocationsInput = {
   sourceRequests?: Prisma.BusinessRequestUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutLocationsInput = {
@@ -513,6 +611,7 @@ export type CountryUncheckedUpdateWithoutLocationsInput = {
   sourceRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryCreateWithoutServedByCompaniesInput = {
@@ -526,6 +625,7 @@ export type CountryCreateWithoutServedByCompaniesInput = {
   locations?: Prisma.LocationCreateNestedManyWithoutCountryInput
   sourceRequests?: Prisma.BusinessRequestCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestCreateNestedManyWithoutDestinationCountryInput
+  registeredCompanies?: Prisma.CompanyCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUncheckedCreateWithoutServedByCompaniesInput = {
@@ -539,6 +639,7 @@ export type CountryUncheckedCreateWithoutServedByCompaniesInput = {
   locations?: Prisma.LocationUncheckedCreateNestedManyWithoutCountryInput
   sourceRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutSourceCountryInput
   destinationRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutDestinationCountryInput
+  registeredCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryCreateOrConnectWithoutServedByCompaniesInput = {
@@ -568,6 +669,7 @@ export type CountryUpdateWithoutServedByCompaniesInput = {
   locations?: Prisma.LocationUpdateManyWithoutCountryNestedInput
   sourceRequests?: Prisma.BusinessRequestUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUpdateManyWithoutDestinationCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutServedByCompaniesInput = {
@@ -581,6 +683,7 @@ export type CountryUncheckedUpdateWithoutServedByCompaniesInput = {
   locations?: Prisma.LocationUncheckedUpdateManyWithoutCountryNestedInput
   sourceRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutSourceCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutDestinationCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryCreateWithoutSourceRequestsInput = {
@@ -594,6 +697,7 @@ export type CountryCreateWithoutSourceRequestsInput = {
   locations?: Prisma.LocationCreateNestedManyWithoutCountryInput
   destinationRequests?: Prisma.BusinessRequestCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUncheckedCreateWithoutSourceRequestsInput = {
@@ -607,6 +711,7 @@ export type CountryUncheckedCreateWithoutSourceRequestsInput = {
   locations?: Prisma.LocationUncheckedCreateNestedManyWithoutCountryInput
   destinationRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutDestinationCountryInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryCreateOrConnectWithoutSourceRequestsInput = {
@@ -625,6 +730,7 @@ export type CountryCreateWithoutDestinationRequestsInput = {
   locations?: Prisma.LocationCreateNestedManyWithoutCountryInput
   sourceRequests?: Prisma.BusinessRequestCreateNestedManyWithoutSourceCountryInput
   servedByCompanies?: Prisma.CompanyCountryCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryUncheckedCreateWithoutDestinationRequestsInput = {
@@ -638,6 +744,7 @@ export type CountryUncheckedCreateWithoutDestinationRequestsInput = {
   locations?: Prisma.LocationUncheckedCreateNestedManyWithoutCountryInput
   sourceRequests?: Prisma.BusinessRequestUncheckedCreateNestedManyWithoutSourceCountryInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedCreateNestedManyWithoutCountryInput
+  registeredCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutRegistrationCountryInput
 }
 
 export type CountryCreateOrConnectWithoutDestinationRequestsInput = {
@@ -667,6 +774,7 @@ export type CountryUpdateWithoutSourceRequestsInput = {
   locations?: Prisma.LocationUpdateManyWithoutCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutSourceRequestsInput = {
@@ -680,6 +788,7 @@ export type CountryUncheckedUpdateWithoutSourceRequestsInput = {
   locations?: Prisma.LocationUncheckedUpdateManyWithoutCountryNestedInput
   destinationRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutDestinationCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUpsertWithoutDestinationRequestsInput = {
@@ -704,6 +813,7 @@ export type CountryUpdateWithoutDestinationRequestsInput = {
   locations?: Prisma.LocationUpdateManyWithoutCountryNestedInput
   sourceRequests?: Prisma.BusinessRequestUpdateManyWithoutSourceCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 export type CountryUncheckedUpdateWithoutDestinationRequestsInput = {
@@ -717,6 +827,7 @@ export type CountryUncheckedUpdateWithoutDestinationRequestsInput = {
   locations?: Prisma.LocationUncheckedUpdateManyWithoutCountryNestedInput
   sourceRequests?: Prisma.BusinessRequestUncheckedUpdateManyWithoutSourceCountryNestedInput
   servedByCompanies?: Prisma.CompanyCountryUncheckedUpdateManyWithoutCountryNestedInput
+  registeredCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutRegistrationCountryNestedInput
 }
 
 
@@ -729,6 +840,7 @@ export type CountryCountOutputType = {
   sourceRequests: number
   destinationRequests: number
   servedByCompanies: number
+  registeredCompanies: number
 }
 
 export type CountryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -736,6 +848,7 @@ export type CountryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   sourceRequests?: boolean | CountryCountOutputTypeCountSourceRequestsArgs
   destinationRequests?: boolean | CountryCountOutputTypeCountDestinationRequestsArgs
   servedByCompanies?: boolean | CountryCountOutputTypeCountServedByCompaniesArgs
+  registeredCompanies?: boolean | CountryCountOutputTypeCountRegisteredCompaniesArgs
 }
 
 /**
@@ -776,6 +889,13 @@ export type CountryCountOutputTypeCountServedByCompaniesArgs<ExtArgs extends run
   where?: Prisma.CompanyCountryWhereInput
 }
 
+/**
+ * CountryCountOutputType without action
+ */
+export type CountryCountOutputTypeCountRegisteredCompaniesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompanyWhereInput
+}
+
 
 export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -789,6 +909,7 @@ export type CountrySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   sourceRequests?: boolean | Prisma.Country$sourceRequestsArgs<ExtArgs>
   destinationRequests?: boolean | Prisma.Country$destinationRequestsArgs<ExtArgs>
   servedByCompanies?: boolean | Prisma.Country$servedByCompaniesArgs<ExtArgs>
+  registeredCompanies?: boolean | Prisma.Country$registeredCompaniesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["country"]>
 
@@ -828,6 +949,7 @@ export type CountryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   sourceRequests?: boolean | Prisma.Country$sourceRequestsArgs<ExtArgs>
   destinationRequests?: boolean | Prisma.Country$destinationRequestsArgs<ExtArgs>
   servedByCompanies?: boolean | Prisma.Country$servedByCompaniesArgs<ExtArgs>
+  registeredCompanies?: boolean | Prisma.Country$registeredCompaniesArgs<ExtArgs>
   _count?: boolean | Prisma.CountryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CountryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -840,6 +962,7 @@ export type $CountryPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     sourceRequests: Prisma.$BusinessRequestPayload<ExtArgs>[]
     destinationRequests: Prisma.$BusinessRequestPayload<ExtArgs>[]
     servedByCompanies: Prisma.$CompanyCountryPayload<ExtArgs>[]
+    registeredCompanies: Prisma.$CompanyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1247,6 +1370,7 @@ export interface Prisma__CountryClient<T, Null = never, ExtArgs extends runtime.
   sourceRequests<T extends Prisma.Country$sourceRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$sourceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   destinationRequests<T extends Prisma.Country$destinationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$destinationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   servedByCompanies<T extends Prisma.Country$servedByCompaniesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$servedByCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyCountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  registeredCompanies<T extends Prisma.Country$registeredCompaniesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Country$registeredCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1769,6 +1893,30 @@ export type Country$servedByCompaniesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.CompanyCountryScalarFieldEnum | Prisma.CompanyCountryScalarFieldEnum[]
+}
+
+/**
+ * Country.registeredCompanies
+ */
+export type Country$registeredCompaniesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Company
+   */
+  select?: Prisma.CompanySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Company
+   */
+  omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  where?: Prisma.CompanyWhereInput
+  orderBy?: Prisma.CompanyOrderByWithRelationInput | Prisma.CompanyOrderByWithRelationInput[]
+  cursor?: Prisma.CompanyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompanyScalarFieldEnum | Prisma.CompanyScalarFieldEnum[]
 }
 
 /**

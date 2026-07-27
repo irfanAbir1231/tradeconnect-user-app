@@ -2,6 +2,10 @@
 
 This document maps the current App Router surface to the proposed Next.js Route Handlers under `/api/v1`. `src/data/*` is the current mock source; each row identifies the replacement query/mutation, expected states, role, and integration phase.
 
+## Phase 4A.2 onboarding boundary
+
+`/dashboard/company/onboarding` now creates a real authenticated company through `POST /api/v1/companies`. It consumes canonical category/country/location reference endpoints and redirects to the server-rendered private company page after success. Request, inquiry, document, verification, and marketplace fixtures remain explicitly demo/deferred.
+
 ## Shared adapter conventions
 
 ## Phase 3A update
@@ -40,6 +44,8 @@ This document maps the current App Router surface to the proposed Next.js Route 
 | `/marketplace/[slug]` | `opportunities.ts`, `companies.ts` | View safe detail; submit interest/information | `GET /marketplace/listings/:slug`; `POST /marketplace/listings/:id/interests` | `PublicListingDetail`; `InterestCreate` | notFound; form pending/success/validation/rate-limit | Guest/business user / 6 |
 | `/directory` | `companies.ts` | Search/filter companies | `GET /companies` | `search,businessType,category,location,verification,page`; `Paginated<PublicCompanyCard>` | loading; empty/reset; 500 | Guest / 3 |
 | `/directory/[slug]` | `companies.ts`, `opportunities.ts` | View safe profile; send inquiry | `GET /companies/:slug`; `POST /inquiries` | `PublicCompanyProfile`; `InquiryCreate` | notFound; inquiry success/error | Guest/business user / 3 then 7 |
+
+| `/dashboard/company`, `/dashboard/company/edit` | Authenticated company service + reference APIs | View/update the actor's selected private company draft | `GET/PATCH /companies/:companyId`; reference GET routes | `CompanyOwnerView`; compact member/navigation projections | Onboarding redirect, forbidden redirect, field errors, version conflict | Active member; PATCH owner/admin / 4A.3 |
 | `/products` | `products.ts` | Browse/filter products | `GET /products` | `search,category,targetUser,page`; `Paginated<PublicProductCard>` | loading; empty; error | Guest / 7 |
 | `/products/[slug]` | `products.ts`, `DemoRequestForm` | View product; request demo | `GET /products/:slug`; `POST /demo-requests` | `PublicProductDetail`; `DemoRequestCreate` | notFound; form pending/success/error | Guest/business user / 7 |
 | `/resources`, `/about`, `/contact` | Not implemented | Product decision required | Future CMS/content endpoints or remove links | TBD | Not currently routable | Guest / decision before launch |

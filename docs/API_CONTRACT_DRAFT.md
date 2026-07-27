@@ -1,5 +1,9 @@
 # TradeConnect API Contract Draft
 
+## Phase 4A.4 company-domain note
+
+Company PATCH uses an expected `version` and returns the canonical `COMPANY_VERSION_CONFLICT` (409) for stale writes. Reference endpoints remain public, minimal, active-only, deterministic, and cached separately from private `no-store` company responses.
+
 This is a frontend-oriented draft for the full-stack Next.js application. It uses Next.js Route Handlers under `src/app/api/v1` and a consistent JSON response envelope. Exact naming, authentication mechanism, pagination defaults, and validation rules must be approved before implementation.
 
 Phase 2 adds the database readiness contract only. No business resource API is enabled yet. `GET /api/v1/health` remains liveness-only; `GET /api/v1/health/ready` performs a minimal `SELECT 1` using the server-only Prisma boundary and returns `503 SERVICE_UNAVAILABLE` without provider details when the database is unavailable.

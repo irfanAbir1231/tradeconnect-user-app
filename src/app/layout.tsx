@@ -8,10 +8,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "TradeConnect | Move business forward",
-    template: "%s | TradeConnect",
+    default: "Bhuiyan Genesis | TradeConnect",
+    template: "%s | Bhuiyan Genesis",
   },
-  description: "A connected platform for smarter trade, stronger partnerships, and confident business growth.",
+  description: "Official website of Bhuiyan Genesis, a Bangladesh-based import, supply, and business technology enterprise behind TradeConnect.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

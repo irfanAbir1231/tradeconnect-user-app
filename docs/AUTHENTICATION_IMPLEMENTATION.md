@@ -20,7 +20,7 @@ BETTER_AUTH_URL=
 
 ## Deployment origins
 
-Better Auth uses its dynamic `baseURL` configuration so each accepted request resolves its own base URL only after host validation. The production origin is `https://tradeconnect-user-app.vercel.app`. The explicit allowlist contains `localhost:3000`, the production hostname, and both exact server-side Vercel hostnames when present: `VERCEL_URL` for the unique deployment URL and `VERCEL_BRANCH_URL` for the stable Git branch URL. Both are trusted deployment metadata, validated as protocol-free `*.vercel.app` hostnames, and never read from a browser request.
+Better Auth uses its dynamic `baseURL` configuration so each accepted request resolves its own base URL only after host validation. The production origin is `https://bhuiyan-genesis.vercel.app`. The explicit allowlist contains `localhost:3000`, the current production hostname, the former exact project hostname during the domain transition, and both exact server-side Vercel hostnames when present: `VERCEL_URL` for the unique deployment URL and `VERCEL_BRANCH_URL` for the stable Git branch URL. Both are trusted deployment metadata, validated as protocol-free `*.vercel.app` hostnames, and never read from a browser request.
 
 Local requests use HTTP; Vercel Preview and production use HTTPS with secure cookies. Better Auth derives trusted origins from the allowed hosts, validates forwarded/request hosts before use, and rejects unknown origins rather than redirecting them to production. No wildcard is used: Vercel supplies both hostnames at build and runtime, so each Preview explicitly accepts its generated deployment URL and branch URL without manually updating `BETTER_AUTH_URL`. Other Vercel projects remain rejected.
 

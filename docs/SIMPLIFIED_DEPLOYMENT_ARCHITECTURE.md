@@ -22,7 +22,7 @@ next build
 | --- | --- | --- | --- |
 | Local development | `DATABASE_URL` (pooled) | `DIRECT_URL`, then `DATABASE_URL_UNPOOLED` | Explicit local `BETTER_AUTH_URL` is optional and loopback-only |
 | Vercel Preview | Neon main `DATABASE_URL` (pooled) | Neon main `DATABASE_URL_UNPOOLED` or `DIRECT_URL` | Exact `VERCEL_URL` and `VERCEL_BRANCH_URL` when present |
-| Vercel Production | Neon main `DATABASE_URL` (pooled) | Neon main `DATABASE_URL_UNPOOLED` or `DIRECT_URL` | `https://tradeconnect-user-app.vercel.app` |
+| Vercel Production | Neon main `DATABASE_URL` (pooled) | Neon main `DATABASE_URL_UNPOOLED` or `DIRECT_URL` | `https://bhuiyan-genesis.vercel.app` |
 
 The runtime client never uses a direct migration URL. Prisma migration/schema operations prefer `DIRECT_URL` and otherwise use `DATABASE_URL_UNPOOLED`; they fail with a sanitized error if neither is configured. Neither connection value is logged or exposed to browser code.
 
@@ -40,7 +40,7 @@ The Vercel project must have these names configured in both Production and Previ
 | `DATABASE_URL_UNPOOLED` or `DIRECT_URL` | Production, Preview | direct migrations and seed | Neon main |
 | `BETTER_AUTH_SECRET` | Production | production session signing | Production secret |
 | `BETTER_AUTH_SECRET` | Preview | Preview session signing | Preview secret when Preview remains enabled |
-| `BETTER_AUTH_URL` | Production | canonical auth origin | `https://tradeconnect-user-app.vercel.app` |
+| `BETTER_AUTH_URL` | Production | canonical auth origin | `https://bhuiyan-genesis.vercel.app` |
 
 Do not delete `DATABASE_URL` before the direct migration variable is confirmed. Do not paste connection values into source control, logs, or chat.
 

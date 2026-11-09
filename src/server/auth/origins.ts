@@ -1,7 +1,14 @@
 const maximumHostnameLength = 253;
 const vercelHostnamePattern = /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+vercel\.app$/i;
 
-export const canonicalProductionHost = "tradeconnect-user-app.vercel.app";
+/** The Vercel Production alias currently assigned to the TradeConnect project. */
+export const canonicalProductionHost = "bhuiyan-genesis.vercel.app";
+/**
+ * Retain the former project hostname explicitly while DNS/browser sessions
+ * converge. This is an exact hostname—not a wildcard—and can be removed once
+ * the previous alias is no longer in use.
+ */
+export const legacyProductionHosts = ["tradeconnect-user-app.vercel.app"] as const;
 export const localDevelopmentHost = "localhost:3000";
 
 /** Validates only server-provided Vercel deployment hostnames. */
@@ -35,6 +42,7 @@ export function buildAuthAllowedHosts(input: {
   return [...new Set([
     localDevelopmentHost,
     canonicalProductionHost,
+    ...legacyProductionHosts,
     input.vercelUrl,
     input.vercelBranchUrl,
     localHostFromOrigin(input.localOrigin, input.isVercelDeployment),

@@ -5,6 +5,7 @@ import { resolveDynamicBaseURL } from "better-auth";
 import {
   buildAuthAllowedHosts,
   canonicalProductionHost,
+  legacyProductionHosts,
   localDevelopmentHost,
   optionalVercelSystemHost,
 } from "../src/server/auth/origins";
@@ -18,12 +19,13 @@ const allowedHosts = buildAuthAllowedHosts({
   vercelBranchUrl: optionalVercelSystemHost("VERCEL_BRANCH_URL", branchHost),
 });
 
-assert.deepEqual(allowedHosts, [localDevelopmentHost, canonicalProductionHost, deploymentHost, branchHost]);
+assert.deepEqual(allowedHosts, [localDevelopmentHost, canonicalProductionHost, ...legacyProductionHosts, deploymentHost, branchHost]);
 assert.equal(new Set(allowedHosts).size, allowedHosts.length);
 assert.ok(allowedHosts.includes(deploymentHost));
 assert.ok(allowedHosts.includes(branchHost));
 assert.ok(allowedHosts.includes(canonicalProductionHost));
-assert.deepEqual(buildAuthAllowedHosts({ isVercelDeployment: true, vercelUrl: deploymentHost, vercelBranchUrl: deploymentHost }), [localDevelopmentHost, canonicalProductionHost, deploymentHost]);
+assert.ok(legacyProductionHosts.every((host) => allowedHosts.includes(host)));
+assert.deepEqual(buildAuthAllowedHosts({ isVercelDeployment: true, vercelUrl: deploymentHost, vercelBranchUrl: deploymentHost }), [localDevelopmentHost, canonicalProductionHost, ...legacyProductionHosts, deploymentHost]);
 
 const localAllowedHosts = buildAuthAllowedHosts({ isVercelDeployment: false, localOrigin: "http://localhost:3000" });
 assert.ok(localAllowedHosts.includes(localDevelopmentHost));
@@ -40,6 +42,9 @@ const localBaseURL = { allowedHosts: localAllowedHosts, protocol: "http" as cons
 assert.equal(resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": deploymentHost, "x-forwarded-proto": "https" }), "/api/auth", true), `https://${deploymentHost}/api/auth`);
 assert.equal(resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": branchHost, "x-forwarded-proto": "https" }), "/api/auth", true), `https://${branchHost}/api/auth`);
 assert.equal(resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": canonicalProductionHost, "x-forwarded-proto": "https" }), "/api/auth", true), `https://${canonicalProductionHost}/api/auth`);
+for (const legacyHost of legacyProductionHosts) {
+  assert.equal(resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": legacyHost, "x-forwarded-proto": "https" }), "/api/auth", true), `https://${legacyHost}/api/auth`);
+}
 assert.equal(resolveDynamicBaseURL(localBaseURL, new Headers({ host: localDevelopmentHost }), "/api/auth", false), `http://${localDevelopmentHost}/api/auth`);
 assert.throws(() => resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": "unrelated-project.vercel.app", "x-forwarded-proto": "https" }), "/api/auth", true));
 assert.throws(() => resolveDynamicBaseURL(baseURL, new Headers({ "x-forwarded-host": "unapproved.example.invalid", "x-forwarded-proto": "https" }), "/api/auth", true));

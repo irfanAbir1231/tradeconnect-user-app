@@ -54,7 +54,7 @@ export const footerNavGroups: NavGroup[] = [
   {
     label: "Company",
     items: [
-      { label: "About TradeConnect", href: "/#about" },
+      { label: "About Bhuiyan Genesis", href: "/#about" },
       { label: "Contact", href: "/submit" },
       { label: "Careers", href: "/#about" },
     ],

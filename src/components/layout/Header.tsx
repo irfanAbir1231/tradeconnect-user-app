@@ -26,9 +26,12 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[color:var(--background)/.9] backdrop-blur-xl">
       <div className="container-shell flex h-[4.5rem] items-center justify-between">
-        <Link aria-label="TradeConnect home" className="flex items-center gap-3" href="/">
+        <Link aria-label="Bhuiyan Genesis home" className="flex items-center gap-3" href="/">
           <TradeConnectMark />
-          <span className="text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--navy)]">TradeConnect</span>
+          <span className="flex flex-col leading-none">
+            <span className="text-[1.02rem] font-semibold tracking-[-0.03em] text-[var(--navy)]">Bhuiyan Genesis</span>
+            <span className="mt-1 text-[.58rem] font-bold uppercase tracking-[.16em] text-[var(--accent-deep)]">TradeConnect</span>
+          </span>
         </Link>
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-5 lg:flex xl:gap-7">
